@@ -1,1 +1,386 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #172033;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(5, 20, 45, 0.92), rgba(0, 122, 146, 0.78)),
+    url("assets/radar-panama.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  padding: 24px;
+}
+
+.navbar {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  color: #31e6c8;
+}
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+  font-size: 15px;
+}
+
+.nav-links a {
+  opacity: 0.9;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  color: #31e6c8;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 140px auto 0;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.hero h1 {
+  font-size: clamp(38px, 7vw, 72px);
+  line-height: 1.05;
+  margin-bottom: 24px;
+  letter-spacing: -2px;
+}
+
+.hero-text {
+  max-width: 760px;
+  margin: 0 auto 34px;
+  font-size: 19px;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.btn.primary {
+  background: #31e6c8;
+  color: #062236;
+}
+
+.btn.primary:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn.secondary {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+}
+
+.btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+main {
+  background: #f4f7fb;
+}
+
+.search-section {
+  max-width: 1000px;
+  margin: -70px auto 40px;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 42px 28px;
+  text-align: center;
+  box-shadow: 0 18px 45px rgba(10, 31, 68, 0.14);
+  position: relative;
+  z-index: 3;
+}
+
+.search-section h2,
+.section h2,
+.business-section h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  margin-bottom: 12px;
+  letter-spacing: -1px;
+}
+
+.search-section p,
+.section-text,
+.business-section p {
+  max-width: 760px;
+  margin: 0 auto 26px;
+  color: #5b667a;
+  font-size: 17px;
+}
+
+.search-box {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 999px;
+  padding: 8px;
+  border: 1px solid #e1e8f0;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 14px 18px;
+  font-size: 16px;
+  outline: none;
+  color: #172033;
+}
+
+.search-box button {
+  border: none;
+  background: #0b7285;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.search-box button:hover {
+  background: #064d5b;
+}
+
+.search-result {
+  margin-top: 16px;
+  font-weight: 700;
+  color: #0b7285;
+}
+
+.intro-grid {
+  max-width: 1150px;
+  margin: 60px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(10, 31, 68, 0.08);
+}
+
+.card h3 {
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #5b667a;
+}
+
+.section {
+  max-width: 1150px;
+  margin: 70px auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.section.light {
+  max-width: 100%;
+  background: #ffffff;
+  padding: 70px 24px;
+}
+
+.province-grid,
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  max-width: 1050px;
+  margin: 34px auto 0;
+}
+
+.province-card {
+  background: #ffffff;
+  padding: 26px 18px;
+  border-radius: 22px;
+  font-weight: 800;
+  color: #172033;
+  box-shadow: 0 10px 26px rgba(10, 31, 68, 0.08);
+  border: 1px solid #e8eef5;
+  transition: 0.25s ease;
+}
+
+.province-card:hover {
+  background: #0b7285;
+  color: #ffffff;
+  transform: translateY(-4px);
+}
+
+.category {
+  background: #f4f7fb;
+  padding: 22px;
+  border-radius: 20px;
+  font-weight: 700;
+  border: 1px solid #e8eef5;
+}
+
+.comparison {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.comparison div {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(10, 31, 68, 0.08);
+  text-align: left;
+}
+
+.comparison h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #0b7285;
+}
+
+.comparison p {
+  color: #5b667a;
+}
+
+.business-section {
+  margin: 80px auto 0;
+  padding: 80px 24px;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(6, 34, 54, 0.96), rgba(11, 114, 133, 0.9));
+  color: #ffffff;
+}
+
+.business-section p {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+footer {
+  background: #061827;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  padding: 24px;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero-content {
+    margin-top: 110px;
+  }
+
+  .intro-grid,
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .province-grid,
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .search-section {
+    margin: -45px 16px 30px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    min-height: 88vh;
+    padding: 20px;
+  }
+
+  .hero-content {
+    margin-top: 95px;
+  }
+
+  .hero h1 {
+    letter-spacing: -1px;
+  }
+
+  .hero-text {
+    font-size: 17px;
+  }
+
+  .search-box {
+    flex-direction: column;
+    border-radius: 22px;
+  }
+
+  .search-box button {
+    width: 100%;
+  }
+
+  .province-grid,
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card,
+  .comparison div {
+    padding: 24px;
+  }
+}
