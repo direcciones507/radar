@@ -1,0 +1,65 @@
+[
+  {
+    "id": "circuito-playa-rio-hato",
+    "nombre": "Circuito Playa Río Hato",
+    "provincia": "Coclé",
+    "distrito": "Antón",
+    "sector": "Río Hato",
+    "tipo": "playa",
+    "duracion": "1 día",
+    "descripcion": "Ruta turística por playas, hoteles y restaurantes del área de Río Hato.",
+    "lugares": [
+      "Playa Blanca",
+      "Farallón",
+      "Santa Clara"
+    ],
+    "categorias": [
+      "hoteles",
+      "restaurantes",
+      "actividades",
+      "atm",
+      "gasolineras"
+    ]
+  },
+  {
+    "id": "circuito-coronado-nocturno",
+    "nombre": "Circuito Coronado Nocturno",
+    "provincia": "Panamá Oeste",
+    "distrito": "San Carlos",
+    "sector": "Coronado",
+    "tipo": "vida-nocturna",
+    "duracion": "4 horas",
+    "descripcion": "Ruta enfocada en bares, restaurantes y entretenimiento nocturno en Coronado.",
+    "lugares": [
+      "Coronado Mall",
+      "Zona de restaurantes",
+      "Bares del área"
+    ],
+    "categorias": [
+      "bares",
+      "restaurantes",
+      "atm"
+    ]
+  },
+  {
+    "id": "circuito-chame-aventura",
+    "nombre": "Circuito Chame Aventura",
+    "provincia": "Panamá Oeste",
+    "distrito": "Chame",
+    "sector": "Chame",
+    "tipo": "aventura",
+    "duracion": "1 día",
+    "descripcion": "Circuito turístico para visitantes interesados en playas, naturaleza y actividades recreativas.",
+    "lugares": [
+      "Playa Caracol",
+      "Gorgona",
+      "Punta Chame"
+    ],
+    "categorias": [
+      "actividades",
+      "hoteles",
+      "restaurantes",
+      "gasolineras"
+    ]
+  }
+]
