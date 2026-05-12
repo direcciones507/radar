@@ -1,0 +1,32 @@
+[
+  {
+    "id": "hoteles",
+    "nombre": "Hoteles",
+    "icono": "🏨"
+  },
+  {
+    "id": "restaurantes",
+    "nombre": "Restaurantes",
+    "icono": "🍽️"
+  },
+  {
+    "id": "actividades",
+    "nombre": "Actividades",
+    "icono": "🎯"
+  },
+  {
+    "id": "atm",
+    "nombre": "ATM",
+    "icono": "🏧"
+  },
+  {
+    "id": "gasolineras",
+    "nombre": "Gasolineras",
+    "icono": "⛽"
+  },
+  {
+    "id": "bares",
+    "nombre": "Bares",
+    "icono": "🍸"
+  }
+]
