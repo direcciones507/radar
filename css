@@ -392,3 +392,69 @@ footer {
   border-radius:15px;
   box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f4f8fb, #eaf3ef);
+  color: #1f2933;
+}
+
+#circuitos {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.card-circuito {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-circuito:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+}
+
+.card-circuito h2 {
+  margin-top: 0;
+  font-size: 1.35rem;
+  color: #0f766e;
+}
+
+.card-circuito p {
+  line-height: 1.6;
+  color: #374151;
+}
+
+.card-circuito strong {
+  color: #111827;
+}
+
+.hero-radar {
+  max-width: 1100px;
+  margin: 40px auto 10px;
+  padding: 35px 25px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #0f766e, #14b8a6);
+  color: white;
+  text-align: center;
+  box-shadow: 0 18px 45px rgba(15,118,110,0.25);
+}
+
+.hero-radar h1 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+}
+
+.hero-radar p {
+  margin: 0;
+  font-size: 1.05rem;
+}
