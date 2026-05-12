@@ -384,3 +384,11 @@ footer {
     padding: 24px;
   }
 }
+
+.card-circuito{
+  background:#ffffff;
+  padding:20px;
+  margin:20px;
+  border-radius:15px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
