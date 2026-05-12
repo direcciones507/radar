@@ -1,0 +1,58 @@
+[
+  {
+    "provincia": "Coclé",
+    "distrito": "Antón",
+    "sector": "Río Hato",
+    "slug": "rio-hato",
+    "categorias": [
+      "hoteles",
+      "restaurantes",
+      "actividades",
+      "atm",
+      "gasolineras",
+      "bares"
+    ]
+  },
+  {
+    "provincia": "Panamá Oeste",
+    "distrito": "San Carlos",
+    "sector": "Coronado",
+    "slug": "coronado",
+    "categorias": [
+      "hoteles",
+      "restaurantes",
+      "actividades",
+      "atm",
+      "gasolineras",
+      "bares"
+    ]
+  },
+  {
+    "provincia": "Panamá Oeste",
+    "distrito": "San Carlos",
+    "sector": "San Carlos",
+    "slug": "san-carlos",
+    "categorias": [
+      "hoteles",
+      "restaurantes",
+      "actividades",
+      "atm",
+      "gasolineras",
+      "bares"
+    ]
+  },
+  {
+    "provincia": "Panamá Oeste",
+    "distrito": "Chame",
+    "sector": "Chame",
+    "slug": "chame",
+    "categorias": [
+      "hoteles",
+      "restaurantes",
+      "actividades",
+      "atm",
+      "gasolineras",
+      "bares"
+    ]
+  }
+]
