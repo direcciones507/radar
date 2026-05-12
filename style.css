@@ -458,3 +458,52 @@ body {
   margin: 0;
   font-size: 1.05rem;
 }
+
+@media (max-width: 768px) {
+  body {
+    background-position: center;
+    background-size: cover;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  #circuitos {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    margin: 20px auto;
+    gap: 18px;
+  }
+
+  .card-circuito {
+    width: auto;
+    min-height: auto;
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .card-circuito h2 {
+    font-size: 1.45rem;
+  }
+
+  .card-circuito p {
+    font-size: 1rem;
+  }
+
+  .hero-radar {
+    margin: 20px;
+    padding: 28px 18px;
+    border-radius: 22px;
+  }
+
+  .hero-radar h1 {
+    font-size: 1.7rem;
+  }
+
+  .hero-radar p {
+    font-size: 1rem;
+  }
+}
