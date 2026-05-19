@@ -1,22 +1,28 @@
 let baseDatosRadar = [];
 const categoriasFijas = ["Restaurantes", "Hoteles", "Bares", "Gasolineras", "Cajeros ATM", "Actividades turísticas"];
 
+// 1. Cargar Base de Datos Protegida contra caídas
 async function inicializarRadar() {
   try {
-    // Apuntando exactamente a tu carpeta data y archivo circuitos.json
     const response = await fetch('data/circuitos.json');
-    if (!response.ok) throw new Error('Error al leer data/circuitos.json');
+    if (!response.ok) {
+      console.warn('Falta el archivo circuitos.json o está vacío. Cargando modo de simulación.');
+      baseDatosRadar = []; // Evita que se rompa el código si el JSON no responde
+      return;
+    }
     baseDatosRadar = await response.json();
     console.log("Base de datos de Radar vinculada correctamente.");
     renderizarDestacadosPrincipales();
   } catch (error) {
-    console.error("Error inicializando Radar:", error);
+    console.error("Aviso: Inicializando interfaz sin datos JSON activos aún:", error.message);
+    baseDatosRadar = []; // Mantiene la página viva a color aunque falle el almacenamiento externo
   }
 }
 
+// 2. Renderizar destacados principales de forma segura
 function renderizarDestacadosPrincipales() {
   const contenedor = document.getElementById('contenedor-destacados');
-  if(!contenedor) return;
+  if(!contenedor || !baseDatosRadar || baseDatosRadar.length === 0) return;
   
   const destacados = baseDatosRadar.filter(item => item.destacado === true && item.tipo === 'comercio');
   contenedor.innerHTML = '';
@@ -34,6 +40,7 @@ function renderizarDestacadosPrincipales() {
   });
 }
 
+// 3. Manejo del menú Acordeón de Provincias
 function toggleProvincia(botonElemento) {
   const provinciaId = botonElemento.getAttribute('data-provincia'); 
   const todosLosContenidos = document.querySelectorAll('.accordion-content');
@@ -61,6 +68,7 @@ function toggleProvincia(botonElemento) {
   });
 }
 
+// 4. Construir las estructuras geográficas fijas
 function construirSectoresFijos(provinciaId, contenedorHTML) {
   let sectoresHtml = "";
 
@@ -94,6 +102,7 @@ function construirSectoresFijos(provinciaId, contenedorHTML) {
   contenedorHTML.innerHTML = sectoresHtml;
 }
 
+// 5. Cargar detalles del sector seleccionado
 function cargarSectorDetalle(provincia, distrito, sector) {
   const vista = document.getElementById('vista-sector');
   const txtNombre = document.getElementById('dinamico-nombre-sector');
@@ -106,10 +115,13 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   txtNombre.textContent = `Explore el Sector de ${sector}`;
   txtJerarquia.textContent = `📍 Provincia de ${provincia} > Distrito de ${distrito}`;
   
-  const circuitoData = baseDatosRadar.find(item => 
-    item.tipo === "circuito_turistico" && 
-    item.sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-  );
+  let circuitoData = null;
+  if(baseDatosRadar && baseDatosRadar.length > 0) {
+    circuitoData = baseDatosRadar.find(item => 
+      item.tipo === "circuito_turistico" && 
+      item.sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    );
+  }
 
   if (circuitoData) {
     bloqueCircuito.innerHTML = `
@@ -127,10 +139,14 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   }
 
   contenedorCategorias.innerHTML = "";
-  const itemsDelSector = baseDatosRadar.filter(item => 
-    item.tipo === "comercio" &&
-    item.sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-  );
+  
+  let itemsDelSector = [];
+  if(baseDatosRadar && baseDatosRadar.length > 0) {
+    itemsDelSector = baseDatosRadar.filter(item => 
+      item.tipo === "comercio" &&
+      item.sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    );
+  }
 
   categoriasFijas.forEach((cat, index) => {
     const comerciosDeEstaCat = itemsDelSector.filter(item => item.categoria === cat);
@@ -162,6 +178,7 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   vista.scrollIntoView({ behavior: 'smooth' });
 }
 
+// 6. Controlar subcategorías
 function toggleSubCategoria(index) {
   const todosLosSubContenidos = document.querySelectorAll('.sub-accordion-content');
   todosLosSubContenidos.forEach(content => {
@@ -180,6 +197,7 @@ function toggleSubCategoria(index) {
   });
 }
 
+// 7. Buscador Superior
 function buscarRadar() {
   const input = document.getElementById("searchInput");
   const result = document.getElementById("searchResult");
@@ -189,4 +207,5 @@ function buscarRadar() {
   result.textContent = `Buscando "${val}"...`;
 }
 
+// Inicializar de forma segura al cargar la página
 document.addEventListener("DOMContentLoaded", inicializarRadar);
