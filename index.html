@@ -3,15 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Radar Direcciones507 | Negocios, turismo y ubicaciones en Panamá</title>
-
   <meta name="description" content="Radar Direcciones507 es una plataforma territorial para encontrar negocios, turismo, restaurantes, hoteles, actividades, servicios y ubicaciones digitales en Panamá." />
-
   <meta name="keywords" content="Radar Direcciones507, negocios en Panamá, turismo en Panamá, direcciones digitales, hoteles Panamá, restaurantes Panamá, actividades turísticas Panamá, ubicación digital Panamá" />
-
   <meta name="author" content="Direcciones507" />
-
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -22,7 +17,6 @@
       <div class="logo">
         Radar<span>507</span>
       </div>
-
       <div class="nav-links">
         <a href="#buscar">Buscar</a>
         <a href="#provincias">Provincias</a>
@@ -31,68 +25,53 @@
       </div>
     </nav>
 
-    <div id="circuitos"></div>
-
     <section class="hero-content">
       <p class="badge">Una plataforma de Direcciones507</p>
-
       <h1>Explora Panamá por zonas, negocios y experiencias</h1>
-
       <p class="hero-text">
         Radar Direcciones507 organiza negocios, turismo, servicios y ubicaciones digitales por provincia, distrito y sector para que las personas encuentren lo que necesitan de forma rápida, clara y moderna.
       </p>
-
-      
-
-    </div>
     </section>
   </header>
 
   <main>
-
+    <!-- Buscador Principal Flotante -->
     <section id="buscar" class="search-section">
       <h2>Busca por lugar, negocio o categoría</h2>
-      <p>
-        Encuentra restaurantes, hoteles, bares, actividades turísticas, gasolineras, cajeros, farmacias y más.
-      </p>
-
+      <p>Encuentra restaurantes, hoteles, bares, actividades turísticas, gasolineras, cajeros, farmacias y más.</p>
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="Ejemplo: restaurantes en Coronado" />
         <button onclick="buscarRadar()">Buscar</button>
       </div>
-
       <p id="searchResult" class="search-result"></p>
     </section>
 
+    <!-- Sección de Circuitos Dinámicos cargados por JS -->
+    <div class="section-title-container">
+      <h2 style="font-size: 26px; font-weight: 700; color: #0f766e;">📍 Zonas y Circuitos Destacados</h2>
+    </div>
+    <section id="circuitos"></section>
+
+    <!-- Características del Sistema -->
     <section class="intro-grid">
       <div class="card">
         <h3>📍 Ubicación territorial</h3>
-        <p>
-          Radar organiza Panamá por provincia, distrito, corregimiento y sector para crear una navegación clara y útil.
-        </p>
+        <p>Radar organiza Panamá por provincia, distrito, corregimiento y sector para crear una navegación clara y útil.</p>
       </div>
-
       <div class="card">
         <h3>🏪 Negocios locales</h3>
-        <p>
-          Cada negocio puede tener presencia digital, contacto directo, ubicación, referencias, horarios y enlaces.
-        </p>
+        <p>Cada negocio puede tener presencia digital, contacto directo, ubicación, referencias, horarios y enlaces.</p>
       </div>
-
       <div class="card">
         <h3>🌴 Turismo y experiencias</h3>
-        <p>
-          Hoteles, playas, senderos, restaurantes, tours y actividades organizadas por zona.
-        </p>
+        <p>Hoteles, playas, senderos, restaurantes, tours y actividades organizadas por zona.</p>
       </div>
     </section>
 
+    <!-- Provincias -->
     <section id="provincias" class="section">
       <h2>Explorar por provincia</h2>
-      <p class="section-text">
-        Esta será la entrada principal para navegar Radar por territorio.
-      </p>
-
+      <p class="section-text">Esta será la entrada principal para navegar Radar por territorio.</p>
       <div class="province-grid">
         <a href="#" class="province-card">Panamá Oeste</a>
         <a href="#" class="province-card">Coclé</a>
@@ -105,9 +84,10 @@
       </div>
     </section>
 
+    <!-- Categorías -->
     <section id="categorias" class="section light">
       <h2>Categorías principales</h2>
-
+      <p class="section-text">Filtra rápidamente lo que necesitas en cada comunidad.</p>
       <div class="category-grid">
         <div class="category">🍽️ Restaurantes</div>
         <div class="category">🏨 Hoteles</div>
@@ -116,43 +96,36 @@
         <div class="category">🏧 Cajeros ATM</div>
         <div class="category">💊 Farmacias</div>
         <div class="category">🌊 Playas</div>
-        <div class="category">🥾 Actividades turísticas</div>
+        <div class="category">🥾 Actividades</div>
         <div class="category">🛒 Supermercados</div>
         <div class="category">🚕 Transporte</div>
       </div>
     </section>
 
+    <!-- Comparativa con Sistema Tradicional -->
     <section class="section">
       <h2>Radar no es solo un directorio</h2>
-
       <p class="section-text">
         Es una estructura territorial digital que conecta negocios, usuarios, turistas y comunidades. Mientras otros sistemas solo muestran códigos o ubicaciones básicas, Radar convierte cada zona en una experiencia navegable, comercial y útil.
       </p>
-
       <div class="comparison">
         <div>
-          <h3>Código postal</h3>
-          <p>Clasifica zonas para correo, logística y organización administrativa.</p>
+          <h3>Código postal tradicional</h3>
+          <p>Clasifica zonas de forma estática principalmente para correo, logística básica y organización administrativa.</p>
         </div>
-
         <div>
           <h3>Radar Direcciones507</h3>
-          <p>Organiza negocios, turismo, direcciones digitales, servicios y experiencias por zona.</p>
+          <p>Evolución interactiva que organiza negocios, turismo, direcciones digitales, servicios y experiencias dinámicas por zona.</p>
         </div>
       </div>
     </section>
 
+    <!-- CTA Negocios -->
     <section id="negocios" class="business-section">
-      <h2>¿Tienes un negocio?</h2>
-      <p>
-        Radar puede ayudarte a aparecer mejor en internet, mejorar tu ubicación digital y conectar con clientes que buscan servicios en tu zona.
-      </p>
-
-      <a href="https://direcciones507.com" class="btn primary" target="_blank">
-        Conocer Direcciones507
-      </a>
+      <h2>¿Tienes un negocio en Panamá?</h2>
+      <p>Radar te ayuda a aparecer mejor en internet, optimizar tu ubicación digital y conectar directo con clientes en tu zona.</p>
+      <a href="https://direcciones507.com" class="btn primary" target="_blank">Conocer Direcciones507</a>
     </section>
-
   </main>
 
   <footer>
@@ -161,25 +134,30 @@
 
   <script src="script.js"></script>
   <script>
-async function cargarCircuitos() {
-  const response = await fetch('data/circuitos.json');
-  const circuitos = await response.json();
-
-  const contenedor = document.getElementById('circuitos');
-
-  circuitos.forEach(circuito => {
-    contenedor.innerHTML += `
-      <div class="card-circuito">
-        <h2>${circuito.nombre}</h2>
-        <p><strong>Provincia:</strong> ${circuito.provincia}</p>
-        <p><strong>Sector:</strong> ${circuito.sector}</p>
-        <p>${circuito.descripcion}</p>
-      </div>
-    `;
-  });
-}
-
-cargarCircuitos();
-</script>
+    // Código de carga seguro en caso de que falte el archivo JSON en pruebas locales
+    async function cargarCircuitos() {
+      try {
+        const response = await fetch('data/circuitos.json');
+        if (!response.ok) throw new Error('No se encontró el archivo de datos');
+        const circuitos = await response.json();
+        const contenedor = document.getElementById('circuitos');
+        
+        contenedor.innerHTML = ''; // Limpiar contenedor
+        circuitos.forEach(circuito => {
+          contenedor.innerHTML += `
+            <div class="card-circuito">
+              <h2>${circuito.nombre}</h2>
+              <p><strong>Provincia:</strong> ${circuito.provincia}</p>
+              <p><strong>Sector:</strong> ${circuito.sector}</p>
+              <p style="margin-top:10px; color:#475569;">${circuito.descripcion}</p>
+            </div>
+          `;
+        });
+      } catch (error) {
+        console.log('Esperando circuitos dinámicos...', error.message);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", cargarCircuitos);
+  </script>
 </body>
 </html>
