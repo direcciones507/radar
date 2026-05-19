@@ -1,25 +1,24 @@
 let baseDatosRadar = [];
 const categoriasFijas = ["Restaurantes", "Hoteles", "Bares", "Gasolineras", "Cajeros ATM", "Actividades turísticas"];
 
-// 1. Inicializar Base de Datos de forma segura
+// 1. Inicializar Base de Datos
 async function inicializarRadar() {
   try {
     const response = await fetch('data/circuitos.json');
     if (!response.ok) {
-      console.warn('Archivo circuitos.json no encontrado. Usando modo simulación.');
+      console.warn('Archivo de datos ausente. Operando en modo estructural.');
       baseDatosRadar = [];
       return;
     }
     baseDatosRadar = await response.json();
-    console.log("Base de datos territorial vinculada correctamente.");
     renderizarDestacadosPais();
   } catch (error) {
-    console.error("Aviso: Interfaz gráfica lista. Esperando datos JSON:", error.message);
+    console.error("Aviso: Interfaz gráfica montada sin JSON de datos activo:", error.message);
     baseDatosRadar = [];
   }
 }
 
-// 2. Mostrar los destacados generales en la Portada
+// 2. Renderizar destacados generales en la Portada
 function renderizarDestacadosPais() {
   const contenedor = document.getElementById('contenedor-destacados');
   if(!contenedor || !baseDatosRadar || baseDatosRadar.length === 0) return;
@@ -45,7 +44,7 @@ function renderizarDestacadosPais() {
   });
 }
 
-// 3. Controlar el Botón Maestro Único "EXPLORAR TERRITORIO"
+// 3. Controlar el Botón Maestro Principal
 function toggleMenuMaestro() {
   const contenido = document.getElementById('contenido-maestro-provincias');
   const icono = document.getElementById('icono-maestro');
@@ -60,7 +59,7 @@ function toggleMenuMaestro() {
   }
 }
 
-// 4. Controlar y construir las Provincias por dentro de forma limpia
+// 4. Desplegar bloques internos de Provincias
 function toggleProvinciaDinamica(provinciaKey, botonElemento) {
   const contenedorSectores = document.getElementById(`sub-sectores-${provinciaKey}`);
   const subIcono = botonElemento.querySelector('.sub-icon-prov');
@@ -71,14 +70,12 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
     subIcono.textContent = '+';
     contenedorSectores.innerHTML = '';
   } else {
-    // Cerrar otros bloques abiertos para mantener orden
     document.querySelectorAll('.sectores-internos-menu').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.sub-icon-prov').forEach(el => el.textContent = '+');
 
     contenedorSectores.classList.add('active');
     subIcono.textContent = '-';
 
-    // Inyectar distritos y sectores ordenados
     if (provinciaKey === "PanamaOeste") {
       contenedorSectores.innerHTML = `
         <div class="distrito-bloque">
@@ -109,7 +106,7 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
   }
 }
 
-// 5. Cargar detalles del sector (Circuito + Recomendados Locales + Categorías)
+// 5. Cargar detalles del sector seleccionado (Circuito + Recomendados Locales + Categorías)
 function cargarSectorDetalle(provincia, distrito, sector) {
   const vista = document.getElementById('vista-sector');
   const txtNombre = document.getElementById('dinamico-nombre-sector');
@@ -125,7 +122,6 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   txtNombre.textContent = `Explore el Sector de ${sector}`;
   txtJerarquia.textContent = `📍 Provincia de ${provincia} > Distrito de ${distrito}`;
   
-  // A. Extraer circuito turístico de la base de datos
   let circuitoData = null;
   if(baseDatosRadar && baseDatosRadar.length > 0) {
     circuitoData = baseDatosRadar.find(item => 
@@ -149,13 +145,11 @@ function cargarSectorDetalle(provincia, distrito, sector) {
     bloqueCircuito.innerHTML = `<p style="color: #64748b; font-style: italic;">✨ Circuito Turístico de la comunidad consolidándose próximamente.</p>`;
   }
 
-  // B. Obtener comercios de este sector
   const itemsDelSector = baseDatosRadar.filter(item => 
     item.tipo === "comercio" &&
     item.sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   );
 
-  // C. Inyectar los Destacados Recomendados de esta Zona Específica
   const destacadosDeLaZona = itemsDelSector.filter(comercio => comercio.destacado === true);
   
   if (destacadosDeLaZona.length > 0 && bloqueDestacadosZona && contenedorDestacadosZona) {
@@ -175,7 +169,6 @@ function cargarSectorDetalle(provincia, distrito, sector) {
     bloqueDestacadosZona.style.display = "none";
   }
 
-  // D. Clasificar el resto por las 6 categorías fijas ordenadas
   contenedorCategorias.innerHTML = "";
   categoriasFijas.forEach((cat, index) => {
     const comerciosDeEstaCat = itemsDelSector.filter(item => item.categoria === cat);
@@ -207,7 +200,6 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   vista.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// 6. Controlar subcategorías de negocios
 function toggleSubCategoria(index) {
   const todosLosSubContenidos = document.querySelectorAll('.sub-accordion-content');
   todosLosSubContenidos.forEach(content => {
@@ -226,17 +218,13 @@ function toggleSubCategoria(index) {
   });
 }
 
-// 7. Buscador por Texto Inteligente
 function buscarRadar() {
   const input = document.getElementById("searchInput");
   const result = document.getElementById("searchResult");
   if (!input || !result) return;
   
   const val = input.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  if (val === "") { 
-    result.textContent = "Por favor escribe una zona o categoría."; 
-    return; 
-  }
+  if (val === "") { result.textContent = "Por favor escribe un término."; return; }
 
   result.style.color = "#0f766e";
   result.textContent = `Buscando coincidencias para "${input.value}"...`;
@@ -252,7 +240,7 @@ function buscarRadar() {
       result.textContent = "📍 ¡Sector detectado! Cargando Río Hato...";
       cargarSectorDetalle('Coclé', 'Antón', 'Río Hato');
     } else {
-      result.textContent = `Próximamente resultados interactivos en vivo para: "${input.value}"`;
+      result.textContent = `Próximamente resultados en vivo para: "${input.value}"`;
     }
   }, 600);
 }
