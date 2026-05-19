@@ -1,29 +1,36 @@
 let baseDatosRadar = [];
 const categoriasFijas = ["Restaurantes", "Hoteles", "Bares", "Gasolineras", "Cajeros ATM", "Actividades turísticas"];
 
+// 1. Cargar Base de Datos de forma segura
 async function inicializarRadar() {
   try {
     const response = await fetch('data/circuitos.json');
     if (!response.ok) {
-      console.warn('circuitos.json file missing or empty. Loading sandbox mode.');
+      console.warn('Archivo circuitos.json no encontrado. Inicializando en modo simulación.');
       baseDatosRadar = [];
       return;
     }
     baseDatosRadar = await response.json();
-    console.log("Radar database successfully connected.");
-    renderizarDestacadosPrincipales();
+    console.log("Base de datos territorial vinculada.");
+    renderizarDestacadosPais();
   } catch (error) {
-    console.error("Notice: Initializing UI without live JSON data yet:", error.message);
+    console.error("Aviso: Interfaz lista. Esperando datos JSON:", error.message);
     baseDatosRadar = [];
   }
 }
 
-function renderizarDestacadosPrincipales() {
+// 2. Renderizar destacados generales en la Portada
+function renderizarDestacadosPais() {
   const contenedor = document.getElementById('contenedor-destacados');
   if(!contenedor || !baseDatosRadar || baseDatosRadar.length === 0) return;
   
   const destacados = baseDatosRadar.filter(item => item.destacado === true && item.tipo === 'comercio');
   contenedor.innerHTML = '';
+
+  if(destacados.length === 0) {
+    contenedor.innerHTML = '<p class="txt-vacio">Cargando próximos comercios recomendados...</p>';
+    return;
+  }
 
   destacados.forEach(item => {
     contenedor.innerHTML += `
@@ -38,6 +45,7 @@ function renderizarDestacadosPrincipales() {
   });
 }
 
+// 3. Controlar el Acordeón Territorial de Portada
 function toggleProvincia(botonElemento) {
   const provinciaId = botonElemento.getAttribute('data-provincia'); 
   const todosLosContenidos = document.querySelectorAll('.accordion-content');
@@ -65,6 +73,7 @@ function toggleProvincia(botonElemento) {
   });
 }
 
+// 4. Construir las estructuras geográficas fijas en Español
 function construirSectoresFijos(provinciaId, contenedorHTML) {
   let sectoresHtml = "";
 
@@ -98,18 +107,23 @@ function construirSectoresFijos(provinciaId, contenedorHTML) {
   contenedorHTML.innerHTML = sectoresHtml;
 }
 
+// 5. Cargar detalles del sector seleccionado (Circuito + Destacados de Zona + Categorías)
 function cargarSectorDetalle(provincia, distrito, sector) {
   const vista = document.getElementById('vista-sector');
   const txtNombre = document.getElementById('dinamico-nombre-sector');
   const txtJerarquia = document.getElementById('dinamico-jerarquia');
   const bloqueCircuito = document.getElementById('bloque-circuito-turistico');
   const contenedorCategorias = document.getElementById('categorias-desplegables');
+  
+  const bloqueDestacadosZona = document.getElementById('zona-destacados-container');
+  const contenedorDestacadosZona = document.getElementById('contenedor-destacados-zona');
 
   if(!vista || !txtNombre || !txtJerarquia || !bloqueCircuito || !contenedorCategorias) return;
 
   txtNombre.textContent = `Explore el Sector de ${sector}`;
   txtJerarquia.textContent = `📍 Provincia de ${provincia} > Distrito de ${distrito}`;
   
+  // A. Extraer circuito turístico de la base de datos
   let circuitoData = null;
   if(baseDatosRadar && baseDatosRadar.length > 0) {
     circuitoData = baseDatosRadar.find(item => 
@@ -133,16 +147,34 @@ function cargarSectorDetalle(provincia, distrito, sector) {
     bloqueCircuito.innerHTML = `<p style="color: #64748b; font-style: italic;">✨ Circuito Turístico de la comunidad consolidándose próximamente.</p>`;
   }
 
-  contenedorCategorias.innerHTML = "";
+  // B. Obtener comercios de este sector específico
+  const itemsDelSector = baseDatosRadar.filter(item => 
+    item.tipo === "comercio" &&
+    item.sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  );
+
+  // C. Inyectar los Destacados Exclusivos de esta Zona arriba
+  const destacadosDeLaZona = itemsDelSector.filter(comercio => comercio.destacado === true);
   
-  let itemsDelSector = [];
-  if(baseDatosRadar && baseDatosRadar.length > 0) {
-    itemsDelSector = baseDatosRadar.filter(item => 
-      item.tipo === "comercio" &&
-      item.sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    );
+  if (destacadosDeLaZona.length > 0 && bloqueDestacadosZona && contenedorDestacadosZona) {
+    contenedorDestacadosZona.innerHTML = '';
+    destacadosDeLaZona.forEach(comercio => {
+      contenedorDestacadosZona.innerHTML += `
+        <div class="card-circuito pop-destacado" style="background: #faf5ff; border-color: #a855f7 !important;">
+          <span class="badge-card-cat" style="background:rgba(168,85,247,0.1); color:#a855f7;">⭐ Recomendado Local</span>
+          <h2>${comercio.nombre}</h2>
+          <p>${comercio.descripcion}</p>
+          <a href="${comercio.enlace || '#'}" target="_blank" class="enlace-comercio" style="color:#a855f7;">Ver Dirección Digital →</a>
+        </div>
+      `;
+    });
+    bloqueDestacadosZona.style.display = "block";
+  } else if (bloqueDestacadosZona) {
+    bloqueDestacadosZona.style.display = "none";
   }
 
+  // D. Clasificar el resto por las 6 categorías fijas
+  contenedorCategorias.innerHTML = "";
   categoriasFijas.forEach((cat, index) => {
     const comerciosDeEstaCat = itemsDelSector.filter(item => item.categoria === cat);
     const conteo = comerciosDeEstaCat.length;
@@ -170,9 +202,10 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   });
 
   vista.style.display = "block";
-  vista.scrollIntoView({ behavior: 'smooth' });
+  vista.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+// 6. Controlar subcategorías
 function toggleSubCategoria(index) {
   const todosLosSubContenidos = document.querySelectorAll('.sub-accordion-content');
   todosLosSubContenidos.forEach(content => {
@@ -191,13 +224,35 @@ function toggleSubCategoria(index) {
   });
 }
 
+// 7. Buscador por Texto
 function buscarRadar() {
   const input = document.getElementById("searchInput");
   const result = document.getElementById("searchResult");
   if (!input || !result) return;
-  const val = input.value.trim();
-  if (val === "") { result.textContent = "Por favor escribe un término."; return; }
-  result.textContent = `Buscando "${val}"...`;
+  
+  const val = input.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  if (val === "") { 
+    result.textContent = "Por favor escribe una zona o categoría."; 
+    return; 
+  }
+
+  result.style.color = "#0f766e";
+  result.textContent = `Buscando coincidencias para "${input.value}"...`;
+
+  setTimeout(() => {
+    if(val.includes("valle") || val.includes("anton")) {
+      result.textContent = "📍 ¡Sector detectado! Cargando El Valle de Antón...";
+      cargarSectorDetalle('Coclé', 'Antón', 'El Valle');
+    } else if(val.includes("coronado")) {
+      result.textContent = "📍 ¡Sector detectado! Cargando Coronado...";
+      cargarSectorDetalle('Panamá Oeste', 'Chame', 'Coronado');
+    } else if(val.includes("hato") || val.includes("rio")) {
+      result.textContent = "📍 ¡Sector detectado! Cargando Río Hato...";
+      cargarSectorDetalle('Coclé', 'Antón', 'Río Hato');
+    } else {
+      result.textContent = `Próximamente resultados interactivos en vivo para: "${input.value}"`;
+    }
+  }, 600);
 }
 
 document.addEventListener("DOMContentLoaded", inicializarRadar);
