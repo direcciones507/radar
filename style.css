@@ -199,3 +199,45 @@ footer { background: #06121e; color: rgba(255, 255, 255, 0.6); text-align: cente
   .search-box input { background: #f8fafc; border-radius: 10px; border: 2px solid #e2e8f0; }
   .search-box button { width: 100%; border-radius: 10px; }
 }
+
+/* Estilos para el menú en cascada interno del Botón Maestro */
+.provincia-bloque-menu {
+  background: #ffffff;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.btn-provincia-select {
+  width: 100%;
+  background: #ffffff;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f766e;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-provincia-select:hover {
+  background: #f8fafc;
+}
+
+.sectores-internos-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease-out;
+  background: #f8fafc;
+  padding: 0 20px;
+}
+
+.sectores-internos-menu.active {
+  max-height: 500px;
+  padding: 16px 20px;
+  border-top: 1px solid #e2e8f0;
+}
