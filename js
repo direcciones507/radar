@@ -2,29 +2,33 @@ function buscarRadar() {
   const input = document.getElementById("searchInput");
   const result = document.getElementById("searchResult");
 
-  const busqueda = input.value.trim().toLowerCase();
+  if (!input || !result) return;
+
+  const busqueda = input.value.trim();
 
   if (busqueda === "") {
+    result.style.color = "#ef4444"; // Color de alerta/error sutil
     result.textContent = "Escribe una zona, negocio o categoría para buscar en Radar.";
     return;
   }
 
-  result.textContent = `Buscando en Radar: "${input.value}"`;
+  result.style.color = "#0f766e"; // Color principal correcto
+  result.textContent = `Buscando en Radar: "${busqueda}"...`;
 
-  // Por ahora esto es una búsqueda simulada.
-  // Después aquí conectamos las páginas reales por provincia, distrito, sector y categoría.
-
+  // Simulación de respuesta asíncrona optimizada
   setTimeout(() => {
-    result.textContent = `Próximamente verás resultados para: "${input.value}"`;
-  }, 700);
+    result.textContent = `Próximamente verás los comercios y mapas disponibles para: "${busqueda}"`;
+  }, 800);
 }
 
+// Escuchar evento Enter en el input de manera limpia
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("searchInput");
 
   if (searchInput) {
     searchInput.addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
+        event.preventDefault(); // Evita recargas inesperadas de página
         buscarRadar();
       }
     });
