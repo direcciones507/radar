@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Radar Direcciones507 | Negocios, turismo y ubicaciones en Panamá</title>
   <meta name="description" content="Radar Direcciones507 es una plataforma territorial para encontrar negocios y circuitos turísticos en Panamá." />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="estilo.css" />
 </head>
 <body>
 
@@ -13,10 +13,10 @@
     <nav class="navbar">
       <div class="logo">Radar<span>507</span></div>
       <div class="nav-links">
-        <a href="#search">Search</a>
-        <a href="#featured">Featured</a>
-        <a href="#provinces">Zones</a>
-        <a href="#business">Business</a>
+        <a href="#zonas">Explorar Zonas</a>
+        <a href="#destacados">Recomendados</a>
+        <a href="#buscar">Buscador</a>
+        <a href="#negocios">Para Negocios</a>
       </div>
     </nav>
     <section class="hero-content">
@@ -29,43 +29,26 @@
   </header>
 
   <main>
-    <section id="search" class="search-section">
-      <h2>Busca por lugar, negocio o categoría</h2>
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Ejemplo: hoteles en El Valle" />
-        <button onclick="buscarRadar()">Buscar</button>
-      </div>
-      <p id="searchResult" class="search-result"></p>
-    </section>
-
-    <section id="featured" class="section">
-      <div class="section-title-container">
-        <h2>⭐ Negocios Destacados</h2>
-        <p class="section-text">Los comercios e infraestructura digital recomendados de la semana en Panamá.</p>
-      </div>
-      <div id="contenedor-destacados" class="grid-tarjetas"></div>
-    </section>
-
-    <section id="provinces" class="section light">
-      <h2>Explorar por Territorio</h2>
-      <p class="section-text">Selecciona la provincia y el sector que deseas explorar para abrir su circuito turístico y categorías.</p>
-      
+    
+    <section id="zonas" class="section" style="margin-top: -60px; position: relative; z-index: 10;">
       <div class="accordion-container">
-        <div class="accordion-item">
-          <button class="accordion-header" data-provincia="Panama Oeste" onclick="toggleProvincia(this)">
-            <span>📍 Panamá Oeste</span>
-            <span class="icon">+</span>
+        
+        <div class="accordion-item" style="box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18); border: 2px solid #31e6c8;">
+          <button class="accordion-header" style="background: #ffffff; padding: 26px; font-size: 20px; font-weight: 800; color: #0f766e;" data-provincia="Panama Oeste" onclick="toggleProvincia(this)">
+            <span>🗺️ EXPLORAR TERRITORIO: Panamá Oeste (Chame, Coronado, San Carlos)</span>
+            <span class="icon" style="color: #31e6c8; font-size: 24px;">+</span>
           </button>
           <div class="accordion-content" id="sectores-PanamaOeste"></div>
         </div>
 
-        <div class="accordion-item">
-          <button class="accordion-header" data-provincia="Cocle" onclick="toggleProvincia(this)">
-            <span>📍 Coclé</span>
-            <span class="icon">+</span>
+        <div class="accordion-item" style="box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18); border: 2px solid #31e6c8;">
+          <button class="accordion-header" style="background: #ffffff; padding: 26px; font-size: 20px; font-weight: 800; color: #0f766e;" data-provincia="Cocle" onclick="toggleProvincia(this)">
+            <span>🗺️ EXPLORAR TERRITORIO: Coclé (Río Hato, El Valle de Antón)</span>
+            <span class="icon" style="color: #31e6c8; font-size: 24px;">+</span>
           </button>
           <div class="accordion-content" id="sectores-Cocle"></div>
         </div>
+
       </div>
     </section>
 
@@ -77,11 +60,36 @@
 
       <div id="bloque-circuito-turistico" class="circuito-card-destacada"></div>
 
+      <div id="zona-destacados-container" style="display:none; margin-bottom: 40px;">
+        <h3 style="color: #0f766e; margin-bottom: 15px; font-size: 20px;">⭐ Negocios Recomendados en la Zona</h3>
+        <div id="contenedor-destacados-zona" class="grid-tarjetas"></div>
+      </div>
+
       <h3>📂 Categorías Disponibles</h3>
       <div id="categorias-desplegables" class="accordion-container-categorias"></div>
     </section>
 
-    <section id="business" class="business-section">
+    <section id="destacados" class="section light">
+      <div class="section-title-container">
+        <h2>⭐ Negocios Destacados en Panamá</h2>
+        <p class="section-text">Descubre los comercios e infraestructura digital recomendados de la semana.</p>
+      </div>
+      <div id="contenedor-destacados" class="grid-tarjetas"></div>
+    </section>
+
+    <section id="buscar" class="section">
+      <div class="search-section" style="margin: 0 auto; box-shadow: var(--card-shadow); border: 1px solid #e2e8f0;">
+        <h2>¿Buscas un negocio o categoría específica?</h2>
+        <p>Escribe lo que necesitas si ya conoces el nombre del comercio o servicio en la zona.</p>
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Ejemplo: cajero atm, restaurante, hotel..." />
+          <button onclick="buscarRadar()">Buscar en Radar</button>
+        </div>
+        <p id="searchResult" class="search-result"></p>
+      </div>
+    </section>
+
+    <section id="negocios" class="business-section">
       <h2>¿Tienes un negocio en estas zonas?</h2>
       <p>Aparece en el Radar de tu sector, mejora tu geolocalización y conecta con clientes directos.</p>
       <a href="https://direcciones507.com" class="btn primary" target="_blank">Conocer Direcciones507</a>
