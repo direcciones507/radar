@@ -1,24 +1,22 @@
 let baseDatosRadar = [];
 const categoriasFijas = ["Restaurantes", "Hoteles", "Bares", "Gasolineras", "Cajeros ATM", "Actividades turísticas"];
 
-// 1. Inicializar Base de Datos
 async function inicializarRadar() {
   try {
     const response = await fetch('data/circuitos.json');
     if (!response.ok) {
-      console.warn('Archivo de datos ausente. Operando en modo estructural.');
+      console.warn('Archivo de datos no encontrado de forma local.');
       baseDatosRadar = [];
       return;
     }
     baseDatosRadar = await response.json();
     renderizarDestacadosPais();
   } catch (error) {
-    console.error("Aviso: Interfaz gráfica montada sin JSON de datos activo:", error.message);
+    console.error("Aviso: Interfaz lista. Esperando datos del JSON local:", error.message);
     baseDatosRadar = [];
   }
 }
 
-// 2. Renderizar destacados generales en la Portada
 function renderizarDestacadosPais() {
   const contenedor = document.getElementById('contenedor-destacados');
   if(!contenedor || !baseDatosRadar || baseDatosRadar.length === 0) return;
@@ -44,7 +42,6 @@ function renderizarDestacadosPais() {
   });
 }
 
-// 3. Controlar el Botón Maestro Principal
 function toggleMenuMaestro() {
   const contenido = document.getElementById('contenido-maestro-provincias');
   const icono = document.getElementById('icono-maestro');
@@ -59,7 +56,6 @@ function toggleMenuMaestro() {
   }
 }
 
-// 4. Desplegar bloques internos de Provincias
 function toggleProvinciaDinamica(provinciaKey, botonElemento) {
   const contenedorSectores = document.getElementById(`sub-sectores-${provinciaKey}`);
   const subIcono = botonElemento.querySelector('.sub-icon-prov');
@@ -106,7 +102,6 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
   }
 }
 
-// 5. Cargar detalles del sector seleccionado (Circuito + Recomendados Locales + Categorías)
 function cargarSectorDetalle(provincia, distrito, sector) {
   const vista = document.getElementById('vista-sector');
   const txtNombre = document.getElementById('dinamico-nombre-sector');
