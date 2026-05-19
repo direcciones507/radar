@@ -46,10 +46,42 @@
       <p id="searchResult" class="search-result"></p>
     </section>
 
-    <!-- Sección de Circuitos Dinámicos cargados por JS -->
+    <!-- Exploración Territorial Jerárquica -->
+    <section id="provincias" class="section">
+      <h2>Explorar por Territorio</h2>
+      <p class="section-text">Selecciona una provincia para desplegar sus distritos y sectores comerciales disponibles.</p>
+      
+      <div class="accordion-container">
+        <!-- Provincia: Panamá Oeste -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleProvincia('Panamá Oeste')">
+            <span>📍 Panamá Oeste</span>
+            <span class="icon">+</span>
+          </button>
+          <div class="accordion-content" id="sectores-Panamá Oeste">
+            <!-- JS inyectará aquí los distritos y sectores correspondientes -->
+          </div>
+        </div>
+
+        <!-- Provincia: Coclé -->
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleProvincia('Coclé')">
+            <span>📍 Coclé</span>
+            <span class="icon">+</span>
+          </button>
+          <div class="accordion-content" id="sectores-Coclé">
+            <!-- JS inyectará aquí los distritos y sectores correspondientes -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Título Dinámico para Resultados -->
     <div class="section-title-container">
-      <h2 style="font-size: 26px; font-weight: 700; color: #0f766e;">📍 Zonas y Circuitos Destacados</h2>
+      <h2 id="titulo-zona" style="font-size: 26px; font-weight: 700; color: #0f766e; margin-top: 20px;">📍 Comercios Destacados</h2>
     </div>
+    
+    <!-- Contenedor de Tarjetas de Comercios -->
     <section id="circuitos"></section>
 
     <!-- Características del Sistema -->
@@ -68,23 +100,7 @@
       </div>
     </section>
 
-    <!-- Provincias -->
-    <section id="provincias" class="section">
-      <h2>Explorar por provincia</h2>
-      <p class="section-text">Esta será la entrada principal para navegar Radar por territorio.</p>
-      <div class="province-grid">
-        <a href="#" class="province-card">Panamá Oeste</a>
-        <a href="#" class="province-card">Coclé</a>
-        <a href="#" class="province-card">Chiriquí</a>
-        <a href="#" class="province-card">Panamá</a>
-        <a href="#" class="province-card">Colón</a>
-        <a href="#" class="province-card">Veraguas</a>
-        <a href="#" class="province-card">Los Santos</a>
-        <a href="#" class="province-card">Herrera</a>
-      </div>
-    </section>
-
-    <!-- Categorías -->
+    <!-- Categorías Estáticas Rápidas -->
     <section id="categorias" class="section light">
       <h2>Categorías principales</h2>
       <p class="section-text">Filtra rápidamente lo que necesitas en cada comunidad.</p>
@@ -102,7 +118,7 @@
       </div>
     </section>
 
-    <!-- Comparativa con Sistema Tradicional -->
+    <!-- Comparativa -->
     <section class="section">
       <h2>Radar no es solo un directorio</h2>
       <p class="section-text">
@@ -133,31 +149,5 @@
   </footer>
 
   <script src="script.js"></script>
-  <script>
-    // Código de carga seguro en caso de que falte el archivo JSON en pruebas locales
-    async function cargarCircuitos() {
-      try {
-        const response = await fetch('data/circuitos.json');
-        if (!response.ok) throw new Error('No se encontró el archivo de datos');
-        const circuitos = await response.json();
-        const contenedor = document.getElementById('circuitos');
-        
-        contenedor.innerHTML = ''; // Limpiar contenedor
-        circuitos.forEach(circuito => {
-          contenedor.innerHTML += `
-            <div class="card-circuito">
-              <h2>${circuito.nombre}</h2>
-              <p><strong>Provincia:</strong> ${circuito.provincia}</p>
-              <p><strong>Sector:</strong> ${circuito.sector}</p>
-              <p style="margin-top:10px; color:#475569;">${circuito.descripcion}</p>
-            </div>
-          `;
-        });
-      } catch (error) {
-        console.log('Esperando circuitos dinámicos...', error.message);
-      }
-    }
-    document.addEventListener("DOMContentLoaded", cargarCircuitos);
-  </script>
 </body>
 </html>
