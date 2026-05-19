@@ -1,20 +1,17 @@
 let baseDatosRadar = [];
 const categoriasFijas = ["Restaurantes", "Hoteles", "Bares", "Gasolineras", "Cajeros ATM", "Actividades turísticas"];
 
-// 1. Cargar Base de Datos apuntando a tu ruta real: datos/circuitos.json
 async function inicializarRadar() {
   try {
     const response = await fetch('datos/circuitos.json');
     if (!response.ok) throw new Error('Error al leer datos/circuitos.json');
     baseDatosRadar = await response.json();
-    console.log("Base de datos de Radar vinculada correctamente.");
     renderizarDestacadosPrincipales();
   } catch (error) {
     console.error("Error inicializando Radar:", error);
   }
 }
 
-// 2. Renderizar destacados principales
 function renderizarDestacadosPrincipales() {
   const contenedor = document.getElementById('contenedor-destacados');
   if(!contenedor) return;
@@ -35,14 +32,11 @@ function renderizarDestacadosPrincipales() {
   });
 }
 
-// 3. Controlar el Acordeón usando el Atributo de Datos (Inmune al traductor de Chrome)
 function toggleProvincia(botonElemento) {
-  // Extraemos la provincia directa del atributo html sin importar el idioma visual
   const provinciaId = botonElemento.getAttribute('data-provincia'); 
   const todosLosContenidos = document.querySelectorAll('.accordion-content');
   
   todosLosContenidos.forEach(contenido => {
-    // Quitamos espacios para armar el ID del contenedor
     const idEsperado = `sectores-${provinciaId.replace(/\s+/g, '')}`;
     
     if (contenido.id === idEsperado) {
@@ -55,7 +49,6 @@ function toggleProvincia(botonElemento) {
         construirSectoresFijos(provinciaId, contenido);
       }
     } else {
-      // Efecto retráctil automático
       contenido.classList.remove('active');
       const tarjetaPadre = contenido.closest('.accordion-item');
       if(tarjetaPadre) {
@@ -66,7 +59,6 @@ function toggleProvincia(botonElemento) {
   });
 }
 
-// 4. Construir las estructuras geográficas fijas limpias
 function construirSectoresFijos(provinciaId, contenedorHTML) {
   let sectoresHtml = "";
 
@@ -100,7 +92,6 @@ function construirSectoresFijos(provinciaId, contenedorHTML) {
   contenedorHTML.innerHTML = sectoresHtml;
 }
 
-// 5. Cargar detalles del sector seleccionado
 function cargarSectorDetalle(provincia, distrito, sector) {
   const vista = document.getElementById('vista-sector');
   const txtNombre = document.getElementById('dinamico-nombre-sector');
@@ -108,10 +99,11 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   const bloqueCircuito = document.getElementById('bloque-circuito-turistico');
   const contenedorCategorias = document.getElementById('categorias-desplegables');
 
+  if(!vista || !txtNombre || !txtJerarquia || !bloqueCircuito || !contenedorCategorias) return;
+
   txtNombre.textContent = `Explore el Sector de ${sector}`;
   txtJerarquia.textContent = `📍 Provincia de ${provincia} > Distrito de ${distrito}`;
   
-  // Buscar circuito en la base de datos (normalizando el texto para evitar caídas por acentos)
   const circuitoData = baseDatosRadar.find(item => 
     item.tipo === "circuito_turistico" && 
     item.sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === sector.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -132,7 +124,6 @@ function cargarSectorDetalle(provincia, distrito, sector) {
     bloqueCircuito.innerHTML = `<p style="color: #64748b; font-style: italic;">✨ Circuito Turístico de la comunidad consolidándose próximamente.</p>`;
   }
 
-  // Agrupar comercios en las 6 categorías fijas
   contenedorCategorias.innerHTML = "";
   const itemsDelSector = baseDatosRadar.filter(item => 
     item.tipo === "comercio" &&
