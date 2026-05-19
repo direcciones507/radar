@@ -1,36 +1,29 @@
-function buscarRadar() {
-  const input = document.getElementById("searchInput");
-  const result = document.getElementById("searchResult");
-
-  if (!input || !result) return;
-
-  const busqueda = input.value.trim();
-
-  if (busqueda === "") {
-    result.style.color = "#ef4444"; // Color de alerta/error sutil
-    result.textContent = "Escribe una zona, negocio o categoría para buscar en Radar.";
-    return;
+[
+  {
+    "nombre": "Restaurante Delicias del Mar",
+    "provincia": "Panamá Oeste",
+    "distrito": "Chame",
+    "sector": "Coronado",
+    "categoria": "Restaurantes",
+    "descripcion": "Los mejores mariscos y ambiente familiar en el corazón de Coronado.",
+    "enlace": "https://direcciones507.com/coronado-delicias"
+  },
+  {
+    "nombre": "Hotel Campestre El Valle",
+    "provincia": "Coclé",
+    "distrito": "Antón",
+    "sector": "El Valle",
+    "categoria": "Hoteles",
+    "descripcion": "Disfruta del clima fresco de El Valle con total comodidad.",
+    "enlace": "https://direcciones507.com/elvalle-campestre"
+  },
+  {
+    "nombre": "Pizzería Las Lajas",
+    "provincia": "Panamá Oeste",
+    "distrito": "Chame",
+    "sector": "Las Lajas",
+    "categoria": "Restaurantes",
+    "descripcion": "Pizzas artesanales a la leña a pocos minutos de la vía principal.",
+    "enlace": "https://direcciones507.com/laslajas-pizza"
   }
-
-  result.style.color = "#0f766e"; // Color principal correcto
-  result.textContent = `Buscando en Radar: "${busqueda}"...`;
-
-  // Simulación de respuesta asíncrona optimizada
-  setTimeout(() => {
-    result.textContent = `Próximamente verás los comercios y mapas disponibles para: "${busqueda}"`;
-  }, 800);
-}
-
-// Escuchar evento Enter en el input de manera limpia
-document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.getElementById("searchInput");
-
-  if (searchInput) {
-    searchInput.addEventListener("keydown", function (event) {
-      if (event.key === "Enter") {
-        event.preventDefault(); // Evita recargas inesperadas de página
-        buscarRadar();
-      }
-    });
-  }
-});
+]
