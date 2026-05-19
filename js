@@ -3,9 +3,11 @@ const categoriasFijas = ["Restaurantes", "Hoteles", "Bares", "Gasolineras", "Caj
 
 async function inicializarRadar() {
   try {
-    const response = await fetch('datos/circuitos.json');
-    if (!response.ok) throw new Error('Error al leer datos/circuitos.json');
+    // Apuntando exactamente a tu carpeta data y archivo circuitos.json
+    const response = await fetch('data/circuitos.json');
+    if (!response.ok) throw new Error('Error al leer data/circuitos.json');
     baseDatosRadar = await response.json();
+    console.log("Base de datos de Radar vinculada correctamente.");
     renderizarDestacadosPrincipales();
   } catch (error) {
     console.error("Error inicializando Radar:", error);
