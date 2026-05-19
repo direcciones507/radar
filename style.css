@@ -1,7 +1,20 @@
+/* ==========================================================================
+   1. RESET & VARIABLES
+   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+:root {
+  --primary: #31e6c8;
+  --primary-dark: #12b8a6;
+  --bg-main: #f4f7fb;
+  --text-dark: #0f172a;
+  --text-muted: #475569;
+  --card-shadow: 0 12px 34px rgba(15, 23, 42, 0.06);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
@@ -9,9 +22,9 @@ html {
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  color: #172033;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-dark);
   line-height: 1.6;
 }
 
@@ -20,218 +33,258 @@ a {
   color: inherit;
 }
 
+/* ==========================================================================
+   2. HERO SECTOR (ENCABEZADO)
+   ========================================================================== */
 .hero {
-  min-height: 110vh;
-  background:
-    linear-gradient(135deg, rgba(5, 20, 45, 0.92), rgba(0, 122, 146, 0.78)),
-    url("assets/radar-panama.jpg");
+  min-height: 90vh;
+  position: relative;
+  background: 
+    linear-gradient(135deg, rgba(6, 24, 44, 0.95), rgba(11, 114, 133, 0.82)),
+    url("assets/radar-panama.jpg") no-repeat center center;
   background-size: cover;
-  background-position: center;
+  background-attachment: fixed;
   color: #ffffff;
-  padding: 24px;
+  padding: 24px 24px 120px 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar {
-  max-width: 1150px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 0;
 }
 
 .logo {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
-  letter-spacing: -0.5px;
+  letter-spacing: -1px;
 }
 
 .logo span {
-  color: #31e6c8;
+  color: var(--primary);
 }
 
 .nav-links {
   display: flex;
-  gap: 22px;
+  gap: 30px;
   font-size: 15px;
+  font-weight: 500;
 }
 
 .nav-links a {
-  opacity: 0.9;
+  opacity: 0.85;
+  transition: var(--transition);
 }
 
 .nav-links a:hover {
   opacity: 1;
-  color: #31e6c8;
+  color: var(--primary);
 }
 
 .hero-content {
-  max-width: 900px;
-  margin: 140px auto 80px;
+  max-width: 850px;
+  margin: auto auto 0 auto;
   text-align: center;
 }
 
 .badge {
   display: inline-block;
-  padding: 8px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 6px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
-  font-size: 14px;
-  margin-bottom: 22px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--primary);
 }
 
 .hero h1 {
-  font-size: clamp(38px, 7vw, 72px);
-  line-height: 1.05;
+  font-size: clamp(36px, 6.5vw, 64px);
+  line-height: 1.1;
   margin-bottom: 24px;
   letter-spacing: -2px;
+  font-weight: 800;
 }
 
 .hero-text {
-  max-width: 760px;
-  margin: 0 auto 34px;
+  max-width: 700px;
+  margin: 0 auto;
   font-size: 19px;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
 }
 
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  display: inline-block;
-  padding: 14px 24px;
-  border-radius: 999px;
-  font-weight: 700;
-  transition: 0.25s ease;
-}
-
-.btn.primary {
-  background: #31e6c8;
-  color: #062236;
-}
-
-.btn.primary:hover {
-  background: #ffffff;
-  transform: translateY(-2px);
-}
-
-.btn.secondary {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  color: #ffffff;
-}
-
-.btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
-}
-
-main {
-  background: #f4f7fb;
-}
-
+/* ==========================================================================
+   3. SECCIÓN DE BÚSQUEDA FLOTANTE
+   ========================================================================== */
 .search-section {
-  max-width: 1000px;
-  margin: -70px auto 40px;
+  max-width: 950px;
+  margin: -60px auto 60px;
   background: #ffffff;
-  border-radius: 28px;
-  padding: 42px 28px;
+  border-radius: 24px;
+  padding: 40px;
   text-align: center;
-  box-shadow: 0 18px 45px rgba(10, 31, 68, 0.14);
+  box-shadow: 0 24px 50px rgba(15, 23, 42, 0.12);
   position: relative;
-  z-index: 3;
+  z-index: 10;
 }
 
-.search-section h2,
-.section h2,
-.business-section h2 {
-  font-size: clamp(28px, 4vw, 42px);
-  margin-bottom: 12px;
-  letter-spacing: -1px;
+.search-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
 }
 
-.search-section p,
-.section-text,
-.business-section p {
-  max-width: 760px;
-  margin: 0 auto 26px;
-  color: #5b667a;
-  font-size: 17px;
+.search-section p {
+  color: var(--text-muted);
+  margin-bottom: 28px;
 }
 
 .search-box {
-  max-width: 760px;
+  max-width: 700px;
   margin: 0 auto;
   display: flex;
-  background: #f1f5f9;
-  border-radius: 999px;
-  padding: 8px;
-  border: 1px solid #e1e8f0;
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 6px;
+  border: 2px solid #e2e8f0;
+  transition: var(--transition);
+}
+
+.search-box:focus-within {
+  border-color: var(--primary-dark);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(18, 184, 166, 0.15);
 }
 
 .search-box input {
   flex: 1;
   border: none;
   background: transparent;
-  padding: 14px 18px;
+  padding: 14px 20px;
   font-size: 16px;
   outline: none;
-  color: #172033;
+  color: var(--text-dark);
 }
 
 .search-box button {
   border: none;
-  background: #0b7285;
+  background: #0f766e;
   color: white;
-  padding: 14px 24px;
-  border-radius: 999px;
-  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.25s ease;
+  transition: var(--transition);
 }
 
 .search-box button:hover {
-  background: #064d5b;
+  background: #115e59;
 }
 
 .search-result {
   margin-top: 16px;
-  font-weight: 700;
-  color: #0b7285;
+  font-weight: 600;
+  color: #0f766e;
+  min-height: 24px;
 }
 
+/* ==========================================================================
+   4. CIRCUITOS (DINÁMICOS) Y TARJETAS
+   ========================================================================== */
+.section-title-container {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 24px;
+  text-align: left;
+}
+
+#circuitos {
+  max-width: 1200px;
+  margin: 20px auto 60px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.card-circuito {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid #f1f5f9;
+  transition: var(--transition);
+}
+
+.card-circuito:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+.card-circuito h2 {
+  font-size: 22px;
+  color: #0f766e;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.card-circuito p {
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.card-circuito p strong {
+  color: var(--text-dark);
+}
+
+/* Grids e Introducción */
 .intro-grid {
-  max-width: 1150px;
+  max-width: 1200px;
   margin: 60px auto;
   padding: 0 24px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 24px;
 }
 
 .card {
   background: #ffffff;
-  padding: 30px;
-  border-radius: 24px;
-  box-shadow: 0 12px 30px rgba(10, 31, 68, 0.08);
+  padding: 36px 30px;
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid #f1f5f9;
 }
 
 .card h3 {
-  font-size: 21px;
-  margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-weight: 700;
 }
 
 .card p {
-  color: #5b667a;
+  color: var(--text-muted);
+  font-size: 15px;
 }
 
+/* ==========================================================================
+   5. SECCIONES GENERALES (PROVINCIAS Y CATEGORÍAS)
+   ========================================================================== */
 .section {
-  max-width: 1150px;
-  margin: 70px auto;
+  max-width: 1200px;
+  margin: 80px auto;
   padding: 0 24px;
   text-align: center;
 }
@@ -239,301 +292,170 @@ main {
 .section.light {
   max-width: 100%;
   background: #ffffff;
-  padding: 70px 24px;
+  padding: 80px 24px;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
 }
 
-.province-grid,
-.category-grid {
+.section h2 {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.section-text {
+  max-width: 650px;
+  margin: 0 auto 40px;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.province-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-  max-width: 1050px;
-  margin: 34px auto 0;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .province-card {
   background: #ffffff;
-  padding: 26px 18px;
-  border-radius: 22px;
-  font-weight: 800;
-  color: #172033;
-  box-shadow: 0 10px 26px rgba(10, 31, 68, 0.08);
-  border: 1px solid #e8eef5;
-  transition: 0.25s ease;
+  padding: 24px 16px;
+  border-radius: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  box-shadow: var(--card-shadow);
+  border: 1px solid #e2e8f0;
+  transition: var(--transition);
 }
 
 .province-card:hover {
-  background: #0b7285;
+  background: #0f766e;
   color: #ffffff;
+  border-color: #0f766e;
   transform: translateY(-4px);
 }
 
-.category {
-  background: #f4f7fb;
-  padding: 22px;
-  border-radius: 20px;
-  font-weight: 700;
-  border: 1px solid #e8eef5;
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
+.category {
+  background: var(--bg-main);
+  padding: 20px 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid #e2e8f0;
+  transition: var(--transition);
+  cursor: default;
+}
+
+.category:hover {
+  background: #ffffff;
+  border-color: var(--primary-dark);
+  transform: scale(1.02);
+}
+
+/* ==========================================================================
+   6. COMPARATIVA Y CTA COMERCIAL
+   ========================================================================== */
 .comparison {
-  margin-top: 34px;
+  margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 30px;
 }
 
 .comparison div {
   background: #ffffff;
-  padding: 30px;
+  padding: 40px;
   border-radius: 24px;
-  box-shadow: 0 12px 30px rgba(10, 31, 68, 0.08);
+  box-shadow: var(--card-shadow);
   text-align: left;
+  border: 1px solid #f1f5f9;
 }
 
 .comparison h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #0b7285;
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: #0f766e;
+  font-weight: 700;
 }
 
 .comparison p {
-  color: #5b667a;
+  color: var(--text-muted);
 }
 
 .business-section {
-  margin: 80px auto 0;
-  padding: 80px 24px;
+  padding: 90px 24px;
   text-align: center;
-  background:
-    linear-gradient(135deg, rgba(6, 34, 54, 0.96), rgba(11, 114, 133, 0.9));
+  background: linear-gradient(135deg, #091e2f, #0f766e);
   color: #ffffff;
 }
 
+.business-section h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
 .business-section p {
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin: 0 auto 36px;
+  font-size: 18px;
 }
 
-footer {
-  background: #061827;
-  color: rgba(255, 255, 255, 0.75);
-  text-align: center;
-  padding: 24px;
-  font-size: 14px;
+.btn {
+  display: inline-block;
+  padding: 16px 36px;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: var(--transition);
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .nav-links {
-    display: none;
-  }
-
-  .hero-content {
-    margin-top: 110px;
-  }
-
-  .intro-grid,
-  .comparison {
-    grid-template-columns: 1fr;
-  }
-
-  .province-grid,
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .search-section {
-    margin: -45px 16px 30px;
-  }
+.btn.primary {
+  background: var(--primary);
+  color: #061827;
 }
 
-@media (max-width: 560px) {
-  .hero {
-    min-height: 88vh;
-    padding: 20px;
-  }
-
-  .hero-content {
-    margin-top: 95px;
-  }
-
-  .hero h1 {
-    letter-spacing: -1px;
-  }
-
-  .hero-text {
-    font-size: 17px;
-  }
-
-  .search-box {
-    flex-direction: column;
-    border-radius: 22px;
-  }
-
-  .search-box button {
-    width: 100%;
-  }
-
-  .province-grid,
-  .category-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card,
-  .comparison div {
-    padding: 24px;
-  }
-}
-
-.card-circuito{
-  background:#ffffff;
-  padding:20px;
-  margin:20px;
-  border-radius:15px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: #1f2933;
-
-  background:
-    linear-gradient(
-      rgba(0,0,0,0.45),
-      rgba(0,0,0,0.45)
-    ),
-    url("assets/radar-panama.jpg");
-
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-
-#circuitos {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 22px;
-}
-
-.card-circuito {
+.btn.primary:hover {
   background: #ffffff;
-  border-radius: 22px;
-  padding: 24px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-  border: 1px solid rgba(0,0,0,0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(49, 230, 200, 0.25);
 }
 
-.card-circuito {
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(10px);
-
-  border-radius: 22px;
-  padding: 24px;
-
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-  border: 1px solid rgba(0,0,0,0.06);
-
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.card-circuito:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
-}
-
-.card-circuito h2 {
-  margin-top: 0;
-  font-size: 1.35rem;
-  color: #0f766e;
-}
-
-.card-circuito p {
-  line-height: 1.6;
-  color: #374151;
-}
-
-.card-circuito strong {
-  color: #111827;
-}
-
-.hero-radar {
-  max-width: 1100px;
-  margin: 40px auto 10px;
-  padding: 35px 25px;
-  border-radius: 28px;
-  background: linear-gradient(135deg, #0f766e, #14b8a6);
-  color: white;
+/* ==========================================================================
+   7. FOOTER & RESPONSIVE
+   ========================================================================== */
+footer {
+  background: #06121e;
+  color: rgba(255, 255, 255, 0.6);
   text-align: center;
-  box-shadow: 0 18px 45px rgba(15,118,110,0.25);
+  padding: 30px 24px;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.hero-radar h1 {
-  margin: 0 0 10px;
-  font-size: 2rem;
-}
-
-.hero-radar p {
-  margin: 0;
-  font-size: 1.05rem;
+@media (max-width: 1024px) {
+  .province-grid { grid-template-columns: repeat(3, 1fr); }
+  .category-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 768px) {
-  body {
-    background-position: center;
-    background-size: cover;
-  }
-
-  nav {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-  }
-
-  #circuitos {
+  .hero { min-height: auto; padding-bottom: 90px; }
+  .nav-links { display: none; }
+  .intro-grid, .comparison, .province-grid, .category-grid {
     grid-template-columns: 1fr;
-    padding: 20px;
-    margin: 20px auto;
-    gap: 18px;
   }
-
-  .card-circuito {
-    width: auto;
-    min-height: auto;
-    padding: 22px;
-    border-radius: 20px;
-  }
-
-  .card-circuito h2 {
-    font-size: 1.45rem;
-  }
-
-  .card-circuito p {
-    font-size: 1rem;
-  }
-
-  .hero-radar {
-    margin: 20px;
-    padding: 28px 18px;
-    border-radius: 22px;
-  }
-
-  .hero-radar h1 {
-    font-size: 1.7rem;
-  }
-
-  .hero-radar p {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll;
-  }
+  .search-section { margin: -40px 16px 40px; padding: 24px; }
+  .search-box { flex-direction: column; border-radius: 14px; background: transparent; border: none; gap: 10px;}
+  .search-box input { background: #f8fafc; border-radius: 10px; border: 2px solid #e2e8f0; }
+  .search-box button { width: 100%; border-radius: 10px; }
 }
