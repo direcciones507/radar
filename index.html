@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-594KMFSF');</script>
-<!-- End Google Tag Manager -->
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W6KSB7F38G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-594KMFSF');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W6KSB7F38G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W6KSB7F38G');
+  </script>
 
-  gtag('config', 'G-W6KSB7F38G');
-</script>
-  <!-- Open Graph -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://radar.direcciones507.com/" />
-<meta property="og:title" content="Radar Direcciones507 | El radar digital de Panamá" />
-<meta property="og:description" content="Explora negocios, turismo, rutas y ubicaciones inteligentes en Panamá con Radar Direcciones507." />
-<meta property="og:image" content="https://radar.direcciones507.com/assets/og-image.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://radar.direcciones507.com/" />
+  <meta property="og:title" content="Radar Direcciones507 | El radar digital de Panamá" />
+  <meta property="og:description" content="Explora negocios, turismo, rutas y ubicaciones inteligentes en Panamá con Radar Direcciones507." />
+  <meta property="og:image" content="https://radar.direcciones507.com/assets/og-image.jpg" />
 
-<!-- Twitter / X -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:url" content="https://radar.direcciones507.com/" />
-<meta name="twitter:title" content="Radar Direcciones507 | El radar digital de Panamá" />
-<meta name="twitter:description" content="Explora negocios, turismo y ubicaciones inteligentes en Panamá." />
-<meta name="twitter:image" content="https://radar.direcciones507.com/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://radar.direcciones507.com/" />
+  <meta name="twitter:title" content="Radar Direcciones507 | El radar digital de Panamá" />
+  <meta name="twitter:description" content="Explora negocios, turismo y ubicaciones inteligentes en Panamá." />
+  <meta name="twitter:image" content="https://radar.direcciones507.com/assets/og-image.jpg" />
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Radar Direcciones507 | Negocios, turismo y ubicaciones en Panamá</title>
@@ -38,11 +34,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </head>
 <body>
 
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-594KMFSF"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-594KMFSF"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <header class="hero">
     <nav class="navbar">
       <div class="logo">Radar<span>507</span></div>
@@ -55,7 +48,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
     <section class="hero-content">
       <p class="badge">Ecosistema Territorial de Visibilidad</p>
-      <h1>Explora Panamá por zonas, negocios y experiences</h1>
+      <h1>Explora Panamá por zonas, negocios y experiencias</h1>
       <p class="hero-text">
         Descubre circuitos turísticos, mapas comerciales y comercios locales con infraestructura de direcciones digitales inteligentes.
       </p>
@@ -78,6 +71,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="accordion-content" id="contenido-maestro-provincias">
             
             <div class="provincia-bloque-menu">
+              <button class="btn-provincia-select" data-provincia="Panama" onclick="toggleProvinciaDinamica('Panama', this)">
+                <span class="header-title-wrapper">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                  <span>Provincia de Panamá (Casco Antiguo)</span>
+                </span>
+                <span class="sub-icon-prov">+</span>
+              </button>
+              <div class="sectores-internos-menu" id="sub-sectores-Panama"></div>
+            </div>
+
+            <div class="provincia-bloque-menu">
               <button class="btn-provincia-select" data-provincia="PanamaOeste" onclick="toggleProvinciaDinamica('PanamaOeste', this)">
                 <span class="header-title-wrapper">
                   <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -97,6 +101,83 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span class="sub-icon-prov">+</span>
               </button>
               <div class="sectores-internos-menu" id="sub-sectores-Cocle"></div>
+            </div>
+
+            <div class="provincia-bloque-menu">
+              <button class="btn-provincia-select" data-provincia="Colon" onclick="toggleProvinciaDinamica('Colon', this)">
+                <span class="header-title-wrapper">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg>
+                  <span>Provincia de Colón (Centro, María Chiquita, Costa Abajo)</span>
+                </span>
+                <span class="sub-icon-prov">+</span>
+              </button>
+              <div class="sectores-internos-menu" id="sub-sectores-Colon"></div>
+            </div>
+
+            <div class="provincia-bloque-menu">
+              <button class="btn-provincia-select" data-provincia="GunaYala" onclick="toggleProvinciaDinamica('GunaYala', this)">
+                <span class="header-title-wrapper">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg>
+                  <span>Comarca Guna Yala (San Blas)</span>
+                </span>
+                <span class="sub-icon-prov">+</span>
+              </button>
+              <div class="sectores-internos-menu" id="sub-sectores-GunaYala"></div>
+            </div>
+
+            <div class="provincia-bloque-menu">
+              <button class="btn-provincia-select" data-provincia="BocasDelToro" onclick="toggleProvinciaDinamica('BocasDelToro', this)">
+                <span class="header-title-wrapper">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                  <span>Provincia de Bocas del Toro (Isla Colón, Carenero, Bastimentos)</span>
+                </span>
+                <span class="sub-icon-prov">+</span>
+              </button>
+              <div class="sectores-internos-menu" id="sub-sectores-BocasDelToro"></div>
+            </div>
+
+            <div class="provincia-bloque-menu">
+              <button class="btn-provincia-select" data-provincia="Chiriqui" onclick="toggleProvinciaDinamica('Chiriqui', this)">
+                <span class="header-title-wrapper">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19.36 10.04L20.5 11.5l-1.64 7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  <span>Provincia de Chiriquí (Boquete, Volcán, Cerro Punta, David)</span>
+                </span>
+                <span class="sub-icon-prov">+</span>
+              </button>
+              <div class="sectores-internos-menu" id="sub-sectores-Chiriqui"></div>
+            </div>
+
+            <div class="provincia-bloque-menu">
+              <button class="btn-provincia-select" data-provincia="Veraguas" onclick="toggleProvinciaDinamica('Veraguas', this)">
+                <span class="header-title-wrapper">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+                  <span>Provincia de Veraguas (Santa Catalina, Torio, Mariato)</span>
+                </span>
+                <span class="sub-icon-prov">+</span>
+              </button>
+              <div class="sectores-internos-menu" id="sub-sectores-Veraguas"></div>
+            </div>
+
+            <div class="provincia-bloque-menu">
+              <button class="btn-provincia-select" data-provincia="LosSantos" onclick="toggleProvinciaDinamica('LosSantos', this)">
+                <span class="header-title-wrapper">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                  <span>Provincia de Los Santos (Pedasí, Playa Venao, Cambutal, Las Tablas)</span>
+                </span>
+                <span class="sub-icon-prov">+</span>
+              </button>
+              <div class="sectores-internos-menu" id="sub-sectores-LosSantos"></div>
+            </div>
+
+            <div class="provincia-bloque-menu">
+              <button class="btn-provincia-select" data-provincia="Herrera" onclick="toggleProvinciaDinamica('Herrera', this)">
+                <span class="header-title-wrapper">
+                  <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10z"/></svg>
+                  <span>Provincia de Herrera (Chitré)</span>
+                </span>
+                <span class="sub-icon-prov">+</span>
+              </button>
+              <div class="sectores-internos-menu" id="sub-sectores-Herrera"></div>
             </div>
 
           </div>
