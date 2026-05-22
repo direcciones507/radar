@@ -55,7 +55,12 @@ function tieneContenidoTerritorial(item) {
 
   const tieneNegocio = negociosRadar.some(n =>
     normalizar(n.sector) === sectorNorm &&
-    (n.estado_radar === undefined || normalizar(n.estado_radar) === "aprobado")
+    (
+      n.estado_radar === undefined ||
+    ["aprobado", "premium", "premium pro"].includes(
+      normalizar(n.estado_radar)
+    )
+  )
   );
 
   const tieneCircuito = circuitosRadar.some(c =>
