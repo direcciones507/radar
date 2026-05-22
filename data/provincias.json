@@ -305,8 +305,8 @@
     "slug": "union-choco",
     "activo": false,
     "categorias": ["hoteles", "restaurantes", "actividades", "atm", "gasolineras", "bares", "cafeterias", "farmacias", "supermercados", "turismo"]
-  }
-]
+  },
+  [
 {
   "provincia": "Herrera",
   "distrito": "Chitré",
@@ -324,7 +324,6 @@
     "farmacias",
     "supermercados",
     "turismo"
-  ]
 },
 {
   "provincia": "Herrera",
@@ -343,8 +342,8 @@
     "farmacias",
     "supermercados",
     "turismo"
-  ]
-}
+},
+  ] 
 {
   "provincia": "Herrera",
   "distrito": "Parita",
