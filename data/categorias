@@ -1,32 +1,58 @@
 [
-  {
-    "id": "hoteles",
-    "nombre": "Hoteles",
-    "icono": "🏨"
-  },
-  {
-    "id": "restaurantes",
-    "nombre": "Restaurantes",
-    "icono": "🍽️"
-  },
-  {
-    "id": "actividades",
-    "nombre": "Actividades",
-    "icono": "🎯"
-  },
-  {
-    "id": "atm",
-    "nombre": "ATM",
-    "icono": "🏧"
-  },
-  {
-    "id": "gasolineras",
-    "nombre": "Gasolineras",
-    "icono": "⛽"
-  },
-  {
-    "id": "bares",
-    "nombre": "Bares",
-    "icono": "🍸"
-  }
+  { "id": "hoteles", "nombre": "Hoteles", "icono": "🏨" },
+  { "id": "hostales", "nombre": "Hostales", "icono": "🛏️" },
+  { "id": "apartamentos", "nombre": "Apartamentos Vacacionales", "icono": "🏢" },
+  { "id": "restaurantes", "nombre": "Restaurantes", "icono": "🍽️" },
+  { "id": "cafeterias", "nombre": "Cafeterías", "icono": "☕" },
+  { "id": "bares", "nombre": "Bares", "icono": "🍸" },
+  { "id": "discotecas", "nombre": "Discotecas", "icono": "🎵" },
+  { "id": "panaderias", "nombre": "Panaderías", "icono": "🥖" },
+  { "id": "supermercados", "nombre": "Supermercados", "icono": "🛒" },
+  { "id": "minisuper", "nombre": "Mini Súper", "icono": "🏪" },
+  { "id": "farmacias", "nombre": "Farmacias", "icono": "💊" },
+  { "id": "hospitales", "nombre": "Hospitales", "icono": "🏥" },
+  { "id": "clinicas", "nombre": "Clínicas", "icono": "🩺" },
+  { "id": "dentistas", "nombre": "Dentistas", "icono": "🦷" },
+  { "id": "veterinarias", "nombre": "Veterinarias", "icono": "🐾" },
+  { "id": "gasolineras", "nombre": "Gasolineras", "icono": "⛽" },
+  { "id": "atm", "nombre": "ATM", "icono": "🏧" },
+  { "id": "bancos", "nombre": "Bancos", "icono": "🏦" },
+  { "id": "ferreterias", "nombre": "Ferreterías", "icono": "🔨" },
+  { "id": "constructoras", "nombre": "Constructoras", "icono": "🏗️" },
+  { "id": "inmobiliarias", "nombre": "Inmobiliarias", "icono": "🏠" },
+  { "id": "abogados", "nombre": "Abogados", "icono": "⚖️" },
+  { "id": "contadores", "nombre": "Contadores", "icono": "📊" },
+  { "id": "consultorias", "nombre": "Consultorías", "icono": "💼" },
+  { "id": "tecnologia", "nombre": "Tecnología", "icono": "💻" },
+  { "id": "telefonia", "nombre": "Telefonía", "icono": "📱" },
+  { "id": "internet", "nombre": "Internet y Telecomunicaciones", "icono": "🌐" },
+  { "id": "transporte", "nombre": "Transporte", "icono": "🚐" },
+  { "id": "taxis", "nombre": "Taxis", "icono": "🚕" },
+  { "id": "alquiler-autos", "nombre": "Alquiler de Autos", "icono": "🚗" },
+  { "id": "talleres", "nombre": "Talleres Mecánicos", "icono": "🔧" },
+  { "id": "lavado-autos", "nombre": "Lavado de Autos", "icono": "🧽" },
+  { "id": "turismo", "nombre": "Turismo", "icono": "🌴" },
+  { "id": "tours", "nombre": "Tours", "icono": "🧭" },
+  { "id": "actividades", "nombre": "Actividades", "icono": "🎯" },
+  { "id": "playas", "nombre": "Playas", "icono": "🏖️" },
+  { "id": "senderismo", "nombre": "Senderismo", "icono": "🥾" },
+  { "id": "aventura", "nombre": "Aventura", "icono": "🧗" },
+  { "id": "buceo", "nombre": "Buceo", "icono": "🤿" },
+  { "id": "pesca", "nombre": "Pesca Deportiva", "icono": "🎣" },
+  { "id": "agro", "nombre": "Agropecuario", "icono": "🌾" },
+  { "id": "viveros", "nombre": "Viveros", "icono": "🌱" },
+  { "id": "ganaderia", "nombre": "Ganadería", "icono": "🐄" },
+  { "id": "belleza", "nombre": "Belleza", "icono": "💄" },
+  { "id": "barberias", "nombre": "Barberías", "icono": "✂️" },
+  { "id": "salones", "nombre": "Salones de Belleza", "icono": "💇" },
+  { "id": "spa", "nombre": "Spa", "icono": "🧖" },
+  { "id": "gimnasios", "nombre": "Gimnasios", "icono": "🏋️" },
+  { "id": "educacion", "nombre": "Educación", "icono": "🎓" },
+  { "id": "escuelas", "nombre": "Escuelas", "icono": "🏫" },
+  { "id": "universidades", "nombre": "Universidades", "icono": "📚" },
+  { "id": "iglesias", "nombre": "Iglesias", "icono": "⛪" },
+  { "id": "gobierno", "nombre": "Instituciones Públicas", "icono": "🏛️" },
+  { "id": "seguridad", "nombre": "Seguridad", "icono": "🚔" },
+  { "id": "bomberos", "nombre": "Bomberos", "icono": "🚒" },
+  { "id": "otros", "nombre": "Otros Servicios", "icono": "📍" }
 ]
