@@ -279,7 +279,42 @@ Registro gratuito sujeto a validación.
     <p>© 2026 Radar Direcciones507. Plataforma territorial de negocios, turismo y ubicaciones digitales en Panamá.</p>
   </footer>
 
-  <script src="js/script.js?v=30"></script>
+  <script src="js/script.js?v=40"></script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const boton = document.getElementById("btn-maestro-explorar");
+  const contenido = document.getElementById("contenido-maestro-provincias");
+  const icono = document.getElementById("icono-maestro");
+
+  if (!boton || !contenido) {
+    alert("Radar: no encontré el botón o el contenedor.");
+    return;
+  }
+
+  boton.onclick = function () {
+    contenido.classList.toggle("active");
+    icono.textContent = contenido.classList.contains("active") ? "-" : "+";
+
+    if (contenido.innerHTML.trim() === "") {
+      contenido.innerHTML = `
+        <div class="provincia-bloque-menu">
+          <button class="btn-provincia-select">
+            <span>Panamá Oeste</span>
+            <span>+</span>
+          </button>
+        </div>
+        <div class="provincia-bloque-menu">
+          <button class="btn-provincia-select">
+            <span>Coclé</span>
+            <span>+</span>
+          </button>
+        </div>
+      `;
+    }
+  };
+});
+</script>
 
 </body>
 </body>
