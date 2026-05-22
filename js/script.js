@@ -32,6 +32,9 @@ async function cargarJSON(rutas) {
 }
 
 async function inicializarRadar() {
+
+  alert("Radar JS cargó correctamente");
+  
   provinciasRadar = await cargarJSON(["data/provincias.json", "data/provincias"]);
   categoriasRadar = await cargarJSON(["data/categorias.json", "data/categorias"]);
   negociosRadar = await cargarJSON(["data/negocios.json", "data/negocios"]);
