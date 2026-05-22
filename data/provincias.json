@@ -306,44 +306,6 @@
     "activo": false,
     "categorias": ["hoteles", "restaurantes", "actividades", "atm", "gasolineras", "bares", "cafeterias", "farmacias", "supermercados", "turismo"]
   },
-  [
-{
-  "provincia": "Herrera",
-  "distrito": "Chitré",
-  "sector": "Chitré",
-  "slug": "chitre",
-  "activo": true,
-  "categorias": [
-    "hoteles",
-    "restaurantes",
-    "actividades",
-    "atm",
-    "gasolineras",
-    "bares",
-    "cafeterias",
-    "farmacias",
-    "supermercados",
-    "turismo"
-},
-{
-  "provincia": "Herrera",
-  "distrito": "Ocú",
-  "sector": "Ocú",
-  "slug": "ocu",
-  "activo": false,
-  "categorias": [
-    "hoteles",
-    "restaurantes",
-    "actividades",
-    "atm",
-    "gasolineras",
-    "bares",
-    "cafeterias",
-    "farmacias",
-    "supermercados",
-    "turismo"
-},
-  ] 
 {
   "provincia": "Herrera",
   "distrito": "Parita",
@@ -376,4 +338,4 @@
   "activo": false,
   "categorias": ["hoteles","restaurantes","actividades","atm","gasolineras","bares","cafeterias","farmacias","supermercados","turismo"]
 }
-  ]   
+]   
