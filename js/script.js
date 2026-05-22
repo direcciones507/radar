@@ -149,7 +149,7 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
   subIcono.textContent = "-";
 
   const provinciaReal = Object.keys(agruparProvinciasActivas()).find(
-    p => slugify(p) === provinciaKey
+  p => p === provinciaKey
   );
 
   if (!provinciaReal) return;
