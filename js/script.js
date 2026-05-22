@@ -40,6 +40,13 @@ async function inicializarRadar() {
   negociosRadar = await cargarJSON(["data/negocios.json", "data/negocios"]);
   circuitosRadar = await cargarJSON(["data/circuitos.json"]);
 
+  alert(
+  "Provincias: " + provinciasRadar.length +
+  "\nCategorías: " + categoriasRadar.length +
+  "\nNegocios: " + negociosRadar.length +
+  "\nCircuitos: " + circuitosRadar.length
+);
+
   baseDatosRadar = [
     ...circuitosRadar,
     ...negociosRadar.map(n => ({
