@@ -1,0 +1,22 @@
+[
+  {
+    "id": "RH-RH-CVS-0002",
+    "nombre": "Super wynn",
+    "provincia": "Provincia de Coclé",
+    "distrito": "",
+    "sector": "Río Hato Centro",
+    "categoria": "Convenience Store",
+    "descripcion": "Tienda de conveniencia",
+    "telefono": "",
+    "whatsapp": "",
+    "direccion": "Río Hato, Carr. Panamericana, 243-3",
+    "google_maps": "",
+    "waze": "",
+    "imagen": "",
+    "rating": "5",
+    "reviews": "1",
+    "destacado": false,
+    "plan": "Gratis",
+    "estado_radar": "Aprobado"
+  }
+]
