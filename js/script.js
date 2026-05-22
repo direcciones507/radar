@@ -32,24 +32,11 @@ async function cargarJSON(rutas) {
 }
 
 async function inicializarRadar() {
-
-  alert("Radar JS cargó correctamente");
   
   provinciasRadar = await cargarJSON(["data/provincias.json", "data/provincias"]);
   categoriasRadar = await cargarJSON(["data/categorias.json", "data/categorias"]);
   negociosRadar = await cargarJSON(["data/negocios.json", "data/negocios"]);
   circuitosRadar = await cargarJSON(["data/circuitos.json"]);
-
-  alert(
-  "Provincias: " + provinciasRadar.length +
-  "\nCategorías: " + categoriasRadar.length +
-  "\nNegocios: " + negociosRadar.length +
-  "\nCircuitos: " + circuitosRadar.length
-);
-
-  alert("Render provincias ejecutado");
-
-  document.getElementById("contenido-maestro-provincias").style.display = "block";
 
   baseDatosRadar = [
     ...circuitosRadar,
@@ -98,6 +85,7 @@ function agruparProvinciasActivas() {
 function renderizarMenuProvincias() {
   const contenedor = document.getElementById("contenido-maestro-provincias");
   if (!contenedor) return;
+  console.log("Renderizando provincias:", provinciasRadar.length);
 
   const mapa = agruparProvinciasActivas();
   // contenedor.innerHTML = "";
