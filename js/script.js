@@ -89,7 +89,7 @@ function renderizarMenuProvincias() {
   contenedor.innerHTML = "";
 
   Object.keys(mapa).sort().forEach(provincia => {
-    const key = slugify(provincia);
+    const key = String(provincia || "").trim();
 
     contenedor.innerHTML += `
       <div class="provincia-bloque-menu">
