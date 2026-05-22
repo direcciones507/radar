@@ -61,7 +61,7 @@ function tieneContenidoTerritorial(item) {
     normalizar(c.sector) === sectorNorm
   );
 
-  return item.activo === true || tieneNegocio || tieneCircuito;
+  return true;
 }
 
 function agruparProvinciasActivas() {
