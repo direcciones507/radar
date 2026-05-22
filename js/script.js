@@ -49,6 +49,8 @@ async function inicializarRadar() {
 
   alert("Render provincias ejecutado");
 
+  document.getElementById("contenido-maestro-provincias").style.display = "block";
+
   baseDatosRadar = [
     ...circuitosRadar,
     ...negociosRadar.map(n => ({
