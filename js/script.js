@@ -47,6 +47,8 @@ async function inicializarRadar() {
   "\nCircuitos: " + circuitosRadar.length
 );
 
+  alert("Render provincias ejecutado");
+
   baseDatosRadar = [
     ...circuitosRadar,
     ...negociosRadar.map(n => ({
