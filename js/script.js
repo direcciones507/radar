@@ -86,7 +86,7 @@ function renderizarMenuProvincias() {
   if (!contenedor) return;
 
   const mapa = agruparProvinciasActivas();
-  contenedor.innerHTML = "";
+  // contenedor.innerHTML = "";
 
   Object.keys(mapa).sort().forEach(provincia => {
     const key = String(provincia || "").trim();
