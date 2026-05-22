@@ -241,3 +241,83 @@ footer { background: #06121e; color: rgba(255, 255, 255, 0.6); text-align: cente
   .search-box input { background: #f8fafc; border-radius: 10px; border: 2px solid #e2e8f0; }
   .search-box button { width: 100%; border-radius: 10px; }
 }
+
+/* =====================================================
+   FORMULARIO REGISTRO RADAR
+===================================================== */
+
+.radar-form{
+  max-width:800px;
+  margin:40px auto 0;
+  display:grid;
+  gap:16px;
+}
+
+.radar-form input,
+.radar-form select,
+.radar-form textarea{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid #dbe2ea;
+  border-radius:12px;
+  background:#ffffff;
+  color:#0f172a;
+  font-size:15px;
+  transition:all .25s ease;
+}
+
+.radar-form input:focus,
+.radar-form select:focus,
+.radar-form textarea:focus{
+  outline:none;
+  border-color:#31e6c8;
+  box-shadow:0 0 0 4px rgba(49,230,200,.15);
+}
+
+.radar-form textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.radar-form button{
+  background:linear-gradient(135deg,#31e6c8,#12b8a6);
+  color:#061827;
+  border:none;
+  border-radius:12px;
+  padding:16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.radar-form button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(49,230,200,.25);
+}
+
+#mensajeRegistro{
+  text-align:center;
+  font-weight:600;
+  color:#0f766e;
+  margin-top:10px;
+}
+
+/* Agrupación visual */
+
+.form-card{
+  background:#ffffff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:var(--card-shadow);
+  border:1px solid #e2e8f0;
+}
+
+/* Etiquetas opcionales */
+
+.form-label{
+  font-size:14px;
+  font-weight:600;
+  color:#334155;
+  margin-bottom:6px;
+  display:block;
+}
