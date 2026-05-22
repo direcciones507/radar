@@ -406,3 +406,8 @@ function buscarRadar() {
 }
 
 document.addEventListener("DOMContentLoaded", inicializarRadar);
+window.toggleMenuMaestro = toggleMenuMaestro;
+window.toggleProvinciaDinamica = toggleProvinciaDinamica;
+window.cargarSectorDetalle = cargarSectorDetalle;
+window.toggleSubCategoria = toggleSubCategoria;
+window.buscarRadar = buscarRadar;
