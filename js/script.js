@@ -344,7 +344,7 @@ function cargarSectorDetalle(provincia, distrito, sector) {
                `}
 
                 <a href="${comercio.enlace || comercio.google_maps || "#"}" target="_blank" class="enlace-comercio">
-                  Ver ubicación →
+                  Ver Radar →
                 </a>
               </div>
             `).join("")}
