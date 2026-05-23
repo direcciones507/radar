@@ -321,3 +321,141 @@ footer { background: #06121e; color: rgba(255, 255, 255, 0.6); text-align: cente
   margin-bottom:6px;
   display:block;
 }
+
+/* ===== MEJORAS PREMIUM RADAR 507 ===== */
+
+/* Logo más fuerte */
+.logo {
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  text-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+
+.logo span {
+  color: #31e6c8;
+  text-shadow: 0 0 18px rgba(49,230,200,.55);
+}
+
+/* Botón azul más premium */
+.btn-registro {
+  background: linear-gradient(135deg, #0a84ff, #0066ff);
+  border-radius: 16px;
+  box-shadow: 0 14px 34px rgba(10,132,255,.35);
+  font-size: 17px;
+}
+
+.btn-registro:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 44px rgba(10,132,255,.45);
+}
+
+/* Botón WhatsApp más elegante */
+.btn.primary {
+  background: linear-gradient(135deg, #31e6c8, #18d7b8);
+  border-radius: 16px;
+  box-shadow: 0 14px 34px rgba(49,230,200,.32);
+  font-size: 17px;
+}
+
+.btn.primary:hover {
+  background: linear-gradient(135deg, #ffffff, #dffef8);
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* Acordeón principal más llamativo */
+.accordion-item {
+  border-radius: 22px;
+  border: 1px solid rgba(49,230,200,.45);
+  box-shadow: 0 22px 55px rgba(15,23,42,.16);
+}
+
+.accordion-header {
+  background: linear-gradient(135deg, #ffffff, #ecfffb);
+  padding: 26px 30px;
+  font-size: 22px;
+  border-bottom: 3px solid #31e6c8;
+}
+
+.accordion-header:hover {
+  background: linear-gradient(135deg, #e8fffb, #ffffff);
+  color: #0f766e;
+}
+
+/* Icono del acordeón con más presencia */
+.header-title-wrapper .icon-svg {
+  background: rgba(49,230,200,.16);
+  padding: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(49,230,200,.22);
+}
+
+/* Contenido abierto más premium */
+.accordion-content.active {
+  background: linear-gradient(180deg, #f8fffd, #f4f7fb);
+  border-top: none;
+}
+
+/* Bloques internos tipo tarjeta elegante */
+.distrito-bloque {
+  border-left: 5px solid #31e6c8;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 16px 34px rgba(15,23,42,.08);
+  background: linear-gradient(135deg, #ffffff, #f7fffd);
+}
+
+.distrito-bloque h4 {
+  font-size: 18px;
+  color: #0f766e;
+}
+
+/* Botones de sectores más bonitos */
+.btn-sector-link {
+  background: #ffffff;
+  border: 1px solid rgba(15,118,110,.22);
+  border-radius: 14px;
+  padding: 11px 18px;
+  box-shadow: 0 8px 18px rgba(15,23,42,.06);
+}
+
+.btn-sector-link:hover {
+  background: linear-gradient(135deg, #0f766e, #12b8a6);
+  color: #ffffff;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+/* Tarjetas de servicios más balanceadas */
+.grid-tarjetas {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+  border-radius: 26px;
+  background: linear-gradient(145deg, #ffffff, #f8fffd);
+  box-shadow: 0 20px 45px rgba(15,23,42,.08);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 60px rgba(15,23,42,.14);
+}
+
+/* Tablet y móvil */
+@media (max-width: 900px) {
+  .grid-tarjetas {
+    grid-template-columns: 1fr;
+  }
+
+  .logo {
+    font-size: 30px;
+  }
+
+  .accordion-header {
+    font-size: 18px;
+    padding: 22px;
+  }
+}
