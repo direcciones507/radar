@@ -333,6 +333,16 @@ function cargarSectorDetalle(provincia, distrito, sector) {
 
                 ${comercio.telefono ? `<p><strong>Tel:</strong> ${comercio.telefono}</p>` : ""}
 
+                ${comercio.url_ubicacion || comercio.google_maps || comercio.waze ? `
+                <a href="${comercio.url_ubicacion || comercio.google_maps || comercio.waze}" target="_blank" class="enlace-comercio">
+              📍 Ver ubicación →
+               </a>
+               ` : `
+               <span class="enlace-comercio ubicacion-no-disponible">
+              📍 Ubicación Premium
+               </span>
+               `}
+
                 <a href="${comercio.enlace || comercio.google_maps || "#"}" target="_blank" class="enlace-comercio">
                   Ver ubicación →
                 </a>
