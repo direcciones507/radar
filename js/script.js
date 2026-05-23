@@ -272,9 +272,14 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   }
 
   const itemsDelSector = negociosRadar.filter(item =>
-    normalizar(item.sector) === sectorNorm &&
-    (item.estado_radar === undefined || normalizar(item.estado_radar) === "aprobado")
-  );
+  normalizar(item.provincia) === normalizar(provincia) &&
+  normalizar(item.distrito) === normalizar(distrito) &&
+  normalizar(item.sector) === sectorNorm &&
+  (
+    item.estado_radar === undefined ||
+    normalizar(item.estado_radar) === "aprobado"
+  )
+);
 
   const destacadosDeLaZona = itemsDelSector.filter(comercio => comercio.destacado === true);
 
