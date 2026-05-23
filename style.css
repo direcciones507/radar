@@ -459,3 +459,121 @@ footer { background: #06121e; color: rgba(255, 255, 255, 0.6); text-align: cente
     padding: 22px;
   }
 }
+
+/* ===== ACORDEÓN PRINCIPAL MÁS PREMIUM ===== */
+
+.accordion-header {
+  background: linear-gradient(135deg, #061e2f, #0f766e 55%, #31e6c8);
+  color: #ffffff;
+  border-bottom: none;
+  box-shadow: inset 0 -3px 0 rgba(49,230,200,.85);
+}
+
+.accordion-header:hover {
+  background: linear-gradient(135deg, #0f766e, #12b8a6, #31e6c8);
+  color: #ffffff;
+}
+
+.accordion-header::after {
+  content: "Explorar ahora";
+  font-size: 12px;
+  background: rgba(255,255,255,.18);
+  color: #ffffff;
+  padding: 7px 12px;
+  border-radius: 999px;
+  margin-left: 12px;
+}
+
+/* Icono del pin más bonito */
+.header-title-wrapper .icon-svg {
+  background: #31e6c8;
+  fill: #061e2f;
+  box-shadow: 0 0 0 8px rgba(49,230,200,.15),
+              0 12px 30px rgba(49,230,200,.35);
+}
+
+/* Flecha o signo menos en blanco */
+.accordion-header span:last-child,
+.accordion-header .toggle-icon {
+  color: #ffffff;
+}
+
+
+/* ===== BOTONES DE SECTORES MÁS PREMIUM ===== */
+
+.btn-sector-link {
+  background: linear-gradient(135deg, #ffffff, #f1fffc);
+  border: 1px solid rgba(49,230,200,.55);
+  color: #0f172a;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-weight: 700;
+  box-shadow: 0 10px 24px rgba(15,23,42,.08);
+}
+
+.btn-sector-link:hover {
+  background: linear-gradient(135deg, #31e6c8, #12b8a6);
+  color: #061827;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 35px rgba(49,230,200,.35);
+}
+
+
+/* ===== TARJETAS DE NEGOCIOS HORIZONTALES ===== */
+
+.padding-intern-cards .grid-tarjetas,
+.sub-accordion-content .grid-tarjetas {
+  grid-template-columns: 1fr !important;
+}
+
+.card-circuito {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 28px;
+  align-items: center;
+  padding: 30px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #ffffff, #f7fffd);
+  border: 1px solid rgba(49,230,200,.28);
+  box-shadow: 0 18px 45px rgba(15,23,42,.08);
+}
+
+.card-circuito h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.15;
+  color: #0f766e;
+  margin-bottom: 14px;
+}
+
+.card-circuito p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.enlace-comercio {
+  background: linear-gradient(135deg, #31e6c8, #12b8a6);
+  color: #061827;
+  padding: 10px 16px;
+  border-radius: 999px;
+  margin-top: 14px;
+  font-weight: 800;
+}
+
+.enlace-comercio:hover {
+  text-decoration: none;
+  background: #0f766e;
+  color: #ffffff;
+}
+
+/* En móvil sí vuelve vertical */
+@media (max-width: 768px) {
+  .card-circuito {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .accordion-header::after {
+    display: none;
+  }
+}
