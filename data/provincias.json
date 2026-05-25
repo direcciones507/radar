@@ -5460,10 +5460,10 @@
     ]
   },
   {
-    "provincia": "Herrera",
-    "distrito": "Ocú",
+    "provincia": "Veraguas",
+    "distrito": "San Francisco",
     "sector": "San Francisco",
-    "slug": "san-francisco-herrera",
+    "slug": "san-francisco-veraguas",
     "activo": false,
     "categorias": [
       "hoteles",
