@@ -314,7 +314,7 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   )
 );
 
-  categoriasSector.forEach((catId, index) => {
+  categoriasConNegocios.forEach((catId, index) => {
     const comerciosDeEstaCat = itemsDelSector.filter(item =>
       normalizar(item.categoria) === normalizar(catId) ||
       normalizar(item.categoria) === normalizar(obtenerNombreCategoria(catId).replace(/^[^\wáéíóúÁÉÍÓÚñÑ]+/, ""))
