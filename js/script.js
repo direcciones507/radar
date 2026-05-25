@@ -57,17 +57,15 @@ function tieneContenidoTerritorial(item) {
     normalizar(n.sector) === sectorNorm &&
     (
       n.estado_radar === undefined ||
-    ["aprobado", "premium", "premium pro"].includes(
-      normalizar(n.estado_radar)
+      normalizar(n.estado_radar) === "aprobado"
     )
-  )
   );
 
   const tieneCircuito = circuitosRadar.some(c =>
     normalizar(c.sector) === sectorNorm
   );
 
-  return true;
+  return tieneNegocio || tieneCircuito;
 }
 
 function agruparProvinciasActivas() {
