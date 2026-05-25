@@ -308,6 +308,12 @@ function cargarSectorDetalle(provincia, distrito, sector) {
 
   const categoriasSector = obtenerCategoriasParaSector(sector);
 
+  const categoriasConNegocios = categoriasSector.filter(catId =>
+  itemsDelSector.some(item =>
+    normalizar(item.categoria) === normalizar(catId)
+  )
+);
+
   categoriasSector.forEach((catId, index) => {
     const comerciosDeEstaCat = itemsDelSector.filter(item =>
       normalizar(item.categoria) === normalizar(catId) ||
