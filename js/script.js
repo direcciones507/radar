@@ -1,11 +1,12 @@
 const API_RADAR = "https://script.google.com/macros/s/AKfycby5TsFEPQd6sGVfj_IPKaVqesh--bujnSrHIIY_C9bhRLaSsRIBBm96XgJlEtsq7jf6/exec";
+
 let provinciasRadar = [];
 let categoriasRadar = [];
 let negociosRadar = [];
 let circuitosRadar = [];
-let baseDatosRadar = [];
 let eventosRadar = [];
 let anunciosRadar = [];
+let baseDatosRadar = [];
 
 function normalizar(texto) {
   return String(texto || "")
@@ -22,53 +23,45 @@ function slugify(texto) {
     .replace(/^-+|-+$/g, "");
 }
 
-async function cargarJSON(rutas) {
-  for (const ruta of rutas) {
-    try {
-      const response = await fetch(ruta);
-      if (response.ok) return await response.json();
-    } catch (error) {
-      console.warn("No se pudo cargar:", ruta);
-    }
-  }
-  return [];
-}
-
 async function inicializarRadar() {
-  
-  const respuesta = await fetch(API_RADAR);
-  const json = await respuesta.json();
+  try {
+    const respuesta = await fetch(API_RADAR);
+    const json = await respuesta.json();
+    const data = json.data || {};
 
-  const data = json.data || {};
-  console.log("DATA RADAR:", data);
-  console.log("Sectores:", data.sectores?.length);
-  console.log("Negocios:", data.negocios?.length);
-  console.log("Categorías:", data.categorias?.length);
-  console.log("Circuitos:", data.circuitos?.length);
+    provinciasRadar = data.sectores || [];
+    categoriasRadar = data.categorias || [];
+    negociosRadar = data.negocios || [];
+    circuitosRadar = data.circuitos || [];
+    eventosRadar = data.eventos || [];
+    anunciosRadar = data.anuncios || [];
 
-  provinciasRadar = data.sectores || [];
-  categoriasRadar = data.categorias || [];
-  negociosRadar = data.negocios || [];
-  circuitosRadar = data.circuitos || [];
-  eventosRadar = data.eventos || [];
-  anunciosRadar = data.anuncios || [];
+    baseDatosRadar = [
+      ...circuitosRadar,
+      ...negociosRadar.map(n => ({
+        ...n,
+        tipo: "comercio"
+      }))
+    ];
 
-  baseDatosRadar = [
-    ...circuitosRadar,
-    ...negociosRadar.map(n => ({
-      ...n,
-      tipo: "comercio"
-    }))
-  ];
+    console.log("Radar cargado:", {
+      sectores: provinciasRadar.length,
+      negocios: negociosRadar.length,
+      categorias: categoriasRadar.length,
+      circuitos: circuitosRadar.length,
+      eventos: eventosRadar.length,
+      anuncios: anunciosRadar.length
+    });
 
-  renderizarMenuProvincias();
-  renderizarDestacadosPais();
+    renderizarMenuProvincias();
+    renderizarDestacadosPais();
+
+  } catch (error) {
+    console.error("Error cargando Radar:", error);
+  }
 }
 
 function tieneContenidoTerritorial(item) {
-  return item.activo === true || String(item.activo).toLowerCase() === "true";
-}
-  function tieneContenidoTerritorial(item) {
   return item.activo === true || String(item.activo).toLowerCase() === "true";
 }
 
@@ -92,13 +85,15 @@ function agruparProvinciasActivas() {
 function renderizarMenuProvincias() {
   const contenedor = document.getElementById("contenido-maestro-provincias");
   if (!contenedor) return;
-  console.log("Renderizando provincias:", provinciasRadar.length);
 
   const mapa = agruparProvinciasActivas();
-  // contenedor.innerHTML = "";
+
+  console.log("Provincias visibles:", Object.keys(mapa).length);
+
+  contenedor.innerHTML = "";
 
   Object.keys(mapa).sort().forEach(provincia => {
-    const key = String(provincia || "").trim();
+    const key = slugify(provincia);
 
     contenedor.innerHTML += `
       <div class="provincia-bloque-menu">
@@ -120,6 +115,7 @@ function renderizarMenuProvincias() {
 function toggleMenuMaestro() {
   const contenido = document.getElementById("contenido-maestro-provincias");
   const icono = document.getElementById("icono-maestro");
+
   if (!contenido || !icono) return;
 
   contenido.classList.toggle("active");
@@ -129,6 +125,7 @@ function toggleMenuMaestro() {
 function toggleProvinciaDinamica(provinciaKey, botonElemento) {
   const contenedorSectores = document.getElementById(`sub-sectores-${provinciaKey}`);
   const subIcono = botonElemento.querySelector(".sub-icon-prov");
+
   if (!contenedorSectores || !subIcono) return;
 
   if (contenedorSectores.classList.contains("active")) {
@@ -150,17 +147,19 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
   contenedorSectores.classList.add("active");
   subIcono.textContent = "-";
 
-  const provinciaReal = Object.keys(agruparProvinciasActivas()).find(
-  p => p === provinciaKey
+  const mapa = agruparProvinciasActivas();
+
+  const provinciaReal = Object.keys(mapa).find(
+    p => slugify(p) === provinciaKey
   );
 
   if (!provinciaReal) return;
 
-  const distritos = agruparProvinciasActivas()[provinciaReal];
+  const distritos = mapa[provinciaReal];
 
   Object.keys(distritos).sort().forEach(distrito => {
     const sectoresHTML = distritos[distrito]
-      .sort((a, b) => a.sector.localeCompare(b.sector))
+      .sort((a, b) => String(a.sector).localeCompare(String(b.sector)))
       .map(item => `
         <button class="btn-sector-link"
           onclick="cargarSectorDetalle('${item.provincia}', '${item.distrito}', '${item.sector}')">
@@ -179,13 +178,20 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
   });
 }
 
+function estadoValido(item) {
+  const estado = normalizar(item.estado_radar || item.estado || item.estado_publicacion || "");
+  if (!estado) return true;
+
+  return ["aprobado", "activo", "premium", "premium pro", "destacado"].includes(estado);
+}
+
 function renderizarDestacadosPais() {
   const contenedor = document.getElementById("contenedor-destacados");
   if (!contenedor) return;
 
   const destacados = negociosRadar.filter(item =>
-    item.destacado === true &&
-    (item.estado_radar === undefined || normalizar(item.estado_radar) === "aprobado")
+    String(item.destacado).toLowerCase() === "true" &&
+    estadoValido(item)
   );
 
   contenedor.innerHTML = "";
@@ -199,11 +205,11 @@ function renderizarDestacadosPais() {
     contenedor.innerHTML += `
       <div class="card-circuito pop-destacado">
         <span class="badge-card-cat">⭐ Destacado</span>
-        <h2>${item.nombre}</h2>
-        <p><strong>Zona:</strong> ${item.sector}, ${item.distrito}</p>
+        <h2>${item.nombre || "Negocio destacado"}</h2>
+        <p><strong>Zona:</strong> ${item.sector || ""}, ${item.distrito || ""}</p>
         <p class="desc-corta">${item.descripcion || ""}</p>
-        <a href="${item.enlace || item.google_maps || "#"}" target="_blank" class="enlace-comercio">
-          Ver Dirección Digital →
+        <a href="${item.enlace || item.url_ubicacion || item.google_maps || "#"}" target="_blank" class="enlace-comercio">
+          Ver Radar →
         </a>
       </div>
     `;
@@ -219,10 +225,18 @@ function obtenerNombreCategoria(idCategoria) {
   return cat ? `${cat.icono || "📂"} ${cat.nombre}` : `📂 ${idCategoria}`;
 }
 
+function limpiarNombreCategoria(catId) {
+  return obtenerNombreCategoria(catId)
+    .replace(/^[^\wáéíóúÁÉÍÓÚñÑ]+/, "")
+    .trim();
+}
+
 function obtenerCategoriasParaSector(sector) {
   const sectorNorm = normalizar(sector);
 
-  const territorial = provinciasRadar.find(p => normalizar(p.sector) === sectorNorm);
+  const territorial = provinciasRadar.find(p =>
+    normalizar(p.sector) === sectorNorm
+  );
 
   if (territorial && Array.isArray(territorial.categorias) && territorial.categorias.length > 0) {
     return territorial.categorias;
@@ -257,35 +271,30 @@ function cargarSectorDetalle(provincia, distrito, sector) {
         <span class="badge-circuito-tag">🎒 Circuito Turístico Oficial</span>
         <span class="duracion-tag">⏱️ ${circuitoData.duracion || "Variable"}</span>
       </div>
-      <h3>${circuitoData.nombre}</h3>
+      <h3>${circuitoData.nombre || "Circuito turístico"}</h3>
       <p>${circuitoData.descripcion || ""}</p>
       <a href="${circuitoData.enlace_mapa || "#"}" target="_blank" class="btn-mapa-circuito">
         🗺️ Ver Ruta Digital del Circuito
       </a>
     `;
-    bloqueCircuito.style.display = "block";
   } else {
     bloqueCircuito.innerHTML = `
       <p style="color:#64748b;font-style:italic;">
         ✨ Circuito turístico de la comunidad consolidándose próximamente.
       </p>
     `;
-    bloqueCircuito.style.display = "block";
   }
 
-  const itemsDelSector = negociosRadar.filter(item =>
-  normalizar(item.provincia) === normalizar(provincia) &&
-  normalizar(item.distrito) === normalizar(distrito) &&
-  normalizar(item.sector) === sectorNorm &&
-  (
-    !item.estado_radar ||
-    ["aprobado", "activo", "premium", "premium pro", "destacado"].includes(
-      normalizar(item.estado_radar || item.estado || item.estado_publicacion)
-    )
-  )
-);
+  bloqueCircuito.style.display = "block";
 
-  const destacadosDeLaZona = itemsDelSector.filter(comercio => comercio.destacado === true);
+  const itemsDelSector = negociosRadar.filter(item =>
+    normalizar(item.sector) === sectorNorm &&
+    estadoValido(item)
+  );
+
+  const destacadosDeLaZona = itemsDelSector.filter(comercio =>
+    String(comercio.destacado).toLowerCase() === "true"
+  );
 
   if (destacadosDeLaZona.length > 0 && bloqueDestacadosZona && contenedorDestacadosZona) {
     contenedorDestacadosZona.innerHTML = "";
@@ -296,10 +305,10 @@ function cargarSectorDetalle(provincia, distrito, sector) {
           <span class="badge-card-cat" style="background:rgba(168,85,247,0.1);color:#a855f7;">
             ⭐ Recomendado Local
           </span>
-          <h2>${comercio.nombre}</h2>
+          <h2>${comercio.nombre || "Negocio recomendado"}</h2>
           <p>${comercio.descripcion || ""}</p>
-          <a href="${comercio.enlace || comercio.google_maps || "#"}" target="_blank" class="enlace-comercio" style="color:#a855f7;">
-            Ver Dirección Digital →
+          <a href="${comercio.enlace || comercio.url_ubicacion || comercio.google_maps || "#"}" target="_blank" class="enlace-comercio" style="color:#a855f7;">
+            Ver Radar →
           </a>
         </div>
       `;
@@ -315,24 +324,27 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   const categoriasSector = obtenerCategoriasParaSector(sector);
 
   const categoriasConNegocios = categoriasSector.filter(catId => {
-  const nombreCat = obtenerNombreCategoria(catId)
-    .replace(/^[^\wáéíóúÁÉÍÓÚñÑ]+/, "")
-    .trim();
+    const nombreCat = limpiarNombreCategoria(catId);
 
-  return itemsDelSector.some(item =>
-    normalizar(item.categoria) === normalizar(catId) ||
-    normalizar(item.categoria) === normalizar(nombreCat)
-  );
-});
+    return itemsDelSector.some(item =>
+      normalizar(item.categoria) === normalizar(catId) ||
+      normalizar(item.categoria) === normalizar(nombreCat)
+    );
+  });
 
-  const nombreCat = obtenerNombreCategoria(catId)
-  .replace(/^[^\wáéíóúÁÉÍÓÚñÑ]+/, "")
-  .trim();
+  if (categoriasConNegocios.length === 0) {
+    contenedorCategorias.innerHTML = `
+      <p class="txt-vacio">Próximamente más comercios afiliados en este sector.</p>
+    `;
+  }
 
-const comerciosDeEstaCat = itemsDelSector.filter(item =>
-  normalizar(item.categoria) === normalizar(catId) ||
-  normalizar(item.categoria) === normalizar(nombreCat)
-);
+  categoriasConNegocios.forEach((catId, index) => {
+    const nombreCat = limpiarNombreCategoria(catId);
+
+    const comerciosDeEstaCat = itemsDelSector.filter(item =>
+      normalizar(item.categoria) === normalizar(catId) ||
+      normalizar(item.categoria) === normalizar(nombreCat)
+    );
 
     const conteo = comerciosDeEstaCat.length;
     const nombreCategoria = obtenerNombreCategoria(catId);
@@ -346,27 +358,25 @@ const comerciosDeEstaCat = itemsDelSector.filter(item =>
 
         <div class="sub-accordion-content" id="sub-cat-${index}">
           <div class="grid-tarjetas padding-intern-cards">
-            ${conteo === 0 ? '<p class="txt-vacio">Próximamente más comercios afiliados en este sector.</p>' : ""}
-
             ${comerciosDeEstaCat.map(comercio => `
               <div class="card-circuito">
-                <h2>${comercio.nombre}</h2>
+                <h2>${comercio.nombre || "Comercio"}</h2>
                 <p>${comercio.descripcion || ""}</p>
                 <p><strong>Dirección:</strong> ${comercio.direccion || comercio.sector || ""}</p>
 
                 ${comercio.telefono ? `<p><strong>Tel:</strong> ${comercio.telefono}</p>` : ""}
 
                 ${comercio.url_ubicacion || comercio.google_maps || comercio.waze ? `
-                <a href="${comercio.url_ubicacion || comercio.google_maps || comercio.waze}" target="_blank" class="enlace-comercio">
-              📍 Ver ubicación →
-               </a>
-               ` : `
-               <span class="enlace-comercio ubicacion-no-disponible">
-              📍 Ubicación Premium
-               </span>
-               `}
+                  <a href="${comercio.url_ubicacion || comercio.google_maps || comercio.waze}" target="_blank" class="enlace-comercio">
+                    📍 Ver ubicación →
+                  </a>
+                ` : `
+                  <span class="enlace-comercio ubicacion-no-disponible">
+                    📍 Ubicación Premium
+                  </span>
+                `}
 
-                <a href="${comercio.enlace || comercio.google_maps || "#"}" target="_blank" class="enlace-comercio">
+                <a href="${comercio.enlace || comercio.url_ubicacion || comercio.google_maps || "#"}" target="_blank" class="enlace-comercio">
                   Ver Radar →
                 </a>
               </div>
@@ -400,6 +410,7 @@ function toggleSubCategoria(index) {
 function buscarRadar() {
   const input = document.getElementById("searchInput");
   const result = document.getElementById("searchResult");
+
   if (!input || !result) return;
 
   const val = normalizar(input.value);
