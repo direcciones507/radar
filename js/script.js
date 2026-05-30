@@ -34,10 +34,13 @@ async function cargarJSON(rutas) {
 
 async function inicializarRadar() {
   
-  provinciasRadar = await cargarJSON(["data/provincias.json", "data/provincias"]);
-  categoriasRadar = await cargarJSON(["data/categorias.json", "data/categorias"]);
-  negociosRadar = await cargarJSON(["data/negocios.json", "data/negocios"]);
-  circuitosRadar = await cargarJSON(["data/circuitos.json"]);
+  const respuesta = await fetch(API_RADAR);
+  const json = await respuesta.json();
+
+  provinciasRadar = json.provincias || [];
+  categoriasRadar = json.categorias || [];
+  negociosRadar = json.negocios || [];
+  circuitosRadar = json.circuitos || [];
 
   baseDatosRadar = [
     ...circuitosRadar,
