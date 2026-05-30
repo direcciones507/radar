@@ -67,7 +67,9 @@ function tieneContenidoTerritorial(item) {
     normalizar(n.sector) === sectorNorm &&
     (
       n.estado_radar === undefined ||
-      normalizar(n.estado_radar) === "aprobado"
+      ["aprobado", "activo", "premium", "premium pro", "destacado"].includes(
+        normalizar(n.estado_radar || n.estado || n.estado_publicacion)
+      )
     )
   );
 
