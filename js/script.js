@@ -68,23 +68,8 @@ async function inicializarRadar() {
 function tieneContenidoTerritorial(item) {
   return item.activo === true || String(item.activo).toLowerCase() === "true";
 }
-  const sectorNorm = normalizar(item.sector);
-
-  const tieneNegocio = negociosRadar.some(n =>
-    normalizar(n.sector) === sectorNorm &&
-    (
-      n.estado_radar === undefined ||
-      ["aprobado", "activo", "premium", "premium pro", "destacado"].includes(
-        normalizar(n.estado_radar || n.estado || n.estado_publicacion)
-      )
-    )
-  );
-
-  const tieneCircuito = circuitosRadar.some(c =>
-    normalizar(c.sector) === sectorNorm
-  );
-
-  return tieneNegocio || tieneCircuito;
+  function tieneContenidoTerritorial(item) {
+  return item.activo === true || String(item.activo).toLowerCase() === "true";
 }
 
 function agruparProvinciasActivas() {
