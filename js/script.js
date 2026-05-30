@@ -39,10 +39,12 @@ async function inicializarRadar() {
   const respuesta = await fetch(API_RADAR);
   const json = await respuesta.json();
 
-  provinciasRadar = json.provincias || [];
-  categoriasRadar = json.categorias || [];
-  negociosRadar = json.negocios || [];
-  circuitosRadar = json.circuitos || [];
+  const data = json.data || {};
+
+  provinciasRadar = data.sectores || [];
+  categoriasRadar = data.categorias || [];
+  negociosRadar = data.negocios || [];
+  circuitosRadar = data.circuitos || [];
   eventosRadar = data.eventos || [];
   anunciosRadar = data.anuncios || [];
 
