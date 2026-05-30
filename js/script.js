@@ -66,6 +66,8 @@ async function inicializarRadar() {
 }
 
 function tieneContenidoTerritorial(item) {
+  return item.activo === true || String(item.activo).toLowerCase() === "true";
+}
   const sectorNorm = normalizar(item.sector);
 
   const tieneNegocio = negociosRadar.some(n =>
