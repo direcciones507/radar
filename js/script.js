@@ -309,6 +309,10 @@ function cargarSectorDetalle(provincia, distrito, sector) {
     estadoValido(item)
   );
 
+  if (itemsDelSector.length > 0) {
+  console.log("PRIMER NEGOCIO:", itemsDelSector[0]);
+}
+
   const destacadosDeLaZona = itemsDelSector.filter(comercio =>
     String(comercio.destacado).toLowerCase() === "true"
   );
