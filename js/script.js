@@ -327,17 +327,25 @@ function cargarSectorDetalle(provincia, distrito, sector) {
 
   const categoriasSector = obtenerCategoriasParaSector(sector);
 
-  const categoriasConNegocios = categoriasSector.filter(catId =>
-  itemsDelSector.some(item =>
-    normalizar(item.categoria) === normalizar(catId)
-  )
-);
+  const categoriasConNegocios = categoriasSector.filter(catId => {
+  const nombreCat = obtenerNombreCategoria(catId)
+    .replace(/^[^\wáéíóúÁÉÍÓÚñÑ]+/, "")
+    .trim();
 
-  categoriasConNegocios.forEach((catId, index) => {
-    const comerciosDeEstaCat = itemsDelSector.filter(item =>
-      normalizar(item.categoria) === normalizar(catId) ||
-      normalizar(item.categoria) === normalizar(obtenerNombreCategoria(catId).replace(/^[^\wáéíóúÁÉÍÓÚñÑ]+/, ""))
-    );
+  return itemsDelSector.some(item =>
+    normalizar(item.categoria) === normalizar(catId) ||
+    normalizar(item.categoria) === normalizar(nombreCat)
+  );
+});
+
+  const nombreCat = obtenerNombreCategoria(catId)
+  .replace(/^[^\wáéíóúÁÉÍÓÚñÑ]+/, "")
+  .trim();
+
+const comerciosDeEstaCat = itemsDelSector.filter(item =>
+  normalizar(item.categoria) === normalizar(catId) ||
+  normalizar(item.categoria) === normalizar(nombreCat)
+);
 
     const conteo = comerciosDeEstaCat.length;
     const nombreCategoria = obtenerNombreCategoria(catId);
