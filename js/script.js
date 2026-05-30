@@ -42,6 +42,10 @@ async function inicializarRadar() {
   negociosRadar = json.negocios || [];
   circuitosRadar = json.circuitos || [];
 
+  // Nuevos datos disponibles
+  eventosRadar = data.eventos || [];
+  anunciosRadar = data.anuncios || [];
+
   baseDatosRadar = [
     ...circuitosRadar,
     ...negociosRadar.map(n => ({
