@@ -286,8 +286,10 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   normalizar(item.distrito) === normalizar(distrito) &&
   normalizar(item.sector) === sectorNorm &&
   (
-    item.estado_radar === undefined ||
-    normalizar(item.estado_radar) === "aprobado"
+    !item.estado_radar ||
+    ["aprobado", "activo", "premium", "premium pro", "destacado"].includes(
+      normalizar(item.estado_radar || item.estado || item.estado_publicacion)
+    )
   )
 );
 
