@@ -716,3 +716,21 @@ footer { background: #06121e; color: rgba(255, 255, 255, 0.6); text-align: cente
     margin-top: 8px;
   }
 }
+
+#contenido-maestro-provincias.active {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.sectores-internos-menu.active {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.accordion-content.active {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+}
