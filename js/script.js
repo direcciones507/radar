@@ -1,3 +1,4 @@
+const API_RADAR = "https://script.google.com/macros/s/AKfycby5TsFEPQd6sGVfj_IPKaVqesh--bujnSrHIIY_C9bhRLaSsRIBBm96XgJlEtsq7jf6/exec";
 let provinciasRadar = [];
 let categoriasRadar = [];
 let negociosRadar = [];
