@@ -4,6 +4,8 @@ let categoriasRadar = [];
 let negociosRadar = [];
 let circuitosRadar = [];
 let baseDatosRadar = [];
+let eventosRadar = [];
+let anunciosRadar = [];
 
 function normalizar(texto) {
   return String(texto || "")
@@ -41,8 +43,6 @@ async function inicializarRadar() {
   categoriasRadar = json.categorias || [];
   negociosRadar = json.negocios || [];
   circuitosRadar = json.circuitos || [];
-
-  // Nuevos datos disponibles
   eventosRadar = data.eventos || [];
   anunciosRadar = data.anuncios || [];
 
