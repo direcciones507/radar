@@ -23,6 +23,10 @@ function slugify(texto) {
     .replace(/^-+|-+$/g, "");
 }
 
+function obtenerSector(item) {
+  return item.sector || item.sector_nombre || item.nombre_sector || item.corregimiento || item.nombre || "";
+}
+
 async function inicializarRadar() {
   try {
     const respuesta = await fetch(API_RADAR);
@@ -168,13 +172,17 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
 
   Object.keys(distritos).sort().forEach(distrito => {
     const sectoresHTML = distritos[distrito]
-      .sort((a, b) => String(a.sector).localeCompare(String(b.sector)))
-      .map(item => `
-        <button class="btn-sector-link"
-          onclick="cargarSectorDetalle('${item.provincia}', '${item.distrito}', '${item.sector}')">
-          📍 ${item.sector}
-        </button>
-      `).join("");
+      .sort((a, b) => String(obtenerSector(a)).localeCompare(String(obtenerSector(b))))
+      .map(item => {
+    const sectorNombre = obtenerSector(item);
+
+    return `
+    <button class="btn-sector-link"
+      onclick="cargarSectorDetalle('${item.provincia}', '${item.distrito}', '${sectorNombre}')">
+      📍 ${sectorNombre}
+    </button>
+  `;
+})
 
     contenedorSectores.innerHTML += `
       <div class="distrito-bloque">
