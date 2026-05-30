@@ -62,7 +62,16 @@ async function inicializarRadar() {
 }
 
 function tieneContenidoTerritorial(item) {
-  return item.activo === true || String(item.activo).toLowerCase() === "true";
+  const estado = normalizar(item.activo || item.estado || item.estado_radar || "activo");
+
+  return (
+    estado === "true" ||
+    estado === "activo" ||
+    estado === "aprobado" ||
+    estado === "premium" ||
+    estado === "premium pro" ||
+    item.sector
+  );
 }
 
 function agruparProvinciasActivas() {
