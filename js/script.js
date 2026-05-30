@@ -40,6 +40,11 @@ async function inicializarRadar() {
   const json = await respuesta.json();
 
   const data = json.data || {};
+  console.log("DATA RADAR:", data);
+  console.log("Sectores:", data.sectores?.length);
+  console.log("Negocios:", data.negocios?.length);
+  console.log("Categorías:", data.categorias?.length);
+  console.log("Circuitos:", data.circuitos?.length);
 
   provinciasRadar = data.sectores || [];
   categoriasRadar = data.categorias || [];
