@@ -734,3 +734,181 @@ footer { background: #06121e; color: rgba(255, 255, 255, 0.6); text-align: cente
   height: auto !important;
   overflow: visible !important;
 }
+
+/* =====================================================
+   MEJORAS PREMIUM PRO: ESTILOS PARA NEGOCIOS (SEGÚN IMAGEN)
+===================================================== */
+
+/* 1. Base mejorada para la tarjeta de negocio estándar */
+.card-circuito {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 30px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; /* Asegura un stacked vertical limpio */
+  flex-direction: column;
+}
+
+.card-circuito:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+}
+
+/* Etiqueta base de categoría (Badge) */
+.badge-card-cat {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 15px;
+  color: #ffffff; /* Color de texto predeterminado si no se especifica */
+}
+
+/* Botón base del negocio (Ver Menú / Ver Radar) */
+.enlace-comercio {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: 8px; /* Cambiado a 8px según imagen, no totalmente redondeado */
+  font-weight: 700;
+  margin-top: 15px;
+  transition: var(--transition);
+  border: none;
+  width: auto; /* O ajusta según diseño, imagen muestra botones no-anchos */
+}
+
+/* =====================================================
+   NIVEL 1: ESTÁNDAR (Como "Fonda El Motete")
+===================================================== */
+/* (Hereda la base .card-circuito) */
+
+/* Teal accents para título y badge */
+.card-circuito h2 {
+  color: #0f766e;
+}
+.badge-card-cat {
+  background: #31e6c8;
+  color: #061827;
+}
+
+/* Botón verde para estándar */
+.enlace-comercio {
+  background: #0f766e;
+  color: #ffffff;
+}
+.enlace-comercio:hover {
+  background: #115e59;
+  text-decoration: none;
+}
+
+
+/* =====================================================
+   NIVEL 2: DESTACADO / YELLOW (Como "Taller Los Motores")
+===================================================== */
+.card-circuito.destacado {
+  background: linear-gradient(145deg, #ffffff, #fffdf0);
+  border: 2px solid #ffcc00;
+  box-shadow: 0 12px 30px rgba(255, 204, 0, 0.15);
+}
+
+.card-circuito.destacado:hover {
+  box-shadow: 0 22px 50px rgba(255, 204, 0, 0.25);
+  border-color: #ffb700;
+}
+
+/* Cinta lateral amarilla (Pseudo-elemento) */
+.card-circuito.destacado::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: #ffcc00;
+}
+
+/* Badge Amarillo con estrella */
+.badge-card-cat.destacado-badge {
+  background: #ffcc00;
+  color: #4a3600;
+  box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
+}
+
+/* Título color oro/marrón oscuro */
+.card-circuito.destacado h2 {
+  color: #7b6100;
+}
+
+/* Botón Amarillo del negocio */
+.card-circuito.destacado .enlace-comercio {
+  background: #ffcc00;
+  color: #333333;
+}
+.card-circuito.destacado .enlace-comercio:hover {
+  background: #ffb700;
+  color: #000000;
+}
+
+/* (Nota: El ícono de la estrella ⭐ lo añadirás en el HTML, no en el CSS) */
+
+
+/* =====================================================
+   NIVEL 3: PREMIUM / GOLD (Como "Boutique Paitilla")
+===================================================== */
+.card-circuito.premium {
+  background: linear-gradient(145deg, #ffffff, #fcfaf2);
+  border: 2px solid transparent; /* Necesario para que el ::after funcione bien */
+  background-clip: padding-box; /* Previene que el background pise el borde ::after */
+  box-shadow: 0 15px 35px rgba(218, 165, 32, 0.15);
+}
+
+/* Borde degradado dorado grueso metálico (con pseudo-elemento ::after para degradado) */
+.card-circuito.premium::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -1;
+  margin: -2px; /* Espesor del borde */
+  border-radius: 26px; /* Ajustado al radio de la tarjeta + espesor borde */
+  background: linear-gradient(135deg, #FFDF00, #D4AF37, #996515); /* Degradado dorado metálico */
+}
+
+.card-circuito.premium:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 25px 55px rgba(218, 165, 32, 0.25);
+}
+
+/* Badge Premium metálico con diamante */
+.badge-card-cat.premium-badge {
+  background: linear-gradient(135deg, #D4AF37, #996515);
+  color: #ffffff;
+  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+  border: 1px solid #FFDF00;
+}
+
+/* Título color oro/marrón oscuro */
+.card-circuito.premium h2 {
+  color: #7b6100;
+}
+
+/* Botón Dorado del negocio VIP */
+.card-circuito.premium .enlace-comercio {
+  background: linear-gradient(135deg, #D4AF37, #996515);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+}
+.card-circuito.premium .enlace-comercio:hover {
+  background: linear-gradient(135deg, #FFDF00, #D4AF37);
+  color: #000000;
+  box-shadow: 0 12px 25px rgba(212, 175, 55, 0.5);
+}
+
+/* (Nota: Los íconos de corona 👑 y diamante 💎 los añadirás en el HTML, no en el CSS) */
