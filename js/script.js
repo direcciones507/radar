@@ -33,151 +33,64 @@ function textoSeguro(texto) {
 
 function obtenerCampo(item, campos, respaldo = "") {
   if (!item) return respaldo;
-
   for (const campo of campos) {
     if (item[campo] !== undefined && item[campo] !== null && String(item[campo]).trim() !== "") {
       return item[campo];
     }
   }
-
   return respaldo;
 }
 
 function obtenerSector(item) {
-  return obtenerCampo(item, [
-    "sector",
-    "sector_nombre",
-    "nombre_sector",
-    "sector_radar",
-    "zona",
-    "zona_radar",
-    "corregimiento",
-    "corregimiento_sector"
-  ], "");
+  return obtenerCampo(item, ["sector", "sector_nombre", "nombre_sector", "sector_radar", "zona", "zona_radar", "corregimiento", "corregimiento_sector"], "");
 }
 
 function obtenerProvincia(item) {
-  return obtenerCampo(item, [
-    "provincia",
-    "provincia_nombre",
-    "nombre_provincia"
-  ], "");
+  return obtenerCampo(item, ["provincia", "provincia_nombre", "nombre_provincia"], "");
 }
 
 function obtenerDistrito(item) {
-  return obtenerCampo(item, [
-    "distrito",
-    "distrito_nombre",
-    "nombre_distrito"
-  ], "");
+  return obtenerCampo(item, ["distrito", "distrito_nombre", "nombre_distrito"], "");
 }
 
 function obtenerNombreNegocio(item) {
-  return obtenerCampo(item, [
-    "nombre",
-    "nombre_negocio",
-    "negocio",
-    "comercio",
-    "empresa",
-    "nombre_empresa",
-    "nombre_comercial",
-    "razon_social"
-  ], "Comercio");
+  return obtenerCampo(item, ["nombre", "nombre_negocio", "negocio", "comercio", "empresa", "nombre_empresa", "nombre_comercial", "razon_social"], "Comercio");
 }
 
 function obtenerCategoriaNegocio(item) {
-  return obtenerCampo(item, [
-    "categoria",
-    "categoria_radar",
-    "categoria_nombre",
-    "tipo_categoria",
-    "categorias_de_empresas",
-    "categoria_de_empresa",
-    "categorias_empresas",
-    "categoria_empresa",
-    "rubro",
-    "tipo_negocio"
-  ], "otros");
+  return obtenerCampo(item, ["categoria", "categoria_radar", "categoria_nombre", "tipo_categoria", "categorias_de_empresas", "categoria_de_empresa", "categorias_empresas", "categoria_empresa", "rubro", "tipo_negocio"], "Otros");
 }
 
 function obtenerDescripcionNegocio(item) {
-  return obtenerCampo(item, [
-    "descripcion",
-    "descripcion_negocio",
-    "detalle",
-    "resumen",
-    "nota"
-  ], "");
+  return obtenerCampo(item, ["descripcion", "descripcion_negocio", "detalle", "resumen", "nota"], "");
 }
 
 function obtenerDireccionNegocio(item) {
-  return obtenerCampo(item, [
-    "direccion",
-    "direccion_fisica",
-    "ubicacion",
-    "referencia",
-    "direccion_completa",
-    "sector",
-    "sector_nombre"
-  ], "");
+  return obtenerCampo(item, ["direccion", "direccion_fisica", "ubicacion", "referencia", "direccion_completa", "sector", "sector_nombre"], "");
 }
 
 function obtenerTelefonoNegocio(item) {
-  return obtenerCampo(item, [
-    "telefono",
-    "tel",
-    "celular",
-    "numero",
-    "numero_contacto"
-  ], "");
+  return obtenerCampo(item, ["telefono", "tel", "celular", "numero", "numero_contacto"], "");
 }
 
 function obtenerEnlaceNegocio(item) {
-  return obtenerCampo(item, [
-    "enlace",
-    "url_negocio",
-    "url_ubicacion",
-    "google_maps",
-    "maps",
-    "waze",
-    "website",
-    "web",
-    "sitio_web",
-    "direccion_digital"
-  ], "#");
+  return obtenerCampo(item, ["enlace", "url_negocio", "url_ubicacion", "google_maps", "maps", "waze", "website", "web", "sitio_web", "direccion_digital"], "#");
 }
 
 function esDestacado(item) {
-  const valor = normalizar(obtenerCampo(item, [
-    "destacado",
-    "destacado_radar",
-    "recomendado",
-    "premium",
-    "visible_destacado"
-  ], ""));
-
+  const valor = normalizar(obtenerCampo(item, ["destacado", "destacado_radar", "recomendado", "premium", "visible_destacado"], ""));
   return ["true", "si", "sÃ­", "1", "destacado", "premium", "premium pro"].includes(valor);
 }
 
 function estadoValido(item) {
-  const estado = normalizar(obtenerCampo(item, [
-    "estado_radar",
-    "estado",
-    "estado_publicacion",
-    "estado_anuncio",
-    "publicacion",
-    "status"
-  ], ""));
-
+  const estado = normalizar(obtenerCampo(item, ["estado_radar", "estado", "estado_publicacion", "estado_anuncio", "publicacion", "status"], ""));
   if (!estado) return true;
-
   return ["aprobado", "activo", "premium", "premium pro", "destacado", "publicado", "visible"].includes(estado);
 }
 
 function sectoresCoinciden(a, b) {
   const sa = normalizar(a);
   const sb = normalizar(b);
-
   if (!sa || !sb) return false;
   if (sa === sb) return true;
 
@@ -185,8 +98,6 @@ function sectoresCoinciden(a, b) {
   const slugB = slugify(sb);
 
   if (slugA === slugB) return true;
-
-  // Permite que "RÃ­o Hato Centro" encuentre negocios marcados como "RÃ­o Hato".
   if (slugA.includes(slugB) && slugB.length >= 5) return true;
   if (slugB.includes(slugA) && slugA.length >= 5) return true;
 
@@ -208,10 +119,7 @@ async function inicializarRadar() {
 
     baseDatosRadar = [
       ...circuitosRadar,
-      ...negociosRadar.map(n => ({
-        ...n,
-        tipo: "comercio"
-      }))
+      ...negociosRadar.map(n => ({ ...n, tipo: "comercio" }))
     ];
 
     console.log("Radar cargado:", {
@@ -235,8 +143,7 @@ function tieneContenidoTerritorial(item) {
   const sector = obtenerSector(item);
 
   const tieneNegocio = negociosRadar.some(n =>
-    sectoresCoinciden(obtenerSector(n), sector) &&
-    estadoValido(n)
+    sectoresCoinciden(obtenerSector(n), sector) && estadoValido(n)
   );
 
   const tieneCircuito = circuitosRadar.some(c =>
@@ -268,13 +175,12 @@ function renderizarMenuProvincias() {
   if (!contenedor) return;
 
   const mapa = agruparProvinciasActivas();
-
   console.log("Provincias visibles:", Object.keys(mapa).length);
 
   contenedor.innerHTML = "";
 
   if (Object.keys(mapa).length === 0) {
-    contenedor.innerHTML = '<p class="txt-vacio">No hay sectores con negocios activos todavÃ­a.</p>';
+    contenedor.innerHTML = '<p class="txt-vacio">No hay sectores con negocios activos todavia.</p>';
     return;
   }
 
@@ -301,7 +207,6 @@ function renderizarMenuProvincias() {
 function toggleMenuMaestro() {
   const contenido = document.getElementById("contenido-maestro-provincias");
   const icono = document.getElementById("icono-maestro");
-
   if (!contenido || !icono) return;
 
   contenido.classList.toggle("active");
@@ -334,11 +239,7 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
   subIcono.textContent = "-";
 
   const mapa = agruparProvinciasActivas();
-
-  const provinciaReal = Object.keys(mapa).find(
-    p => slugify(p) === provinciaKey
-  );
-
+  const provinciaReal = Object.keys(mapa).find(p => slugify(p) === provinciaKey);
   if (!provinciaReal) return;
 
   const distritos = mapa[provinciaReal];
@@ -354,7 +255,7 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
         return `
           <button class="btn-sector-link"
             onclick="cargarSectorDetalle('${textoSeguro(provinciaNombre)}', '${textoSeguro(distritoNombre)}', '${textoSeguro(sectorNombre)}')">
-            ðŸ“ ${sectorNombre}
+            ${sectorNombre}
           </button>
         `;
       })
@@ -362,7 +263,7 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
 
     contenedorSectores.innerHTML += `
       <div class="distrito-bloque">
-        <h4>ðŸ“‹ Distrito: ${distrito}</h4>
+        <h4>Distrito: ${distrito}</h4>
         <div class="sectores-links-container">
           ${sectoresHTML}
         </div>
@@ -375,27 +276,23 @@ function renderizarDestacadosPais() {
   const contenedor = document.getElementById("contenedor-destacados");
   if (!contenedor) return;
 
-  const destacados = negociosRadar.filter(item =>
-    esDestacado(item) &&
-    estadoValido(item)
-  );
-
+  const destacados = negociosRadar.filter(item => esDestacado(item) && estadoValido(item));
   contenedor.innerHTML = "";
 
   if (destacados.length === 0) {
-    contenedor.innerHTML = '<p class="txt-vacio">Cargando prÃ³ximos comercios recomendados...</p>';
+    contenedor.innerHTML = '<p class="txt-vacio">Cargando proximos comercios recomendados...</p>';
     return;
   }
 
   destacados.forEach(item => {
     contenedor.innerHTML += `
       <div class="card-circuito pop-destacado">
-        <span class="badge-card-cat">â­ Destacado</span>
+        <span class="badge-card-cat">Destacado</span>
         <h2>${obtenerNombreNegocio(item)}</h2>
         <p><strong>Zona:</strong> ${obtenerSector(item)}, ${obtenerDistrito(item)}</p>
         <p class="desc-corta">${obtenerDescripcionNegocio(item)}</p>
         <a href="${obtenerEnlaceNegocio(item)}" target="_blank" class="enlace-comercio">
-          Ver Radar â†’
+          Ver Radar
         </a>
       </div>
     `;
@@ -408,7 +305,7 @@ function obtenerNombreCategoria(idCategoria) {
     normalizar(c.nombre) === normalizar(idCategoria)
   );
 
-  return cat ? `${cat.icono || "ðŸ“‚"} ${cat.nombre}` : `ðŸ“‚ ${idCategoria}`;
+  return cat ? `${cat.nombre}` : `${idCategoria}`;
 }
 
 function limpiarNombreCategoria(catId) {
@@ -428,11 +325,7 @@ function categoriaCoincide(item, catId) {
 }
 
 function obtenerCategoriasParaSector(sector) {
-  const sectorNorm = normalizar(sector);
-
-  const territorial = provinciasRadar.find(p =>
-    sectoresCoinciden(obtenerSector(p), sectorNorm)
-  );
+  const territorial = provinciasRadar.find(p => sectoresCoinciden(obtenerSector(p), sector));
 
   if (territorial && Array.isArray(territorial.categorias) && territorial.categorias.length > 0) {
     return territorial.categorias;
@@ -453,28 +346,26 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   if (!vista || !txtNombre || !txtJerarquia || !bloqueCircuito || !contenedorCategorias) return;
 
   txtNombre.textContent = `Explora el sector de ${sector}`;
-  txtJerarquia.textContent = `ðŸ“ Provincia de ${provincia} > Distrito de ${distrito}`;
+  txtJerarquia.textContent = `Provincia de ${provincia} > Distrito de ${distrito}`;
 
-  const circuitoData = circuitosRadar.find(item =>
-    sectoresCoinciden(obtenerSector(item), sector)
-  );
+  const circuitoData = circuitosRadar.find(item => sectoresCoinciden(obtenerSector(item), sector));
 
   if (circuitoData) {
     bloqueCircuito.innerHTML = `
       <div class="circuito-header-info">
-        <span class="badge-circuito-tag">ðŸŽ’ Circuito TurÃ­stico Oficial</span>
-        <span class="duracion-tag">â±ï¸ ${circuitoData.duracion || "Variable"}</span>
+        <span class="badge-circuito-tag">Circuito Turistico Oficial</span>
+        <span class="duracion-tag">${circuitoData.duracion || "Variable"}</span>
       </div>
-      <h3>${circuitoData.nombre || "Circuito turÃ­stico"}</h3>
+      <h3>${circuitoData.nombre || "Circuito turistico"}</h3>
       <p>${circuitoData.descripcion || ""}</p>
       <a href="${circuitoData.enlace_mapa || "#"}" target="_blank" class="btn-mapa-circuito">
-        ðŸ—ºï¸ Ver Ruta Digital del Circuito
+        Ver Ruta Digital del Circuito
       </a>
     `;
   } else {
     bloqueCircuito.innerHTML = `
       <p style="color:#64748b;font-style:italic;">
-        âœ¨ Circuito turÃ­stico de la comunidad consolidÃ¡ndose prÃ³ximamente.
+        Circuito turistico de la comunidad consolidandose proximamente.
       </p>
     `;
   }
@@ -482,8 +373,7 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   bloqueCircuito.style.display = "block";
 
   const itemsDelSector = negociosRadar.filter(item =>
-    sectoresCoinciden(obtenerSector(item), sector) &&
-    estadoValido(item)
+    sectoresCoinciden(obtenerSector(item), sector) && estadoValido(item)
   );
 
   console.log("Negocios del sector:", sector, itemsDelSector.length);
@@ -497,12 +387,12 @@ function cargarSectorDetalle(provincia, distrito, sector) {
       contenedorDestacadosZona.innerHTML += `
         <div class="card-circuito pop-destacado" style="background:#faf5ff;border-color:#a855f7 !important;">
           <span class="badge-card-cat" style="background:rgba(168,85,247,0.1);color:#a855f7;">
-            â­ Recomendado Local
+            Recomendado Local
           </span>
           <h2>${obtenerNombreNegocio(comercio)}</h2>
           <p>${obtenerDescripcionNegocio(comercio)}</p>
           <a href="${obtenerEnlaceNegocio(comercio)}" target="_blank" class="enlace-comercio" style="color:#a855f7;">
-            Ver Radar â†’
+            Ver Radar
           </a>
         </div>
       `;
@@ -516,25 +406,22 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   contenedorCategorias.innerHTML = "";
 
   const categoriasSector = obtenerCategoriasParaSector(sector);
-
   const categoriasConNegocios = categoriasSector.filter(catId =>
     itemsDelSector.some(item => categoriaCoincide(item, catId))
   );
 
   if (itemsDelSector.length === 0) {
     contenedorCategorias.innerHTML = `
-      <p class="txt-vacio">PrÃ³ximamente mÃ¡s comercios afiliados en este sector.</p>
+      <p class="txt-vacio">Proximamente mas comercios afiliados en este sector.</p>
     `;
   }
 
   if (itemsDelSector.length > 0 && categoriasConNegocios.length === 0) {
-    contenedorCategorias.innerHTML = renderizarListaComercios("ðŸ“ Comercios disponibles", itemsDelSector, 0);
+    contenedorCategorias.innerHTML = renderizarListaComercios("Comercios disponibles", itemsDelSector, 0);
   }
 
   categoriasConNegocios.forEach((catId, index) => {
-    const comerciosDeEstaCat = itemsDelSector.filter(item =>
-      categoriaCoincide(item, catId)
-    );
+    const comerciosDeEstaCat = itemsDelSector.filter(item => categoriaCoincide(item, catId));
 
     contenedorCategorias.innerHTML += renderizarListaComercios(
       `${obtenerNombreCategoria(catId)} (${comerciosDeEstaCat.length})`,
@@ -561,23 +448,23 @@ function renderizarListaComercios(titulo, comercios, index) {
             <div class="card-circuito">
               <h2>${obtenerNombreNegocio(comercio)}</h2>
               <p>${obtenerDescripcionNegocio(comercio)}</p>
-              <p><strong>CategorÃ­a:</strong> ${obtenerCategoriaNegocio(comercio)}</p>
-              <p><strong>DirecciÃ³n:</strong> ${obtenerDireccionNegocio(comercio)}</p>
+              <p><strong>Categoria:</strong> ${obtenerCategoriaNegocio(comercio)}</p>
+              <p><strong>Direccion:</strong> ${obtenerDireccionNegocio(comercio)}</p>
 
               ${obtenerTelefonoNegocio(comercio) ? `<p><strong>Tel:</strong> ${obtenerTelefonoNegocio(comercio)}</p>` : ""}
 
               ${obtenerEnlaceNegocio(comercio) !== "#" ? `
                 <a href="${obtenerEnlaceNegocio(comercio)}" target="_blank" class="enlace-comercio">
-                  ðŸ“ Ver ubicaciÃ³n â†’
+                  Ver ubicacion
                 </a>
               ` : `
                 <span class="enlace-comercio ubicacion-no-disponible">
-                  ðŸ“ UbicaciÃ³n Premium
+                  Ubicacion Premium
                 </span>
               `}
 
               <a href="${obtenerEnlaceNegocio(comercio)}" target="_blank" class="enlace-comercio">
-                Ver Radar â†’
+                Ver Radar
               </a>
             </div>
           `).join("")}
@@ -612,7 +499,7 @@ function buscarRadar() {
   const val = normalizar(input.value);
 
   if (val === "") {
-    result.textContent = "Por favor escribe un tÃ©rmino.";
+    result.textContent = "Por favor escribe un termino.";
     return;
   }
 
@@ -633,21 +520,21 @@ function buscarRadar() {
 
   setTimeout(() => {
     if (sectorEncontrado) {
-      result.textContent = `ðŸ“ Sector detectado: ${obtenerSector(sectorEncontrado)}`;
+      result.textContent = `Sector detectado: ${obtenerSector(sectorEncontrado)}`;
       cargarSectorDetalle(
         obtenerProvincia(sectorEncontrado),
         obtenerDistrito(sectorEncontrado),
         obtenerSector(sectorEncontrado)
       );
     } else if (negocioEncontrado) {
-      result.textContent = `ðŸ“ Negocio detectado en ${obtenerSector(negocioEncontrado)}`;
+      result.textContent = `Negocio detectado en ${obtenerSector(negocioEncontrado)}`;
       cargarSectorDetalle(
         obtenerProvincia(negocioEncontrado),
         obtenerDistrito(negocioEncontrado),
         obtenerSector(negocioEncontrado)
       );
     } else {
-      result.textContent = `PrÃ³ximamente resultados en vivo para: "${input.value}"`;
+      result.textContent = `Proximamente resultados en vivo para: "${input.value}"`;
     }
   }, 500);
 }
