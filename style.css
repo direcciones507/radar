@@ -34,7 +34,7 @@
   <style>
     /* =====================================================
        CSS CONSOLIDADO Y LIMPIO: FIJACIÓN DE DESPLAZAMIENTO
-       Y MEJORAS PREMIUM PRO
+       Y MEJORAS PREMIUM PRO UNIFICADAS
     ===================================================== */
     
     * {
@@ -216,7 +216,15 @@
     .btn-provincia-select .icon-svg { fill: #12b8a6; }
 
     .sectores-internos-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1); background: #f8fafc; padding: 0 22px; }
-    .sectores-internos-menu.active { max-height: none !important; height: auto !important; overflow: visible !important; padding: 20px 22px; border-top: 1px solid #e2e8f0; }
+    
+    /* FIJACIÓN DE DESPLAZAMIENTO: SE ELIMINÓ overflow-y: auto; Y max-height limitada */
+    .sectores-internos-menu.active { 
+      max-height: none !important; 
+      height: auto !important; 
+      overflow: visible !important; 
+      padding: 20px 22px; 
+      border-top: 1px solid #e2e8f0; 
+    }
 
     .distrito-bloque { background: #ffffff; border-radius: 12px; padding: 18px; margin-bottom: 16px; border-left: 4px solid #0f766e; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
     .distrito-bloque h4 { font-size: 16px; font-weight: 700; color: #0f766e; margin-bottom: 12px; }
@@ -224,22 +232,6 @@
 
     .btn-sector-link { background: #f1f5f9; border: 1px solid #cbd5e1; color: var(--text-dark); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); }
     .btn-sector-link:hover { background: #0f766e; color: #ffffff; border-color: #0f766e; transform: translateY(-1px); }
-
-    /* === NUEVA ADICIÓN VISUAL: Resaltado Dinámico del Botón de Sector === */
-    @keyframes pulseBackground {
-      0% { box-shadow: 0 0 0 0 rgba(49, 230, 200, 0.7); }
-      70% { box-shadow: 0 0 0 10px rgba(49, 230, 200, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(49, 230, 200, 0); }
-    }
-    
-    .btn-sector-link.is-active {
-      background: linear-gradient(135deg, #31e6c8, #12b8a6);
-      color: #061827;
-      border-color: transparent;
-      animation: pulseBackground 1.5s infinite;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(49,230,200,.35);
-    }
 
     /* RESULTADOS DINÁMICOS */
     .grid-tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; text-align: left; }
@@ -274,13 +266,31 @@
     .sub-accordion-header { width: 100%; background: #f8fafc; padding: 16px 20px; font-size: 16px; font-weight: 700; color: var(--text-dark); border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; }
     .sub-accordion-header:hover { background: #f1f5f9; color: #0f766e; }
     .sub-accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #ffffff; }
-    .sub-accordion-content.open { max-height: none !important; height: auto !important; overflow: visible !important; border-top: 1px solid #e2e8f0; }
+    
+    /* FIJACIÓN DE DESPLAZAMIENTO: SE ELIMINÓ overflow-y: auto; Y max-height limitada */
+    .sub-accordion-content.open { 
+      max-height: none !important; 
+      height: auto !important; 
+      overflow: visible !important; 
+      border-top: 1px solid #e2e8f0; 
+    }
     .padding-intern-cards { padding: 20px; }
     .txt-vacio { color: var(--text-muted); font-size: 14px; font-style: italic; grid-column: 1 / -1; }
 
     /* SERVICIOS ESTRATEGIA COMERCIAL */
     .card-servicio-comercial { text-align: left; display: flex; flex-direction: column; gap: 12px; }
-    .icon-circle { width: 50px; height: 50px; background: rgba(49, 230, 200, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    
+    /* MEJORA VISUAL ÍCONOS: Degradado y sombra general */
+    .icon-circle { 
+      width: 50px; 
+      height: 50px; 
+      background: linear-gradient(135deg, rgba(49, 230, 200, 0.15), rgba(49, 230, 200, 0.05)); 
+      border-radius: 12px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      box-shadow: 0 4px 12px rgba(49, 230, 200, 0.1);
+    }
     .icon-circle svg { width: 24px; height: 24px; fill: #0f766e; }
 
     /* DISEÑO AUXILIAR BASE */
@@ -393,7 +403,7 @@
     }
 
     /* =====================================================
-       MEJORAS PREMIUM PRO: ESTILOS PARA NEGOCIOS (SEGÚN IMAGEN)
+       MEJORAS PREMIUM PRO: ESTILOS PARA NEGOCIOS UNIFICADOS
     ===================================================== */
 
     /* 1. Base mejorada para la tarjeta de negocio estándar */
@@ -514,6 +524,9 @@
       color: #000000;
     }
 
+    /* (Nota: El ícono de la estrella ⭐ lo añadirás en el HTML, no en el CSS) */
+
+
     /* =====================================================
        NIVEL 3: PREMIUM / GOLD (Como "Boutique Paitilla")
     ===================================================== */
@@ -628,7 +641,7 @@ Registro gratuito sujeto a validación.
       <div id="bloque-circuito-turistico" class="circuito-card-destacada"></div>
 
       <div id="zona-destacados-container" style="display: none; margin-bottom: 40px;">
-        <h3 style="color: #0f766e; margin-bottom: 15px; font-size: 20px;">⭐ Negocios Recomendados en la Zona</h3>
+        <h3 style="color: #0f766e; margin-bottom: 15px; font-size: 20px;">📂 Negocios Recomendados en la Zona</h3>
         <div id="contenedor-destacados-zona" class="grid-tarjetas"></div>
       </div>
 
@@ -997,6 +1010,7 @@ Registro gratuito sujeto a validación.
       });
     }
 
+    /* === MEJORA JavaScript: Renderizado Unificado Premium Pro para País === */
     function renderizarDestacadosPais() {
       const contenedor = document.getElementById("contenedor-destacados");
       if (!contenedor) return;
@@ -1009,18 +1023,45 @@ Registro gratuito sujeto a validación.
         return;
       }
 
-      destacados.forEach(item => {
-        contenedor.innerHTML += `
-          <div class="card-circuito pop-destacado">
-            <span class="badge-card-cat">Destacado</span>
-            <h2>${obtenerNombreNegocio(item)}</h2>
-            <p><strong>Zona:</strong> ${obtenerSector(item)}, ${obtenerDistrito(item)}</p>
-            <p class="desc-corta">${obtenerDescripcionNegocio(item)}</p>
-            <a href="${obtenerEnlaceNegocio(item)}" target="_blank" class="enlace-comercio">
-              Ver Radar
-            </a>
-          </div>
-        `;
+      destacados.forEach(comercio => {
+          // LÓGICA DE DESTACADO PREMIUM PRO UNIFICADA
+          const nivel = esPremium(comercio) ? 'premium' : (esDestacado(comercio) ? 'destacado' : 'estandar');
+          
+          // Definir clases, badges y prefijos de título según nivel
+          let cardClasses = 'card-circuito';
+          let badgeHtml = '';
+          let titlePrefixHtml = '';
+
+          if (nivel === 'premium') {
+            cardClasses += ' premium';
+            badgeHtml = '<span class="badge-card-cat premium-badge">💎 PREMIUM</span>';
+            titlePrefixHtml = '👑 '; // Corona antes del título
+          } else if (nivel === 'destacado') {
+            cardClasses += ' destacado';
+            badgeHtml = '<span class="badge-card-cat destacado-badge">⭐ DESTACADO</span>';
+            // Sin prefijo de título para destacado
+          } else {
+            // Estándar (como Fonda)
+            badgeHtml = `<span class="badge-card-cat">${obtenerCategoriaNegocio(comercio)}</span>`;
+          }
+
+          // Renderizado de la tarjeta final apilada verticalmente
+          contenedor.innerHTML += `
+            <div class="${cardClasses}">
+              
+              ${badgeHtml}
+              
+              <h2>${titlePrefixHtml}${obtenerNombreNegocio(comercio)}</h2>
+              
+              <p>${obtenerDescripcionNegocio(comercio)}</p>
+              
+              <p><strong>Zona:</strong> ${obtenerSector(comercio)}, ${obtenerDistrito(comercio)}</p>
+              
+              <a href="${obtenerEnlaceNegocio(comercio)}" target="_blank" class="enlace-comercio">
+                Ver Radar
+              </a>
+            </div>
+          `;
       });
     }
 
@@ -1035,7 +1076,7 @@ Registro gratuito sujeto a validación.
 
     function limpiarNombreCategoria(catId) {
       return obtenerNombreCategoria(catId)
-        .replace(/^[^\wÃ¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“ÃšÃ±Ã‘]+/, "")
+        .replace(/^[^\wÃ¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“ÃšÃ±ÃÑ]+/, "")
         .trim();
     }
 
@@ -1059,6 +1100,7 @@ Registro gratuito sujeto a validación.
       return categoriasRadar.map(c => c.id || c.nombre).filter(Boolean);
     }
 
+    /* === MEJORA JavaScript: Renderizado Unificado Premium Pro para Zona === */
     function cargarSectorDetalle(provincia, distrito, sector) {
       const vista = document.getElementById("vista-sector");
       const txtNombre = document.getElementById("dinamico-nombre-sector");
@@ -1072,21 +1114,6 @@ Registro gratuito sujeto a validación.
 
       txtNombre.textContent = `Explora el sector de ${sector}`;
       txtJerarquia.textContent = `Provincia de ${provincia} > Distrito de ${distrito}`;
-
-      // --- NUEVA ADICIÓN VISUAL: Resaltar botón seleccionado ---
-      // Eliminar estado activo de cualquier otro enlace de sector
-      document.querySelectorAll('.btn-sector-link').forEach(btn => {
-        btn.classList.remove('is-active');
-      });
-      // Añadir estado activo al enlace del sector actual. Coincidir con texto de forma segura.
-      const links = document.querySelectorAll('.btn-sector-link');
-      for(const link of links) {
-        if (normalizar(link.textContent).trim() === normalizar(sector).trim()) {
-            link.classList.add('is-active');
-            break;
-        }
-      }
-      // -----------------------------------------------------------
 
       const circuitoData = circuitosRadar.find(item => sectoresCoinciden(obtenerSector(item), sector));
 
@@ -1124,14 +1151,42 @@ Registro gratuito sujeto a validación.
         contenedorDestacadosZona.innerHTML = "";
 
         destacadosDeLaZona.forEach(comercio => {
+          // LÓGICA DE DESTACADO PREMIUM PRO UNIFICADA
+          const nivel = esPremium(comercio) ? 'premium' : (esDestacado(comercio) ? 'destacado' : 'estandar');
+          
+          // Definir clases, badges y prefijos de título según nivel
+          let cardClasses = 'card-circuito';
+          let badgeHtml = '';
+          let titlePrefixHtml = '';
+
+          if (nivel === 'premium') {
+            cardClasses += ' premium';
+            badgeHtml = '<span class="badge-card-cat premium-badge">💎 PREMIUM</span>';
+            titlePrefixHtml = '👑 '; // Corona antes del título
+          } else if (nivel === 'destacado') {
+            cardClasses += ' destacado';
+            badgeHtml = '<span class="badge-card-cat destacado-badge">⭐ DESTACADO</span>';
+            // Sin prefijo de título para destacado
+          } else {
+            // Estándar (como Fonda)
+            badgeHtml = `<span class="badge-card-cat">${obtenerCategoriaNegocio(comercio)}</span>`;
+          }
+          
+          // MEJORA: Unificar Badge "Recomendado Local" pero con estilos Premium Pro
+          if (esPremium(comercio) || esDestacado(comercio)) {
+             badgeHtml = `<span class="badge-card-cat ${nivel === 'premium' ? 'premium-badge' : 'destacado-badge'}">⭐ Recomendado Local</span>`;
+          }
+
           contenedorDestacadosZona.innerHTML += `
-            <div class="card-circuito pop-destacado" style="background:#faf5ff;border-color:#a855f7 !important;">
-              <span class="badge-card-cat" style="background:rgba(168,85,247,0.1);color:#a855f7;">
-                Recomendado Local
-              </span>
-              <h2>${obtenerNombreNegocio(comercio)}</h2>
+            <div class="${cardClasses}">
+              
+              ${badgeHtml}
+              
+              <h2>${titlePrefixHtml}${obtenerNombreNegocio(comercio)}</h2>
+              
               <p>${obtenerDescripcionNegocio(comercio)}</p>
-              <a href="${obtenerEnlaceNegocio(comercio)}" target="_blank" class="enlace-comercio" style="color:#a855f7;">
+              
+              <a href="${obtenerEnlaceNegocio(comercio)}" target="_blank" class="enlace-comercio">
                 Ver Radar
               </a>
             </div>
@@ -1187,7 +1242,7 @@ Registro gratuito sujeto a validación.
           <div class="sub-accordion-content" id="sub-cat-${index}">
             <div class="grid-tarjetas padding-intern-cards" style="grid-template-columns: 1fr; gap: 18px;">
               ${comercios.map(comercio => {
-                // LÓGICA DE DESTACADO PREMIUM PRO
+                // LÓGICA DE DESTACADO PREMIUM PRO UNIFICADA
                 const nivel = esPremium(comercio) ? 'premium' : (esDestacado(comercio) ? 'destacado' : 'estandar');
                 
                 // Definir clases, badges y prefijos de título según nivel
