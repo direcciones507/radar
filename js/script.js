@@ -19,7 +19,6 @@ function normalizar(texto) {
 function slugify(texto) {
   return normalizar(texto)
     .replace(/Ã±/g, "n")
-    .replace(/ÃƒÂ±/g, "n")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
@@ -75,50 +74,26 @@ function obtenerTelefonoNegocio(item) {
 }
 
 function obtenerEnlaceNegocio(item) {
-  return obtenerCampo(item, ["enlace", "url_negocio", "url_ubicacion", "google_maps", "maps", "waze", "website", "web", "sitio_web", "direccion_digital"], "");
+  return obtenerCampo(item, ["url_ubicacion", "google_maps", "google", "maps", "waze", "enlace", "url_negocio", "website", "web", "sitio_web", "direccion_digital"], "");
 }
 
 function enlaceValido(enlace) {
-  const valor = String(enlace || "").trim();
-  const bajo = valor.toLowerCase();
-  if (!valor || valor === "#" || bajo === "no" || bajo === "n/a" || bajo === "na") return false;
-  if (bajo.includes("sin ubicacion") || bajo.includes("sin ubicaciÃ³n")) return false;
-  return true;
-}
-
-function obtenerImagenCategoria(item) {
-  const imagenPropia = obtenerCampo(item, ["imagen_url", "imagen", "imagen_principal", "foto", "foto_url", "logo"], "");
-  if (String(imagenPropia).startsWith("http")) return imagenPropia;
-
-  const categoria = normalizar(obtenerCategoriaNegocio(item));
-  const nombre = normalizar(obtenerNombreNegocio(item));
-  const texto = `${categoria} ${nombre}`;
-
-  const grupos = [
-    { claves: ["hotel", "hostal", "hospedaje", "resort", "alojamiento", "camping", "inn"], url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80" },
-    { claves: ["restaurante", "comida", "gourmet", "fonda", "cafe", "cafeteria", "bar", "pizza", "marisco"], url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" },
-    { claves: ["farmacia", "medicina", "salud", "clinica", "laboratorio"], url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=900&q=80" },
-    { claves: ["taller", "mecanica", "auto", "repuesto", "llanta", "motor"], url: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=900&q=80" },
-    { claves: ["supermercado", "mini super", "minisuper", "mini sÃºper", "abarroteria", "abarroterÃ­a", "tienda", "market", "mercado", "super"], url: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80" },
-    { claves: ["ferreteria", "ferreterÃ­a", "construccion", "construcciÃ³n", "herramienta"], url: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=900&q=80" },
-    { claves: ["playa", "tour", "turismo", "circuito", "actividad", "experiencia"], url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80" },
-    { claves: ["salon", "salÃ³n", "belleza", "barber", "spa", "estetica", "estÃ©tica"], url: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=80" },
-    { claves: ["gimnasio", "gym", "fitness", "deporte"], url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80" },
-    { claves: ["veterinaria", "mascota", "pet"], url: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=900&q=80" }
-  ];
-
-  const encontrado = grupos.find(g => g.claves.some(clave => texto.includes(normalizar(clave))));
-  return encontrado ? encontrado.url : "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
+  const valor = String(enlace || "").trim().toLowerCase();
+  if (!valor) return false;
+  if (valor === "#" || valor === "na" || valor === "n/a") return false;
+  if (valor.includes("sin ubicacion") || valor.includes("sin ubicaciÃ³n")) return false;
+  return valor.startsWith("http");
 }
 
 function esPremium(item) {
-  const valor = normalizar(obtenerCampo(item, ["premium", "plan_comercial", "estado_radar", "destacado"], ""));
-  return ["premium", "premium pro"].includes(valor);
+  const valor = normalizar(obtenerCampo(item, ["plan_comercial", "estado_radar", "premium", "destacado", "destacado_radar"], ""));
+  return ["premium", "premium pro", "pro", "1"].includes(valor) || valor.includes("premium");
 }
 
 function esDestacado(item) {
+  if (esPremium(item)) return false;
   const valor = normalizar(obtenerCampo(item, ["destacado", "destacado_radar", "recomendado", "visible_destacado"], ""));
-  return ["true", "si", "sÃ­", "sÃƒÂ­", "1", "destacado", "recomendado"].includes(valor) || esPremium(item);
+  return ["true", "si", "sÃ­", "1", "destacado", "recomendado"].includes(valor);
 }
 
 function estadoValido(item) {
@@ -130,6 +105,7 @@ function estadoValido(item) {
 function sectoresCoinciden(a, b) {
   const sa = normalizar(a);
   const sb = normalizar(b);
+
   if (!sa || !sb) return false;
   if (sa === sb) return true;
 
@@ -141,6 +117,75 @@ function sectoresCoinciden(a, b) {
   if (slugB.includes(slugA) && slugA.length >= 5) return true;
 
   return false;
+}
+
+function obtenerImagenCategoria(item) {
+  const imagenPropia = obtenerCampo(item, ["imagen_url", "imagen", "imagen_principal", "foto", "foto_url", "logo"], "");
+  if (String(imagenPropia).trim().startsWith("http")) return imagenPropia;
+
+  const categoria = normalizar(obtenerCategoriaNegocio(item));
+  const nombre = normalizar(obtenerNombreNegocio(item));
+  const texto = `${categoria} ${nombre}`;
+
+  const imagenes = [
+    { claves: ["hotel", "hostal", "hospedaje", "apartamento", "resort", "alojamiento", "suite", "villa"], url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["restaurante", "comida", "gourmet", "fonda", "cafe", "cafeteria", "bar", "pizza", "marisco", "asado"], url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["farmacia", "medicina", "salud", "clinica", "doctor", "laboratorio"], url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["taller", "mecanica", "auto", "repuesto", "llanta", "motor"], url: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["supermercado", "mini super", "minisuper", "abarroteria", "tienda", "mercado"], url: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["ferreteria", "construccion", "herramienta"], url: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["playa", "tour", "turismo", "circuito", "actividad", "experiencia"], url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["salon", "belleza", "barber", "barberia", "spa", "estetica"], url: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["gimnasio", "gym", "fitness", "deporte"], url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["veterinaria", "mascota", "pet"], url: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=900&q=80" }
+  ];
+
+  const encontrada = imagenes.find(grupo => grupo.claves.some(clave => texto.includes(clave)));
+  return encontrada ? encontrada.url : "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
+}
+
+function crearHTMLTarjeta(item, etiqueta = "") {
+  const nombre = obtenerNombreNegocio(item);
+  const categoria = obtenerCategoriaNegocio(item);
+  const descripcion = obtenerDescripcionNegocio(item);
+  const sector = obtenerSector(item);
+  const distrito = obtenerDistrito(item);
+  const direccion = obtenerDireccionNegocio(item);
+  const telefono = obtenerTelefonoNegocio(item);
+  const enlace = obtenerEnlaceNegocio(item);
+  const imagen = obtenerImagenCategoria(item);
+
+  const premium = esPremium(item);
+  const destacado = esDestacado(item);
+
+  let claseTarjeta = "card-circuito";
+  if (premium) claseTarjeta += " premium";
+  if (destacado) claseTarjeta += " destacado";
+
+  const textoBadge = etiqueta || (premium ? "Premium" : destacado ? "Destacado" : categoria);
+
+  const boton = enlaceValido(enlace)
+    ? `<a href="${enlace}" target="_blank" rel="noopener" class="enlace-comercio">Ver ubicacion Radar</a>`
+    : `<span class="enlace-comercio ubicacion-no-disponible">Ubicacion no disponible</span>`;
+
+  return `
+    <article class="${claseTarjeta}">
+      <img src="${imagen}" alt="${nombre}" class="card-img-placeholder" loading="lazy">
+      <span class="badge-card-cat">${textoBadge}</span>
+
+      <div class="card-contenido-interno">
+        <h2>${nombre}</h2>
+        ${descripcion ? `<p class="desc-corta">${descripcion}</p>` : `<p class="desc-corta">Perfil oficial dentro de la plataforma territorial de Radar 507.</p>`}
+
+        <div class="card-dato"><strong>Categoria:</strong> ${categoria}</div>
+        ${sector ? `<div class="card-dato"><strong>Zona:</strong> ${sector}${distrito ? `, ${distrito}` : ""}</div>` : ""}
+        ${direccion && direccion !== sector ? `<div class="card-dato"><strong>Direccion:</strong> ${direccion}</div>` : ""}
+        ${telefono ? `<div class="card-dato"><strong>Tel:</strong> ${telefono}</div>` : ""}
+      </div>
+
+      ${boton}
+    </article>
+  `;
 }
 
 async function inicializarRadar() {
@@ -208,7 +253,7 @@ function renderizarMenuProvincias() {
   contenedor.innerHTML = "";
 
   if (Object.keys(mapa).length === 0) {
-    contenedor.innerHTML = '<p class="txt-vacio">No hay sectores con negocios activos todavÃ­a.</p>';
+    contenedor.innerHTML = '<p class="txt-vacio">No hay sectores con negocios activos todavia.</p>';
     return;
   }
 
@@ -217,10 +262,10 @@ function renderizarMenuProvincias() {
 
     contenedor.innerHTML += `
       <div class="provincia-bloque-menu">
-        <button class="btn-provincia-select" onclick="toggleProvinciaDinamica('${key}', this)">
+        <button class="btn-provincia-select" type="button" onclick="toggleProvinciaDinamica('${key}', this)">
           <span class="header-title-wrapper">
-            <svg class="icon-svg" viewBox="0 0 24 24">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
             </svg>
             <span>${provincia}</span>
           </span>
@@ -281,7 +326,7 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
         const distritoNombre = obtenerDistrito(item);
 
         return `
-          <button class="btn-sector-link"
+          <button class="btn-sector-link" type="button"
             onclick="cargarSectorDetalle('${textoSeguro(provinciaNombre)}', '${textoSeguro(distritoNombre)}', '${textoSeguro(sectorNombre)}')">
             ${sectorNombre}
           </button>
@@ -292,61 +337,28 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
     contenedorSectores.innerHTML += `
       <div class="distrito-bloque">
         <h4>Distrito: ${distrito}</h4>
-        <div class="sectores-links-container">
-          ${sectoresHTML}
-        </div>
+        <div class="sectores-links-container">${sectoresHTML}</div>
       </div>
     `;
   });
-}
-
-function crearTarjetaComercio(comercio, modo = "") {
-  const nombre = obtenerNombreNegocio(comercio);
-  const categoria = obtenerCategoriaNegocio(comercio);
-  const descripcion = obtenerDescripcionNegocio(comercio);
-  const direccion = obtenerDireccionNegocio(comercio);
-  const telefono = obtenerTelefonoNegocio(comercio);
-  const enlace = obtenerEnlaceNegocio(comercio);
-  const imagen = obtenerImagenCategoria(comercio);
-
-  const claseExtra = esPremium(comercio) ? " premium" : (esDestacado(comercio) ? " destacado" : "");
-  const badgeTexto = esPremium(comercio) ? "Premium" : (modo || categoria);
-
-  const boton = enlaceValido(enlace)
-    ? `<a href="${enlace}" target="_blank" class="enlace-comercio">Ver ubicaciÃ³n</a>`
-    : "";
-
-  return `
-    <article class="card-circuito${claseExtra}">
-      <img src="${imagen}" alt="${nombre}" class="card-img-placeholder" loading="lazy">
-      <span class="badge-card-cat">${badgeTexto}</span>
-
-      <div class="card-contenido-interno">
-        <h2>${nombre}</h2>
-        ${descripcion ? `<p class="desc-corta">${descripcion}</p>` : ""}
-        <p><strong>CategorÃ­a:</strong> ${categoria}</p>
-        ${direccion ? `<p><strong>DirecciÃ³n:</strong> ${direccion}</p>` : ""}
-        ${telefono ? `<p><strong>Tel:</strong> ${telefono}</p>` : ""}
-      </div>
-
-      ${boton}
-    </article>
-  `;
 }
 
 function renderizarDestacadosPais() {
   const contenedor = document.getElementById("contenedor-destacados");
   if (!contenedor) return;
 
-  const destacados = negociosRadar.filter(item => esDestacado(item) && estadoValido(item)).slice(0, 6);
-  contenedor.innerHTML = "";
+  const destacados = negociosRadar
+    .filter(item => estadoValido(item) && (esDestacado(item) || esPremium(item)))
+    .slice(0, 9);
 
   if (destacados.length === 0) {
-    contenedor.innerHTML = '<p class="txt-vacio">Cargando prÃ³ximos comercios recomendados...</p>';
+    contenedor.innerHTML = '<p class="txt-vacio">Cargando proximos comercios recomendados...</p>';
     return;
   }
 
-  contenedor.innerHTML = destacados.map(item => crearTarjetaComercio(item, "Destacado")).join("");
+  contenedor.innerHTML = destacados
+    .map(item => crearHTMLTarjeta(item, esPremium(item) ? "Premium" : "Destacado"))
+    .join("");
 }
 
 function obtenerNombreCategoria(idCategoria) {
@@ -361,7 +373,6 @@ function obtenerNombreCategoria(idCategoria) {
 function limpiarNombreCategoria(catId) {
   return obtenerNombreCategoria(catId)
     .replace(/^[^\wÃ¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“ÃšÃ±Ã‘]+/, "")
-    .replace(/^[^\wÃƒÂ¡ÃƒÂ©ÃƒÂ­ÃƒÂ³ÃƒÂºÃƒÂÃƒâ€°ÃƒÂÃƒâ€œÃƒÅ¡ÃƒÂ±Ãƒâ€˜]+/, "")
     .trim();
 }
 
@@ -393,8 +404,13 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   const contenedorCategorias = document.getElementById("categorias-desplegables");
   const bloqueDestacadosZona = document.getElementById("zona-destacados-container");
   const contenedorDestacadosZona = document.getElementById("contenedor-destacados-zona");
+  const territorio = document.getElementById("territorio");
+  const destacados = document.getElementById("destacados");
 
   if (!vista || !txtNombre || !txtJerarquia || !bloqueCircuito || !contenedorCategorias) return;
+
+  if (territorio) territorio.style.display = "none";
+  if (destacados) destacados.style.display = "none";
 
   txtNombre.textContent = `Explora el sector de ${sector}`;
   txtJerarquia.textContent = `Provincia de ${provincia} > Distrito de ${distrito}`;
@@ -402,23 +418,20 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   const circuitoData = circuitosRadar.find(item => sectoresCoinciden(obtenerSector(item), sector));
 
   if (circuitoData) {
+    const enlaceCircuito = circuitoData.enlace_mapa || "#";
     bloqueCircuito.innerHTML = `
       <div class="circuito-header-info">
-        <span class="badge-circuito-tag">Circuito TurÃ­stico Oficial</span>
+        <span class="badge-circuito-tag">Circuito turistico oficial</span>
         <span class="duracion-tag">${circuitoData.duracion || "Variable"}</span>
       </div>
-      <h3>${circuitoData.nombre || "Circuito turÃ­stico"}</h3>
+      <h3>${circuitoData.nombre || "Circuito turistico"}</h3>
       <p>${circuitoData.descripcion || ""}</p>
-      ${enlaceValido(circuitoData.enlace_mapa) ? `
-        <a href="${circuitoData.enlace_mapa}" target="_blank" class="btn-mapa-circuito">
-          Ver ruta digital del circuito
-        </a>
-      ` : ""}
+      ${enlaceValido(enlaceCircuito) ? `<a href="${enlaceCircuito}" target="_blank" rel="noopener" class="enlace-comercio">Ver ruta digital del circuito</a>` : ""}
     `;
   } else {
     bloqueCircuito.innerHTML = `
       <p style="color:#64748b;font-style:italic;">
-        Circuito turÃ­stico de la comunidad consolidÃ¡ndose prÃ³ximamente.
+        Circuito turistico de la comunidad consolidandose proximamente.
       </p>
     `;
   }
@@ -429,12 +442,13 @@ function cargarSectorDetalle(provincia, distrito, sector) {
     sectoresCoinciden(obtenerSector(item), sector) && estadoValido(item)
   );
 
-  const destacadosDeLaZona = itemsDelSector.filter(esDestacado).slice(0, 6);
+  const destacadosDeLaZona = itemsDelSector.filter(item => esDestacado(item) || esPremium(item));
 
   if (destacadosDeLaZona.length > 0 && bloqueDestacadosZona && contenedorDestacadosZona) {
     contenedorDestacadosZona.innerHTML = destacadosDeLaZona
-      .map(comercio => crearTarjetaComercio(comercio, "Recomendado Local"))
+      .map(comercio => crearHTMLTarjeta(comercio, esPremium(comercio) ? "Premium local" : "Recomendado local"))
       .join("");
+
     bloqueDestacadosZona.style.display = "block";
   } else if (bloqueDestacadosZona) {
     bloqueDestacadosZona.style.display = "none";
@@ -449,7 +463,7 @@ function cargarSectorDetalle(provincia, distrito, sector) {
 
   if (itemsDelSector.length === 0) {
     contenedorCategorias.innerHTML = `
-      <p class="txt-vacio">PrÃ³ximamente mÃ¡s comercios afiliados en este sector.</p>
+      <p class="txt-vacio">Proximamente mas comercios afiliados en este sector.</p>
     `;
   }
 
@@ -471,17 +485,29 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   vista.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function cerrarVistaSector() {
+  const vista = document.getElementById("vista-sector");
+  const territorio = document.getElementById("territorio");
+  const destacados = document.getElementById("destacados");
+
+  if (vista) vista.style.display = "none";
+  if (territorio) territorio.style.display = "block";
+  if (destacados) destacados.style.display = "block";
+
+  if (territorio) territorio.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 function renderizarListaComercios(titulo, comercios, index) {
   return `
     <div class="sub-accordion-item">
-      <button class="sub-accordion-header" onclick="toggleSubCategoria(${index})">
+      <button class="sub-accordion-header" type="button" onclick="toggleSubCategoria(${index})">
         <span>${titulo}</span>
         <span class="sub-icon">+</span>
       </button>
 
       <div class="sub-accordion-content" id="sub-cat-${index}">
         <div class="grid-tarjetas padding-intern-cards">
-          ${comercios.map(comercio => crearTarjetaComercio(comercio)).join("")}
+          ${comercios.map(comercio => crearHTMLTarjeta(comercio)).join("")}
         </div>
       </div>
     </div>
@@ -513,7 +539,7 @@ function buscarRadar() {
   const val = normalizar(input.value);
 
   if (val === "") {
-    result.textContent = "Por favor escribe un tÃ©rmino.";
+    result.textContent = "Por favor escribe un termino.";
     return;
   }
 
@@ -548,9 +574,9 @@ function buscarRadar() {
         obtenerSector(negocioEncontrado)
       );
     } else {
-      result.textContent = `PrÃ³ximamente resultados en vivo para: "${input.value}"`;
+      result.textContent = `Proximamente resultados en vivo para: "${input.value}"`;
     }
-  }, 500);
+  }, 350);
 }
 
 document.addEventListener("DOMContentLoaded", inicializarRadar);
@@ -558,5 +584,6 @@ document.addEventListener("DOMContentLoaded", inicializarRadar);
 window.toggleMenuMaestro = toggleMenuMaestro;
 window.toggleProvinciaDinamica = toggleProvinciaDinamica;
 window.cargarSectorDetalle = cargarSectorDetalle;
+window.cerrarVistaSector = cerrarVistaSector;
 window.toggleSubCategoria = toggleSubCategoria;
 window.buscarRadar = buscarRadar;
