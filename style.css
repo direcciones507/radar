@@ -32,160 +32,261 @@
   <meta name="description" content="Radar Direcciones507 es una plataforma territorial para encontrar negocios y circuitos turísticos en Panamá." />
   
   <style>
-    /* =====================================================
-       CSS CONSOLIDADO Y LIMPIO: FIJACIÓN DE DESPLAZAMIENTO,
-       MEJORAS PREMIUM PRO Y TEXTURA TOPOGRÁFICA RADAR
-    ===================================================== */
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+/* =====================================================
+   RADAR507 - ESTILO VISUAL TIPO MOCKUP PREMIUM
+   Textura topográfica, tarjetas blancas, hero glass y móvil limpio
+===================================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    :root {
-      --primary: #31e6c8;
-      --primary-dark: #12b8a6;
-      --bg-main: #f4f7fb;
-      --bg-radar: #E9EEF3;
-      --text-dark: #0f172a;
-      --text-muted: #475569;
-      --card-shadow: 0 12px 34px rgba(15, 23, 42, 0.06);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+:root {
+  --primary: #27d8c5;
+  --primary-dark: #0f766e;
+  --primary-deep: #073b4c;
+  --ink: #0f172a;
+  --muted: #475569;
+  --soft: #f5f8fb;
+  --paper: rgba(255,255,255,.88);
+  --paper-solid: #ffffff;
+  --line: #dbe7ea;
+  --shadow: 0 18px 45px rgba(8, 34, 44, .16);
+  --shadow-soft: 0 12px 30px rgba(8, 34, 44, .10);
+  --radius: 24px;
+  --transition: all .28s ease;
+}
 
-    html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: var(--bg-main);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: var(--ink);
+  line-height: 1.55;
+  background-color: #edf1ee;
+  background-image:
+    linear-gradient(rgba(237,241,238,.72), rgba(237,241,238,.86)),
+    radial-gradient(circle at 18% 12%, rgba(39,216,197,.15), transparent 30%),
+    radial-gradient(circle at 82% 8%, rgba(7,59,76,.10), transparent 30%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='980' height='980' viewBox='0 0 980 980'%3E%3Cg fill='none' stroke='%23073b4c' stroke-opacity='.42' stroke-width='1.25'%3E%3Cpath d='M-120 70c80-55 165-61 236-12 76 52 146 55 221 8 81-51 165-41 238 25 67 61 148 74 242 31 82-38 159-32 238 18'/%3E%3Cpath d='M-130 122c96-65 190-70 271-9 78 59 154 63 236 10 91-58 183-45 263 33 70 68 159 83 261 36 91-42 180-34 269 25'/%3E%3Cpath d='M-148 180c109-71 217-75 306-4 83 66 166 72 256 13 102-67 204-49 292 45 76 81 175 98 287 45 100-47 198-39 301 33'/%3E%3Cpath d='M-158 248c119-79 240-80 339 7 89 78 181 85 280 17 112-77 225-54 323 60 84 98 192 118 315 58 111-54 223-43 340 44'/%3E%3Cpath d='M-150 330c126-88 258-86 370 14 99 89 202 99 314 25 123-82 249-56 357 76 95 116 217 142 354 73 123-62 248-48 379 58'/%3E%3Cpath d='M-135 430c141-100 290-96 415 20 111 103 226 116 351 33 137-91 275-60 395 93 106 135 242 167 395 88 137-70 277-52 422 74'/%3E%3Cpath d='M-130 548c151-111 318-105 460 27 126 117 256 133 397 39 151-101 307-64 441 112 119 156 273 195 444 104 154-82 313-62 479 82'/%3E%3Cpath d='M-120 682c170-126 357-118 514 38 141 140 290 160 449 50 171-118 348-72 499 137 137 189 314 235 507 126 173-98 354-76 542 92'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover, auto, auto, 980px 980px;
+  background-position: center, center, center, center top;
+  background-attachment: fixed;
+}
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
 
-    a { text-decoration: none; color: inherit; }
+/* HERO */
+.hero {
+  min-height: 54vh;
+  width: min(1180px, calc(100% - 48px));
+  margin: 32px auto 0;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  padding: 20px 28px 70px;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(135deg, rgba(6,24,44,.88), rgba(14,148,136,.72)),
+    url("assets/radar-panama.jpg") center/cover no-repeat;
+  box-shadow: var(--shadow);
+}
 
-    /* === NUEVA TEXTURA RADAR TOPOGRÁFICA === */
-    .section-with-texture {
-      background-color: var(--bg-radar);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='1000' viewBox='0 0 1000 1000'%3E%3Cpath d='M0 100c10-10 30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0' stroke='%23B0BCC7' stroke-opacity='0.1' stroke-width='1' fill='none'/%3E%3Cpath d='M0 200c10-10 30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0' stroke='%23B0BCC7' stroke-opacity='0.15' stroke-width='1.2' fill='none'/%3E%3C/svg%3E");
-    }
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(6,24,44,.35), rgba(39,216,197,.14));
+  pointer-events: none;
+}
 
-    /* HERO */
-    .hero {
-      min-height: 85vh;
-      position: relative;
-      background: linear-gradient(135deg, rgba(6, 24, 44, 0.95), rgba(11, 114, 133, 0.82)), url("assets/radar-panama.jpg") no-repeat center center;
-      background-size: cover;
-      background-attachment: fixed;
-      color: #ffffff;
-      padding: 24px 24px 100px 24px;
-      display: flex;
-      flex-direction: column;
-    }
+.navbar, .hero-content { position: relative; z-index: 2; }
+.navbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; max-width: 1080px; width: 100%; margin: 0 auto; }
+.logo { font-size: 26px; font-weight: 900; letter-spacing: -.5px; }
+.logo span { color: var(--primary); }
+.nav-links { display: flex; gap: 28px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,.76); }
+.nav-links a:hover { color: #fff; }
 
-    .btn-registro{ display:inline-block; padding:14px 28px; background:#0a84ff; color:#fff; text-decoration:none; border-radius:10px; font-weight:600; transition:0.3s; }
-    .btn-registro:hover{ transform:translateY(-2px); }
+.hero-content { max-width: 760px; margin: 80px auto 0; text-align: center; }
+.hero h1 { font-size: clamp(33px, 5.6vw, 58px); line-height: 1.03; letter-spacing: -1.7px; margin-bottom: 18px; font-weight: 900; text-shadow: 0 3px 18px rgba(0,0,0,.25); }
+.hero-text { max-width: 650px; margin: 0 auto 20px; font-size: 18px; color: rgba(255,255,255,.9); }
+.btn-registro, .btn.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-weight: 800;
+  box-shadow: 0 14px 25px rgba(0,0,0,.16);
+  transition: var(--transition);
+}
+.btn-registro { background: #0a84ff; color: #fff; }
+.btn.primary { background: var(--primary); color: #06232d; }
+.btn-registro:hover, .btn.primary:hover { transform: translateY(-2px); filter: saturate(1.08); }
 
-    .navbar { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
-    .logo span { color: var(--primary); }
-    .nav-links { display: flex; gap: 30px; font-size: 15px; font-weight: 500; }
-    .nav-links a { opacity: 0.85; transition: var(--transition); }
-    .nav-links a:hover { opacity: 1; color: var(--primary); }
+/* SECCIONES */
+main { width: min(1180px, calc(100% - 48px)); margin: 0 auto 40px; background: rgba(244,248,251,.58); box-shadow: var(--shadow-soft); backdrop-filter: blur(2px); }
+.section { max-width: 1120px; margin: 76px auto; padding: 0 24px; text-align: center; }
+.section.light { max-width: 100%; margin: 0; padding: 70px 24px; background: rgba(255,255,255,.45); border-top: 1px solid rgba(15,118,110,.10); border-bottom: 1px solid rgba(15,118,110,.10); }
+.section h2 { font-size: clamp(26px, 4vw, 36px); line-height: 1.1; font-weight: 900; letter-spacing: -.7px; margin-bottom: 10px; }
+.section-text, .search-section p { color: var(--muted); }
 
-    .hero-content { max-width: 850px; margin: auto auto 0 auto; text-align: center; }
-    .hero h1 { font-size: clamp(36px, 6.5vw, 64px); line-height: 1.1; margin-bottom: 24px; font-weight: 800; letter-spacing: -2px; }
-    .hero-text { max-width: 700px; margin: 0 auto; font-size: 19px; color: rgba(255, 255, 255, 0.85); }
+/* ACORDEON TERRITORIAL */
+.accordion-container { max-width: 760px; margin: 0 auto; text-align: left; }
+.accordion-item { background: var(--paper-solid); border-radius: 8px; overflow: hidden; border: 1px solid rgba(15,118,110,.28); box-shadow: 0 18px 36px rgba(12,65,77,.14); }
+.accordion-header {
+  width: 100%;
+  background: linear-gradient(90deg, #073b4c, var(--primary));
+  color: #fff;
+  border: none;
+  padding: 15px 18px;
+  font-size: 15px;
+  font-weight: 900;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.header-title-wrapper { display: flex; align-items: center; gap: 10px; }
+.icon-svg { width: 23px; height: 23px; fill: currentColor; flex: 0 0 auto; }
+.animated-geo { animation: geoPulse 2s infinite ease-in-out; }
+@keyframes geoPulse { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.pulse-animation { animation: pulseGlow 2.8s infinite; }
+@keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(39,216,197,.35); } 70% { box-shadow: 0 0 0 16px rgba(39,216,197,0); } 100% { box-shadow: 0 0 0 0 rgba(39,216,197,0); } }
+.accordion-content { max-height: 0; overflow: hidden; background: #fff; transition: max-height .35s ease; }
+.accordion-content.active { max-height: none !important; height: auto !important; overflow: visible !important; padding: 10px 18px 18px; }
+.provincia-bloque-menu { border-bottom: 1px solid #edf2f4; }
+.btn-provincia-select { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: #fff; border: none; padding: 13px 0; font-weight: 900; color: #12202b; cursor: pointer; }
+.btn-provincia-select:hover { color: var(--primary-dark); }
+.sectores-internos-menu { max-height: 0; overflow: hidden; transition: max-height .32s ease; padding: 0 0 0 18px; }
+.sectores-internos-menu.active { max-height: none !important; height: auto !important; overflow: visible !important; padding: 8px 0 16px 18px; }
+.distrito-bloque { margin: 6px 0 10px; padding-left: 16px; border-left: 2px solid var(--primary); }
+.distrito-bloque h4 { font-size: 14px; color: #0b4750; text-transform: uppercase; margin-bottom: 8px; }
+.sectores-links-container { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.btn-sector-link { background: transparent; border: none; color: #0f5160; font-weight: 700; padding: 3px 0; cursor: pointer; text-align: left; }
+.btn-sector-link:hover { color: var(--primary-dark); transform: translateX(3px); }
 
-    /* BUSCADOR COLECTOR */
-    .search-section { max-width: 950px; margin: 0 auto; background: #ffffff; border-radius: 24px; padding: 40px; text-align: center; box-shadow: var(--card-shadow); border: 1px solid #e2e8f0; }
-    .search-section h2 { font-size: 28px; margin-bottom: 10px; font-weight: 700; }
-    .search-section p { color: var(--text-muted); margin-bottom: 28px; }
-    .search-box { max-width: 700px; margin: 0 auto; display: flex; background: #f8fafc; border-radius: 16px; padding: 6px; border: 2px solid #e2e8f0; transition: var(--transition); }
-    .search-box:focus-within { border-color: var(--primary-dark); box-shadow: 0 0 0 4px rgba(18, 184, 166, 0.15); background: #ffffff; }
-    .search-box input { flex: 1; border: none; background: transparent; padding: 14px 20px; font-size: 16px; outline: none; }
-    .search-box button { border: none; background: #0f766e; color: white; padding: 14px 28px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: var(--transition); }
-    .search-box button:hover { background: #115e59; }
+/* SERVICIOS */
+.grid-tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 28px; max-width: 1080px; margin: 28px auto 0; text-align: left; }
+.card, .card-servicio-comercial {
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.75);
+  border-radius: var(--radius);
+  padding: 34px 30px;
+  min-height: 250px;
+  box-shadow: var(--shadow-soft);
+}
+.card-servicio-comercial { display: flex; flex-direction: column; gap: 14px; }
+.card-servicio-comercial h3 { font-size: 23px; line-height: 1.12; font-weight: 900; }
+.card-servicio-comercial p { font-size: 16px; color: #111827; }
+.icon-circle {
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-dark);
+  background: radial-gradient(circle at 38% 30%, #ecfffb, #bdebe5 70%);
+  border: 1px solid rgba(15,118,110,.20);
+  box-shadow: 0 8px 18px rgba(15,118,110,.25), inset 0 0 0 6px rgba(255,255,255,.45);
+  margin-bottom: 10px;
+}
+.icon-circle svg { width: 27px; height: 27px; fill: currentColor; }
 
-    /* SECCIÓN ACORDEÓN JERÁRQUICO */
-    .accordion-container { max-width: 900px; margin: 0 auto; text-align: left; }
-    .accordion-item { background: #ffffff; border-radius: 16px; margin-bottom: 14px; box-shadow: var(--card-shadow); overflow: hidden; border: 1px solid #e2e8f0; }
-    .accordion-header { width: 100%; background: #ffffff; padding: 22px; font-size: 19px; font-weight: 700; color: var(--text-dark); border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: var(--transition); }
-    .accordion-header:hover { background: #f8fafc; color: #0f766e; }
-    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #f8fafc; padding: 0 22px; }
-    .accordion-content.active { max-height: none !important; height: auto !important; overflow: visible !important; padding: 24px; border-top: 1px solid #e2e8f0; }
+/* TARJETAS DE NEGOCIOS */
+.card-circuito {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,.90);
+  border: 1px solid rgba(15,118,110,.18);
+  border-radius: 22px;
+  padding: 0 0 22px;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+.card-circuito:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+.card-img-placeholder { width: 100%; height: 170px; object-fit: cover; background: #dce8ec; }
+.card-circuito > div { padding: 18px 20px 0; }
+.badge-card-cat {
+  position: absolute;
+  top: 132px;
+  right: 12px;
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.78);
+  color: #073b4c;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: capitalize;
+  border: 1px solid rgba(15,118,110,.22);
+  backdrop-filter: blur(7px);
+}
+.card-circuito h2 { font-size: 23px; line-height: 1.12; color: #101827; margin: 5px 0 10px; font-weight: 900; }
+.card-circuito p { color: var(--muted); font-size: 14px; }
+.enlace-comercio {
+  width: calc(100% - 40px);
+  margin: 18px 20px 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 18px;
+  background: #fff;
+  color: var(--primary-dark);
+  border: 2px solid var(--primary-dark);
+  border-radius: 10px;
+  font-weight: 900;
+  box-shadow: 0 8px 18px rgba(15,118,110,.18);
+}
+.enlace-comercio:hover { background: var(--primary-dark); color: #fff; }
+.card-circuito.destacado { border: 2px solid #facc15; background: #fffdf0; }
+.badge-card-cat.destacado-badge { background: #facc15; color: #3f2d00; }
+.card-circuito.premium { border: 2px solid #d4af37; background: linear-gradient(180deg, #fffef7, #ffffff); }
+.badge-card-cat.premium-badge { background: linear-gradient(135deg, #d4af37, #8f6b13); color: #fff; }
 
-    /* ANIMACIONES Y BLOQUES */
-    .header-title-wrapper { display: flex; align-items: center; gap: 14px; }
-    .icon-svg { width: 26px; height: 26px; fill: #0f766e; transition: all 0.3s ease; }
-    .accordion-header:hover .icon-svg { fill: var(--primary-dark); transform: scale(1.1); }
-    @keyframes geoPulse { 0% { transform: translateY(0); } 50% { transform: translateY(-4px); } 100% { transform: translateY(0); } }
-    .animated-geo { animation: geoPulse 2s infinite ease-in-out; fill: #0f766e !important; }
-    @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(49, 230, 200, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(49, 230, 200, 0); } 100% { box-shadow: 0 0 0 0 rgba(49, 230, 200, 0); } }
-    .pulse-animation { border: 2px solid var(--primary) !important; animation: pulseGlow 2.5s infinite; }
+/* VISTA SECTOR */
+.dynamic-sector-view { display: none; background: rgba(255,255,255,.86); border-radius: 24px; padding: 36px 24px; box-shadow: var(--shadow-soft); border: 1px solid rgba(15,118,110,.18); text-align: left !important; }
+.sector-header-block { padding-bottom: 18px; border-bottom: 1px solid #e2e8f0; margin-bottom: 24px; }
+.txt-jerarquia { color: var(--muted); font-weight: 600; }
 
-    .provincia-bloque-menu { background: #ffffff; border-radius: 12px; margin-bottom: 12px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); }
-    .btn-provincia-select { width: 100%; background: #ffffff; padding: 18px 22px; font-size: 16px; font-weight: 700; color: #0f766e; border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: var(--transition); }
-    .btn-provincia-select:hover { background: #f8fafc; }
-    .btn-provincia-select .icon-svg { fill: #12b8a6; }
-    .sectores-internos-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1); background: #f8fafc; padding: 0 22px; }
-    .sectores-internos-menu.active { max-height: none !important; height: auto !important; overflow: visible !important; padding: 20px 22px; border-top: 1px solid #e2e8f0; }
+/* BUSCADOR */
+.search-section { max-width: 900px; margin: 0 auto; background: rgba(255,255,255,.88); border-radius: 24px; padding: 38px 28px; box-shadow: var(--shadow-soft); border: 1px solid rgba(15,118,110,.16); }
+.search-box { max-width: 700px; margin: 24px auto 0; display: flex; background: #fff; border: 2px solid #dce8ec; border-radius: 16px; padding: 6px; }
+.search-box:focus-within { border-color: var(--primary); box-shadow: 0 0 0 5px rgba(39,216,197,.16); }
+.search-box input { flex: 1; border: none; outline: none; background: transparent; padding: 13px 15px; font-size: 16px; }
+.search-box button { border: none; background: var(--primary-dark); color: #fff; border-radius: 12px; padding: 13px 22px; font-weight: 900; cursor: pointer; }
+.search-box button:hover { background: #0b5d57; }
 
-    .distrito-bloque { background: #ffffff; border-radius: 12px; padding: 18px; margin-bottom: 16px; border-left: 4px solid #0f766e; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
-    .distrito-bloque h4 { font-size: 16px; font-weight: 700; color: #0f766e; margin-bottom: 12px; }
-    .sectores-links-container { display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn-sector-link { background: #f1f5f9; border: 1px solid #cbd5e1; color: var(--text-dark); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); }
-    .btn-sector-link:hover { background: #0f766e; color: #ffffff; border-color: #0f766e; transform: translateY(-1px); }
+/* CTA FINAL */
+.business-section { padding: 76px 24px; text-align: center; background: linear-gradient(135deg, #061827, #0f766e); color: #ffffff; }
+.business-section h2 { font-size: clamp(28px,4vw,40px); line-height: 1.12; margin-bottom: 15px; }
+footer { width: min(1180px, calc(100% - 48px)); margin: 0 auto 30px; background: #06121e; color: rgba(255,255,255,.68); text-align: center; padding: 26px 20px; font-size: 14px; }
 
-    /* ESTILOS DE TARJETAS (PREMIUM Y NORMALES) */
-    .grid-tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; text-align: left; }
-    
-    .card-circuito {
-      position: relative; overflow: hidden; background-color: #ffffff;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 10c5-5 15-5 20 0s15 5 20 0s15-5 20 0s15 5 20 0s15-5 20 0M0 20c5-5 15-5 20 0s15 5 20 0s15-5 20 0s15 5 20 0s15-5 20 0' stroke='%2331e6c8' stroke-opacity='0.03' stroke-width='0.5' fill='none'/%3E%3C/svg%3E");
-      border-radius: 24px; padding: 30px; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column;
-    }
-    .card-circuito:hover { transform: translateY(-5px); box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12); }
-    
-    .card-circuito h2 { color: #0f766e; font-size: 21px; margin-bottom: 10px; font-weight: 700; }
-    .card-circuito p { color: var(--text-muted); font-size: 14px; margin-bottom: 6px; }
-    .badge-card-cat { font-size: 11px; font-weight: 800; text-transform: uppercase; background: #31e6c8; color: #061827; padding: 6px 14px; border-radius: 999px; display: inline-block; margin-bottom: 15px; }
-    
-    .enlace-comercio { display: inline-flex; justify-content: center; align-items: center; padding: 12px 24px; background: #0f766e; color: #ffffff; border-radius: 8px; font-weight: 700; margin-top: auto; transition: var(--transition); border: none; }
-    .enlace-comercio:hover { background: #115e59; color: #ffffff; }
-    
-    .card-img-placeholder { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; background: #e2e8f0; }
-
-    /* ESTILOS DESTACADOS */
-    .card-circuito.destacado { background-color: #fffdf0; border: 2px solid #ffcc00; box-shadow: 0 12px 30px rgba(255, 204, 0, 0.15); }
-    .card-circuito.destacado::before { content: ""; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: #ffcc00; }
-    .badge-card-cat.destacado-badge { background: #ffcc00; color: #4a3600; }
-    .card-circuito.destacado h2 { color: #7b6100; }
-    .card-circuito.destacado .enlace-comercio { background: #ffcc00; color: #333333; }
-
-    /* ESTILOS PREMIUM PRO */
-    .card-circuito.premium { background-color: #fcfaf2; border: 2px solid transparent; background-clip: padding-box; box-shadow: 0 15px 35px rgba(218, 165, 32, 0.15); }
-    .card-circuito.premium::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1; margin: -2px; border-radius: 26px; background: linear-gradient(135deg, #FFDF00, #D4AF37, #996515); }
-    .badge-card-cat.premium-badge { background: linear-gradient(135deg, #D4AF37, #996515); color: #ffffff; border: 1px solid #FFDF00; }
-    .card-circuito.premium h2 { color: #7b6100; }
-    .card-circuito.premium .enlace-comercio { background: linear-gradient(135deg, #D4AF37, #996515); color: #ffffff; }
-
-    /* VISTA SECTOR Y GENERALES */
-    .dynamic-sector-view { background: #ffffff; border-radius: 24px; padding: 40px 24px; box-shadow: var(--card-shadow); max-width: 1100px; margin: 40px auto; border: 1px solid #e2e8f0; text-align: left !important; }
-    .sector-header-block { margin-bottom: 24px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
-    
-    .section { max-width: 1200px; margin: 80px auto; padding: 0 24px; text-align: center; }
-    .section.light { max-width: 100%; background: #ffffff; padding: 80px 24px; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
-    .section h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
-    
-    .icon-circle { width: 50px; height: 50px; background: linear-gradient(135deg, rgba(49, 230, 200, 0.15), rgba(49, 230, 200, 0.05)); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(49, 230, 200, 0.1); }
-    .icon-circle svg { width: 24px; height: 24px; fill: #0f766e; }
-    
-    .card { background: #ffffff; padding: 36px 30px; border-radius: 20px; box-shadow: var(--card-shadow); border: 1px solid #f1f5f9; }
-    .card-servicio-comercial { text-align: left; display: flex; flex-direction: column; gap: 12px; }
-    
-    .business-section { padding: 90px 24px; text-align: center; background: linear-gradient(135deg, #091e2f, #0f766e); color: #ffffff; }
-    .btn.primary { background: var(--primary); color: #061827; border: none; padding: 16px 36px; border-radius: 12px; font-weight: 700; }
-    footer { background: #06121e; color: rgba(255, 255, 255, 0.6); text-align: center; padding: 30px 24px; font-size: 14px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-  </style>
+@media (max-width: 760px) {
+  body { background-attachment: scroll; }
+  .hero, main, footer { width: 100%; margin-left: 0; margin-right: 0; border-radius: 0; }
+  .hero { min-height: 58vh; padding: 18px 18px 54px; }
+  .navbar { align-items: flex-start; }
+  .nav-links { display: none; }
+  .hero-content { margin-top: 62px; }
+  .hero h1 { font-size: 34px; }
+  .hero-text { font-size: 16px; }
+  .section { margin: 52px auto; padding: 0 16px; }
+  .section.light { padding: 54px 16px; }
+  .grid-tarjetas, .grid-tarjetas[style] { grid-template-columns: 1fr !important; gap: 22px; }
+  .card, .card-servicio-comercial { min-height: auto; padding: 28px 24px; }
+  .accordion-container { max-width: 100%; }
+  .accordion-header { font-size: 13px; padding: 13px 14px; }
+  .search-box { flex-direction: column; }
+  .search-box button { width: 100%; }
+}
+</style>
 </head>
 <body>
 
@@ -352,7 +453,40 @@
     function obtenerNombreNegocio(item) { return obtenerCampo(item, ["nombre", "nombre_negocio", "negocio", "comercio", "empresa", "nombre_empresa", "nombre_comercial", "razon_social"], "Comercio"); }
     function obtenerCategoriaNegocio(item) { return obtenerCampo(item, ["categoria", "categoria_radar", "categoria_nombre", "tipo_categoria", "rubro"], "Otros"); }
     function obtenerDescripcionNegocio(item) { return obtenerCampo(item, ["descripcion", "descripcion_negocio", "detalle", "resumen"], ""); }
-    function obtenerEnlaceNegocio(item) { return obtenerCampo(item, ["enlace", "url_negocio", "url_ubicacion", "direccion_digital"], "#"); }
+    function obtenerEnlaceNegocio(item) { return obtenerCampo(item, ["url_ubicacion", "google_maps", "google", "maps", "mapa", "ubicacion", "direccion_digital", "url_negocio", "enlace"], ""); }
+    
+    // Validación de enlace mejorada para que desaparezca el botón
+    function enlaceValido(enlace) {
+      const valor = String(enlace || "").trim();
+      return valor && valor !== "#" && valor.toLowerCase() !== "sin ubicacion" && valor.toLowerCase() !== "sin ubicación";
+    }
+
+    function obtenerImagenCategoria(item) {
+      const imagenPropia = obtenerCampo(item, ["imagen_url", "imagen", "imagen_principal", "foto", "foto_url", "logo"], "");
+      if (imagenPropia) return imagenPropia;
+
+      const categoria = normalizar(obtenerCategoriaNegocio(item));
+      const nombre = normalizar(obtenerNombreNegocio(item));
+      const texto = `${categoria} ${nombre}`;
+
+      const imagenes = [
+        { claves: ["hotel", "hostal", "hospedaje", "apartamento", "resort", "alojamiento"], url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["restaurante", "comida", "gourmet", "fond", "cafe", "cafeteria", "bar", "pizza", "marisco"], url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["farmacia", "medicina", "salud", "clinica", "doctor", "laboratorio"], url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["taller", "mecanica", "auto", "repuesto", "llanta", "servicio certificado"], url: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["supermercado", "mini super", "minisuper", "abarroteria", "tienda", "mercado"], url: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["ferreteria", "construccion", "herramienta"], url: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["playa", "tour", "turismo", "circuito", "actividad", "experiencia"], url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["salon", "belleza", "barber", "spa", "estetica"], url: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["gimnasio", "gym", "fitness", "deporte"], url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["transporte", "taxi", "delivery", "logistica"], url: "https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["veterinaria", "mascota", "pet"], url: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=900&q=80" },
+        { claves: ["banco", "atm", "finanza"], url: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80" }
+      ];
+
+      const encontrada = imagenes.find(grupo => grupo.claves.some(clave => texto.includes(clave)));
+      return encontrada ? encontrada.url : "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
+    }
 
     function esPremium(item) {
       const valor = normalizar(obtenerCampo(item, ["destacado", "premium", "destacado_radar"], ""));
@@ -382,7 +516,7 @@
       return false;
     }
 
-    // --- FUNCIÓN RECUPERADA: CREAR TARJETAS HTML ---
+    // --- FUNCIÓN RECUPERADA Y MEJORADA: CREAR TARJETAS HTML ---
     function crearHTMLTarjeta(item) {
       const nombre = obtenerNombreNegocio(item);
       const categoria = obtenerCategoriaNegocio(item);
@@ -394,30 +528,56 @@
       let claseTarjeta = "card-circuito";
       let claseBadge = "badge-card-cat";
       let iconoBadge = "";
+      
+      // Texto del botón por defecto unificado y bonito
+      let textoBoton = "📍 Ver Ubicación en Radar"; 
+      
+      // Variable para las estrellas de rating (detalles visuales solicitados)
+      let reviewsHTML = ""; 
 
       // Asignar clases de acuerdo a los planes de Radar (Premium Pro o Destacado)
       if (premium) {
         claseTarjeta += " premium";
         claseBadge += " premium-badge";
-        iconoBadge = "👑 💎 ";
+        iconoBadge = "👑 ";
+        textoBoton = "💎 Ubicación Premium";
+        // Estrellas doradas para Premium
+        reviewsHTML = `
+          <div style="text-align: center; margin-top: 12px;">
+            <div style="color: #d4af37; font-size: 18px; letter-spacing: 2px;">★★★★★</div>
+            <div style="font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase;">5.0 / 5 Votos de Usuarios<br>CERTIFIED REVIEWS</div>
+          </div>`;
       } else if (destacado) {
         claseTarjeta += " destacado";
         claseBadge += " destacado-badge";
         iconoBadge = "⭐ ";
+        textoBoton = "⭐ Ubicación Destacada";
+        // Estrellas en color primario para Destacado
+        reviewsHTML = `
+          <div style="text-align: center; margin-top: 12px;">
+            <div style="color: #0f766e; font-size: 18px; letter-spacing: 2px;">★★★★<span style="opacity:0.4">★</span></div>
+            <div style="font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase;">4.5 / 5 Votos de Usuarios<br>CERTIFIED REVIEWS</div>
+          </div>`;
       }
 
-      // Placeholder de imagen (Si tienes URL de imágenes en tu sheet, lo reemplazas aquí)
-      const imagen = item.imagen_url || "https://images.pexels.com/photos/1516415/pexels-photo-1516415.jpeg?auto=compress&cs=tinysrgb&w=600";
+      // Imagen automática por categoría.
+      const imagen = obtenerImagenCategoria(item);
+      
+      // REGLA ESTRICTA: Si no hay enlace válido, el botón no se genera (desaparece)
+      const botonUbicacion = enlaceValido(enlace)
+        ? `<a href="${enlace}" target="_blank" class="enlace-comercio">${textoBoton}</a>`
+        : "";
 
       return `
         <article class="${claseTarjeta}">
           <img src="${imagen}" alt="${nombre}" class="card-img-placeholder">
-          <div style="flex-grow: 1;">
-            <span class="${claseBadge}">${iconoBadge}${categoria}</span>
-            <h2>${nombre}</h2>
+          <span class="${claseBadge}">${iconoBadge}${categoria}</span>
+          <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center;">
+            <h2 style="margin-top: 5px;">${nombre}</h2>
             <p class="desc-corta">${descripcion || "Explora los servicios y productos de este negocio en su perfil de Radar 507."}</p>
+            ${reviewsHTML}
           </div>
-          <a href="${enlace}" target="_blank" class="enlace-comercio">Ver Radar</a>
+          ${botonUbicacion}
         </article>
       `;
     }
@@ -547,19 +707,15 @@
 
     // --- FUNCIÓN RECUPERADA: CARGAR SECTOR ESPECÍFICO ---
     function cargarSectorDetalle(provincia, distrito, sector) {
-      // 1. Ocultar acordeón principal y mostrar sección del sector
       document.getElementById("territorio").style.display = "none";
       const vistaSector = document.getElementById("vista-sector");
       vistaSector.style.display = "block";
 
-      // 2. Llenar los textos
       document.getElementById("dinamico-nombre-sector").textContent = sector;
       document.getElementById("dinamico-jerarquia").textContent = `${provincia} > ${distrito}`;
 
-      // 3. Filtrar negocios del sector seleccionado
       const negociosSector = baseDatosRadar.filter(item => sectoresCoinciden(obtenerSector(item), sector) && estadoValido(item));
 
-      // 4. Renderizar negocios
       const contenedorZona = document.getElementById("contenedor-destacados-zona");
       const contenedorGeneral = document.getElementById("zona-destacados-container");
 
@@ -571,10 +727,7 @@
         contenedorZona.innerHTML = "";
       }
 
-      // 5. Ocultar la sección general de destacados para no confundir
       document.getElementById("destacados").style.display = "none";
-
-      // 6. Hacer scroll automático al sector
       vistaSector.scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -592,7 +745,7 @@
       
       const destacados = baseDatosRadar
         .filter(item => estadoValido(item) && (esDestacado(item) || esPremium(item)))
-        .slice(0, 6); // Mostrar máximo 6 al inicio
+        .slice(0, 6); 
 
       if(destacados.length > 0) {
         contenedor.innerHTML = destacados.map(crearHTMLTarjeta).join("");
@@ -614,7 +767,6 @@
                normalizar(obtenerSector(item)).includes(query);
       });
 
-      // Mostrar los resultados en la sección de destacados temporalmente
       document.getElementById("territorio").style.display = "block";
       document.getElementById("vista-sector").style.display = "none";
       document.getElementById("destacados").style.display = "block";
