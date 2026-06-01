@@ -468,7 +468,7 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   }
 
   if (itemsDelSector.length > 0 && categoriasConNegocios.length === 0) {
-    contenedorCategorias.innerHTML = renderizarListaComercios("Comercios disponibles", itemsDelSector, 0);
+    contenedorCategorias.innerHTML = renderizarListaComercios("🏪 Negocios disponibles", itemsDelSector, 0);
   }
 
   categoriasConNegocios.forEach((catId, index) => {
