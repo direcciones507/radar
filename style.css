@@ -762,8 +762,19 @@ footer { max-width: 1200px; width: 95%; margin: 40px auto 30px; background: #061
           <span class="${claseBadge}">${iconoBadge}${categoria}</span>
           <div class="card-contenido-interno">
             <h2>${nombre}</h2>
-            <p>${descripcion || "Perfil oficial dentro de la plataforma territorial de Radar 507."}</p>
-            ${reviewsHTML}
+            ${descripcion ? `<p>${descripcion}</p>` : ""}
+
+<div class="card-dato">
+  <strong>Categoría:</strong> ${categoria}
+</div>
+
+${obtenerSector(item) ? `
+  <div class="card-dato">
+    <strong>Dirección:</strong> ${obtenerSector(item)}
+  </div>
+` : ""}
+
+${reviewsHTML}
           </div>
           ${botonUbicacion}
         </article>
