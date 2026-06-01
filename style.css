@@ -709,3 +709,29 @@ footer{
     grid-template-columns:1fr;
   }
 }
+
+.accordion-header-categoria{
+  background:linear-gradient(135deg,#073b4c,#0f766e,#27d8c5);
+  color:#fff;
+  font-weight:800;
+  font-size:16px;
+  padding:16px 22px;
+  border:none;
+  border-radius:16px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 10px 25px rgba(15,118,110,.18);
+  transition:.25s ease;
+}
+
+.accordion-header-categoria:hover{
+  transform:translateY(-2px);
+}
+
+.accordion-header-categoria .icon{
+  font-size:22px;
+  font-weight:900;
+  color:#fff;
+}
