@@ -31,439 +31,165 @@
   <title>Radar Direcciones507 | Negocios, turismo y ubicaciones en Panamá</title>
   <meta name="description" content="Radar Direcciones507 es una plataforma territorial para encontrar negocios y circuitos turísticos en Panamá." />
   
-  <!-- Google Fonts + Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* =====================================================
+       CSS CONSOLIDADO Y LIMPIO: FIJACIÓN DE DESPLAZAMIENTO,
+       MEJORAS PREMIUM PRO Y TEXTURA TOPOGRÁFICA RADAR
+    ===================================================== */
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --primary: #0d9488;
-      --primary-light: #14b8a6;
-      --primary-dark: #0f766e;
-      --primary-soft: rgba(13, 148, 136, 0.08);
-      --bg-page: #f8fafc;
-      --bg-white: #ffffff;
-      --text-main: #0f172a;
+      --primary: #31e6c8;
+      --primary-dark: #12b8a6;
+      --bg-main: #f4f7fb;
+      --bg-radar: #E9EEF3;
+      --text-dark: #0f172a;
       --text-muted: #475569;
-      --border-light: #e2e8f0;
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -1px rgb(0 0 0 / 0.03);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -2px rgb(0 0 0 / 0.025);
-      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.025);
-      --radius-sm: 12px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
+      --card-shadow: 0 12px 34px rgba(15, 23, 42, 0.06);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-page);
-      color: var(--text-main);
-      line-height: 1.5;
-      scroll-behavior: smooth;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-dark);
+      line-height: 1.6;
     }
 
-    /* Textura mapa sutíl */
-    .map-texture {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M10 10 L30 10 L30 30 L10 30 Z' fill='none' stroke='%2314b8a6' stroke-opacity='0.04' stroke-width='0.8'/%3E%3Cpath d='M50 20 L70 20 L70 40 L50 40 Z' fill='none' stroke='%2314b8a6' stroke-opacity='0.03' stroke-width='0.8'/%3E%3Cpath d='M25 60 L45 60 L45 80 L25 80 Z' fill='none' stroke='%2314b8a6' stroke-opacity='0.04' stroke-width='0.8'/%3E%3Cpath d='M70 70 L90 70 L90 90 L70 90 Z' fill='none' stroke='%2314b8a6' stroke-opacity='0.03' stroke-width='0.8'/%3E%3C/svg%3E");
-      background-repeat: repeat;
+    a { text-decoration: none; color: inherit; }
+
+    /* === NUEVA TEXTURA RADAR TOPOGRÁFICA === */
+    .section-with-texture {
+      background-color: var(--bg-radar);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='1000' viewBox='0 0 1000 1000'%3E%3Cpath d='M0 100c10-10 30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0' stroke='%23B0BCC7' stroke-opacity='0.1' stroke-width='1' fill='none'/%3E%3Cpath d='M0 200c10-10 30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0s30 10 40 0s30-10 40 0' stroke='%23B0BCC7' stroke-opacity='0.15' stroke-width='1.2' fill='none'/%3E%3C/svg%3E");
     }
 
-    /* Navegación moderna */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 32px;
-      max-width: 1400px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      border-radius: 100px;
-      margin-top: 20px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid rgba(226, 232, 240, 0.6);
-    }
-
-    .logo {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .logo span {
-      background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-    }
-    .nav-links a {
-      text-decoration: none;
-      font-weight: 500;
-      color: var(--text-main);
-      transition: all 0.2s ease;
-      font-size: 15px;
-    }
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    /* Hero con imagen de radar moderna */
+    /* HERO */
     .hero {
-      background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.98) 100%), url('https://images.pexels.com/photos/260689/pexels-photo-260689.jpeg?auto=compress&cs=tinysrgb&w=1600');
-      background-size: cover;
-      background-position: center 30%;
-      border-radius: 0 0 48px 48px;
-      margin-bottom: 40px;
+      min-height: 85vh;
       position: relative;
-    }
-
-    .hero-content {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 80px 32px 100px;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 56px;
-      font-weight: 800;
-      letter-spacing: -1.5px;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 20px;
-    }
-
-    .hero-text {
-      font-size: 18px;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 32px;
-    }
-
-    .btn-registro {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--primary);
-      color: white;
-      padding: 12px 28px;
-      border-radius: 40px;
-      font-weight: 600;
-      transition: all 0.2s;
-      text-decoration: none;
-      box-shadow: 0 2px 8px rgba(13,148,136,0.2);
-    }
-    .btn-registro:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-    }
-
-    .btn-outline-wa {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: white;
-      color: #075e54;
-      padding: 12px 28px;
-      border-radius: 40px;
-      font-weight: 600;
-      text-decoration: none;
-      border: 1px solid #e2e8f0;
-      transition: all 0.2s;
-    }
-    .btn-outline-wa:hover {
-      border-color: var(--primary-light);
-      box-shadow: var(--shadow-md);
-    }
-
-    /* Sección principal */
-    .section {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-
-    .section-light {
-      background: var(--bg-white);
-      border-radius: var(--radius-lg);
-      margin: 40px auto;
-      box-shadow: var(--shadow-sm);
-    }
-
-    /* Acordeón principal estilo tarjeta */
-    .accordion-container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .accordion-item {
-      background: var(--bg-white);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border-light);
-      overflow: hidden;
-      transition: all 0.2s;
-    }
-    .accordion-header {
-      width: 100%;
-      background: white;
-      padding: 24px 28px;
-      font-size: 18px;
-      font-weight: 700;
+      background: linear-gradient(135deg, rgba(6, 24, 44, 0.95), rgba(11, 114, 133, 0.82)), url("assets/radar-panama.jpg") no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+      color: #ffffff;
+      padding: 24px 24px 100px 24px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      border: none;
-      color: var(--primary-dark);
-      transition: all 0.2s;
-    }
-    .accordion-header:hover {
-      background: #fefce8;
-    }
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-      background: #fefefe;
-      border-top: 1px solid var(--border-light);
-    }
-    .accordion-content.active {
-      max-height: 2000px;
-      padding: 28px;
+      flex-direction: column;
     }
 
-    /* Provincia bloque */
-    .provincia-bloque-menu {
-      background: white;
-      border-radius: var(--radius-sm);
-      margin-bottom: 12px;
-      border: 1px solid var(--border-light);
-    }
-    .btn-provincia-select {
-      width: 100%;
-      background: white;
-      padding: 18px 20px;
-      text-align: left;
-      font-weight: 600;
-      display: flex;
-      justify-content: space-between;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      border-radius: var(--radius-sm);
-      color: var(--text-main);
-    }
-    .btn-provincia-select:hover {
-      background: var(--primary-soft);
-    }
-    .sectores-internos-menu {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      background: #f9fafb;
-      border-top: 1px solid var(--border-light);
-    }
-    .sectores-internos-menu.active {
-      max-height: 1500px;
-      padding: 20px;
-    }
-    .distrito-bloque {
-      margin-bottom: 24px;
-    }
-    .distrito-bloque h4 {
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--primary);
-      margin-bottom: 12px;
-    }
-    .sectores-links-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .btn-sector-link {
-      background: white;
-      border: 1px solid #cbd5e1;
-      border-radius: 40px;
-      padding: 6px 16px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-sector-link:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
+    .btn-registro{ display:inline-block; padding:14px 28px; background:#0a84ff; color:#fff; text-decoration:none; border-radius:10px; font-weight:600; transition:0.3s; }
+    .btn-registro:hover{ transform:translateY(-2px); }
 
-    /* Grid de tarjetas moderno */
-    .grid-tarjetas {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 28px;
-      margin-top: 24px;
-    }
+    .navbar { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+    .logo span { color: var(--primary); }
+    .nav-links { display: flex; gap: 30px; font-size: 15px; font-weight: 500; }
+    .nav-links a { opacity: 0.85; transition: var(--transition); }
+    .nav-links a:hover { opacity: 1; color: var(--primary); }
+
+    .hero-content { max-width: 850px; margin: auto auto 0 auto; text-align: center; }
+    .hero h1 { font-size: clamp(36px, 6.5vw, 64px); line-height: 1.1; margin-bottom: 24px; font-weight: 800; letter-spacing: -2px; }
+    .hero-text { max-width: 700px; margin: 0 auto; font-size: 19px; color: rgba(255, 255, 255, 0.85); }
+
+    /* BUSCADOR COLECTOR */
+    .search-section { max-width: 950px; margin: 0 auto; background: #ffffff; border-radius: 24px; padding: 40px; text-align: center; box-shadow: var(--card-shadow); border: 1px solid #e2e8f0; }
+    .search-section h2 { font-size: 28px; margin-bottom: 10px; font-weight: 700; }
+    .search-section p { color: var(--text-muted); margin-bottom: 28px; }
+    .search-box { max-width: 700px; margin: 0 auto; display: flex; background: #f8fafc; border-radius: 16px; padding: 6px; border: 2px solid #e2e8f0; transition: var(--transition); }
+    .search-box:focus-within { border-color: var(--primary-dark); box-shadow: 0 0 0 4px rgba(18, 184, 166, 0.15); background: #ffffff; }
+    .search-box input { flex: 1; border: none; background: transparent; padding: 14px 20px; font-size: 16px; outline: none; }
+    .search-box button { border: none; background: #0f766e; color: white; padding: 14px 28px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: var(--transition); }
+    .search-box button:hover { background: #115e59; }
+
+    /* SECCIÓN ACORDEÓN JERÁRQUICO */
+    .accordion-container { max-width: 900px; margin: 0 auto; text-align: left; }
+    .accordion-item { background: #ffffff; border-radius: 16px; margin-bottom: 14px; box-shadow: var(--card-shadow); overflow: hidden; border: 1px solid #e2e8f0; }
+    .accordion-header { width: 100%; background: #ffffff; padding: 22px; font-size: 19px; font-weight: 700; color: var(--text-dark); border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: var(--transition); }
+    .accordion-header:hover { background: #f8fafc; color: #0f766e; }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background: #f8fafc; padding: 0 22px; }
+    .accordion-content.active { max-height: none !important; height: auto !important; overflow: visible !important; padding: 24px; border-top: 1px solid #e2e8f0; }
+
+    /* ANIMACIONES Y BLOQUES */
+    .header-title-wrapper { display: flex; align-items: center; gap: 14px; }
+    .icon-svg { width: 26px; height: 26px; fill: #0f766e; transition: all 0.3s ease; }
+    .accordion-header:hover .icon-svg { fill: var(--primary-dark); transform: scale(1.1); }
+    @keyframes geoPulse { 0% { transform: translateY(0); } 50% { transform: translateY(-4px); } 100% { transform: translateY(0); } }
+    .animated-geo { animation: geoPulse 2s infinite ease-in-out; fill: #0f766e !important; }
+    @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(49, 230, 200, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(49, 230, 200, 0); } 100% { box-shadow: 0 0 0 0 rgba(49, 230, 200, 0); } }
+    .pulse-animation { border: 2px solid var(--primary) !important; animation: pulseGlow 2.5s infinite; }
+
+    .provincia-bloque-menu { background: #ffffff; border-radius: 12px; margin-bottom: 12px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03); }
+    .btn-provincia-select { width: 100%; background: #ffffff; padding: 18px 22px; font-size: 16px; font-weight: 700; color: #0f766e; border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: var(--transition); }
+    .btn-provincia-select:hover { background: #f8fafc; }
+    .btn-provincia-select .icon-svg { fill: #12b8a6; }
+    .sectores-internos-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1); background: #f8fafc; padding: 0 22px; }
+    .sectores-internos-menu.active { max-height: none !important; height: auto !important; overflow: visible !important; padding: 20px 22px; border-top: 1px solid #e2e8f0; }
+
+    .distrito-bloque { background: #ffffff; border-radius: 12px; padding: 18px; margin-bottom: 16px; border-left: 4px solid #0f766e; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+    .distrito-bloque h4 { font-size: 16px; font-weight: 700; color: #0f766e; margin-bottom: 12px; }
+    .sectores-links-container { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-sector-link { background: #f1f5f9; border: 1px solid #cbd5e1; color: var(--text-dark); padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); }
+    .btn-sector-link:hover { background: #0f766e; color: #ffffff; border-color: #0f766e; transform: translateY(-1px); }
+
+    /* ESTILOS DE TARJETAS (PREMIUM Y NORMALES) */
+    .grid-tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; text-align: left; }
+    
     .card-circuito {
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      transition: all 0.25s ease;
-      border: 1px solid var(--border-light);
-      box-shadow: var(--shadow-md);
-      display: flex;
-      flex-direction: column;
+      position: relative; overflow: hidden; background-color: #ffffff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M0 10c5-5 15-5 20 0s15 5 20 0s15-5 20 0s15 5 20 0s15-5 20 0M0 20c5-5 15-5 20 0s15 5 20 0s15-5 20 0s15 5 20 0s15-5 20 0' stroke='%2331e6c8' stroke-opacity='0.03' stroke-width='0.5' fill='none'/%3E%3C/svg%3E");
+      border-radius: 24px; padding: 30px; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column;
     }
-    .card-circuito:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-xl);
-      border-color: var(--primary-light);
-    }
-    .card-img-placeholder {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      background: #e2e8f0;
-    }
-    .card-body {
-      padding: 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .badge-card-cat {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      background: #e6f7f5;
-      color: var(--primary-dark);
-      padding: 4px 12px;
-      border-radius: 30px;
-      display: inline-block;
-      margin-bottom: 12px;
-      width: fit-content;
-    }
-    .card-circuito h2 {
-      font-size: 20px;
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-    .desc-corta {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
-    .enlace-comercio {
-      margin-top: auto;
-      background: var(--primary-soft);
-      color: var(--primary-dark);
-      text-align: center;
-      padding: 10px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 14px;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .enlace-comercio:hover {
-      background: var(--primary);
-      color: white;
-    }
+    .card-circuito:hover { transform: translateY(-5px); box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12); }
+    
+    .card-circuito h2 { color: #0f766e; font-size: 21px; margin-bottom: 10px; font-weight: 700; }
+    .card-circuito p { color: var(--text-muted); font-size: 14px; margin-bottom: 6px; }
+    .badge-card-cat { font-size: 11px; font-weight: 800; text-transform: uppercase; background: #31e6c8; color: #061827; padding: 6px 14px; border-radius: 999px; display: inline-block; margin-bottom: 15px; }
+    
+    .enlace-comercio { display: inline-flex; justify-content: center; align-items: center; padding: 12px 24px; background: #0f766e; color: #ffffff; border-radius: 8px; font-weight: 700; margin-top: auto; transition: var(--transition); border: none; }
+    .enlace-comercio:hover { background: #115e59; color: #ffffff; }
+    
+    .card-img-placeholder { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; background: #e2e8f0; }
 
-    /* Destacado / Premium */
-    .card-circuito.destacado {
-      border-left: 5px solid #facc15;
-    }
-    .card-circuito.premium {
-      border-left: 5px solid #d4af37;
-      background: linear-gradient(white, #fffcf0);
-    }
-    .premium .badge-card-cat {
-      background: #fef9e3;
-      color: #b45309;
-    }
+    /* ESTILOS DESTACADOS */
+    .card-circuito.destacado { background-color: #fffdf0; border: 2px solid #ffcc00; box-shadow: 0 12px 30px rgba(255, 204, 0, 0.15); }
+    .card-circuito.destacado::before { content: ""; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: #ffcc00; }
+    .badge-card-cat.destacado-badge { background: #ffcc00; color: #4a3600; }
+    .card-circuito.destacado h2 { color: #7b6100; }
+    .card-circuito.destacado .enlace-comercio { background: #ffcc00; color: #333333; }
 
-    /* Servicios */
-    .servicios-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-    .servicio-card {
-      background: white;
-      border-radius: 24px;
-      padding: 28px;
-      border: 1px solid var(--border-light);
-      transition: all 0.2s;
-    }
-    .servicio-card i {
-      font-size: 32px;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-    .servicio-card h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
+    /* ESTILOS PREMIUM PRO */
+    .card-circuito.premium { background-color: #fcfaf2; border: 2px solid transparent; background-clip: padding-box; box-shadow: 0 15px 35px rgba(218, 165, 32, 0.15); }
+    .card-circuito.premium::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1; margin: -2px; border-radius: 26px; background: linear-gradient(135deg, #FFDF00, #D4AF37, #996515); }
+    .badge-card-cat.premium-badge { background: linear-gradient(135deg, #D4AF37, #996515); color: #ffffff; border: 1px solid #FFDF00; }
+    .card-circuito.premium h2 { color: #7b6100; }
+    .card-circuito.premium .enlace-comercio { background: linear-gradient(135deg, #D4AF37, #996515); color: #ffffff; }
 
-    /* Business CTA */
-    .business-section {
-      background: linear-gradient(105deg, #0f172a 0%, #0f766e 100%);
-      color: white;
-      border-radius: 32px;
-      padding: 60px 40px;
-      text-align: center;
-      margin: 60px auto;
-    }
-
-    footer {
-      text-align: center;
-      padding: 32px;
-      border-top: 1px solid var(--border-light);
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        gap: 16px;
-        border-radius: 32px;
-        margin: 16px;
-      }
-      .hero h1 {
-        font-size: 36px;
-      }
-      .section {
-        padding: 40px 20px;
-      }
-    }
+    /* VISTA SECTOR Y GENERALES */
+    .dynamic-sector-view { background: #ffffff; border-radius: 24px; padding: 40px 24px; box-shadow: var(--card-shadow); max-width: 1100px; margin: 40px auto; border: 1px solid #e2e8f0; text-align: left !important; }
+    .sector-header-block { margin-bottom: 24px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
+    
+    .section { max-width: 1200px; margin: 80px auto; padding: 0 24px; text-align: center; }
+    .section.light { max-width: 100%; background: #ffffff; padding: 80px 24px; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
+    .section h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+    
+    .icon-circle { width: 50px; height: 50px; background: linear-gradient(135deg, rgba(49, 230, 200, 0.15), rgba(49, 230, 200, 0.05)); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(49, 230, 200, 0.1); }
+    .icon-circle svg { width: 24px; height: 24px; fill: #0f766e; }
+    
+    .card { background: #ffffff; padding: 36px 30px; border-radius: 20px; box-shadow: var(--card-shadow); border: 1px solid #f1f5f9; }
+    .card-servicio-comercial { text-align: left; display: flex; flex-direction: column; gap: 12px; }
+    
+    .business-section { padding: 90px 24px; text-align: center; background: linear-gradient(135deg, #091e2f, #0f766e); color: #ffffff; }
+    .btn.primary { background: var(--primary); color: #061827; border: none; padding: 16px 36px; border-radius: 12px; font-weight: 700; }
+    footer { background: #06121e; color: rgba(255, 255, 255, 0.6); text-align: center; padding: 30px 24px; font-size: 14px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
   </style>
 </head>
-<body class="map-texture">
+<body>
 
-  <div class="hero">
+  <header class="hero">
     <nav class="navbar">
       <div class="logo">Radar<span>507</span></div>
       <div class="nav-links">
@@ -473,118 +199,190 @@
         <a href="#buscar">Buscador</a>
       </div>
     </nav>
-    <div class="hero-content">
+    <section class="hero-content">
       <h1>Explora Panamá por zonas, negocios y experiencias</h1>
       <p class="hero-text">Descubre circuitos turísticos, mapas comerciales y comercios locales con infraestructura de direcciones digitales inteligentes.</p>
-      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-        <a href="https://forms.gle/fQCdj3MEZLkvAHGaA" target="_blank" class="btn-registro"><i class="fas fa-store"></i> Registrar mi negocio gratis</a>
-        <a href="https://wa.me/50765996532?text=Hola,%20me%20interesa%20recibir%20una%20propuesta%20personalizada%20de%20Radar%20507." target="_blank" class="btn-outline-wa"><i class="fab fa-whatsapp"></i> Solicitar Información</a>
+      <div style="margin-bottom:20px;">
+        <a href="https://forms.gle/fQCdj3MEZLkvAHGaA" target="_blank" class="btn-registro">🚀 Registrar mi negocio gratis</a>
       </div>
-      <p style="margin-top: 20px; font-size: 12px; opacity: 0.7;">Registro gratuito sujeto a validación.</p>
-    </div>
-  </div>
+      <p style="margin-top:15px;opacity:.85;font-size:14px;">Registro gratuito sujeto a validación.</p>
+      <a href="https://wa.me/50765996532?text=Hola,%20me%20interesa%20recibir%20una%20propuesta%20personalizada%20de%20Radar%20507." class="btn primary" target="_blank">Solicitar Información por WhatsApp</a>
+    </section>
+  </header>
 
   <main>
-    <!-- TERRITORIO ACORDEÓN -->
-    <section id="territorio" class="section">
+    <section id="territorio" class="section" style="margin-top: -65px; position: relative; z-index: 20;">
       <div class="accordion-container">
-        <div class="accordion-item">
-          <button class="accordion-header" id="btn-maestro-explorar" onclick="toggleMenuMaestro()">
-            <span><i class="fas fa-map-marked-alt" style="margin-right: 12px; color: var(--primary);"></i> 📍 ¡HAZ CLIC AQUÍ! EXPLORA EL TERRITORIO DE PANAMÁ</span>
-            <span id="icono-maestro">+</span>
+        <div class="accordion-item btn-maestro-contenedor">
+          <button class="accordion-header pulse-animation" id="btn-maestro-explorar" onclick="toggleMenuMaestro()">
+            <span class="header-title-wrapper">
+              <svg class="icon-svg animated-geo" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <strong>¡HAZ CLIC AQUÍ! EXPLORA EL TERRITORIO DE PANAMÁ</strong>
+            </span>
+            <span class="icon" id="icono-maestro">+</span>
           </button>
           <div class="accordion-content" id="contenido-maestro-provincias"></div>
         </div>
       </div>
     </section>
+            
+    <section id="vista-sector" class="section dynamic-sector-view" style="display: none;">
+      <div class="sector-header-block">
+        <h2 id="dinamico-nombre-sector">Sector</h2>
+        <p id="dinamico-jerarquia" class="txt-jerarquia">Provincia > Distrito</p>
+        <button onclick="cerrarVistaSector()" style="margin-top: 15px; padding: 8px 15px; background: #e2e8f0; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">← Volver al mapa general</button>
+      </div>
 
-    <!-- VISTA SECTOR DETALLE -->
-    <section id="vista-sector" class="section" style="display: none;">
-      <div style="background: white; border-radius: 28px; padding: 32px; box-shadow: var(--shadow-lg);">
-        <div style="margin-bottom: 20px;">
-          <h2 id="dinamico-nombre-sector" style="font-size: 32px;">Sector</h2>
-          <p id="dinamico-jerarquia" style="color: var(--text-muted);">Provincia > Distrito</p>
-          <button onclick="cerrarVistaSector()" style="margin-top: 16px; background: #f1f5f9; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer;"><i class="fas fa-arrow-left"></i> Volver al mapa general</button>
-        </div>
-        <div id="zona-destacados-container" style="display: none;">
-          <h3 style="color: var(--primary); margin-bottom: 20px;">⭐ Negocios en la Zona</h3>
-          <div id="contenedor-destacados-zona" class="grid-tarjetas"></div>
-        </div>
+      <div id="zona-destacados-container" style="display: none; margin-bottom: 40px;">
+        <h3 style="color: #0f766e; margin-bottom: 15px; font-size: 20px;">⭐ Negocios en la Zona</h3>
+        <div id="contenedor-destacados-zona" class="grid-tarjetas"></div>
       </div>
     </section>
 
-    <!-- DESTACADOS GENERALES -->
-    <section id="destacados" class="section">
-      <div style="text-align: center; margin-bottom: 32px;">
-        <h2 style="font-size: 32px;">⭐ Alianzas y Negocios Destacados</h2>
-        <p style="color: var(--text-muted);">Descubre la infraestructura digital y los comercios recomendados de la semana.</p>
+    <section id="destacados" class="section light">
+      <div class="section-title-container">
+        <h2 id="titulo-destacados">⭐ Alianzas y Negocios Destacados</h2>
+        <p class="section-text">Descubre la infraestructura digital y los comercios recomendados de la semana.</p>
       </div>
       <div id="contenedor-destacados" class="grid-tarjetas"></div>
     </section>
 
-    <!-- SERVICIOS MODERNOS -->
-    <section id="servicios" class="section section-light">
-      <div style="text-align: center;">
-        <h2 style="font-size: 32px;">Ecosistema Territorial de Negocios</h2>
-        <p>Planes y soluciones disponibles según tipo de negocio, ubicación y nivel de visibilidad.</p>
+    <section id="servicios" class="section">
+      <div class="section-title-container">
+        <h2>Ecosistema Territorial de Negocios</h2>
+        <p class="section-text">Planes y soluciones disponibles según tipo de negocio, ubicación y nivel de visibilidad.</p>
       </div>
-      <div class="servicios-grid">
-        <div class="servicio-card"><i class="fas fa-map-pin"></i><h3>Dirección Digital Inteligente</h3><p>Integración con WhatsApp, Google Maps, Waze y código QR dinámico.</p></div>
-        <div class="servicio-card"><i class="fas fa-crown"></i><h3>Página Comercial Premium</h3><p>Perfil territorial digital avanzado con branding completo e indexación SEO local.</p></div>
-        <div class="servicio-card"><i class="fas fa-route"></i><h3>Circuitos e Inclusión VIP</h3><p>Posicionamiento garantizado dentro de rutas turísticas y mapas de alta visibilidad.</p></div>
+      <div class="grid-tarjetas" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="card card-servicio-comercial">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
+          </div>
+          <h3>Dirección Digital Inteligente</h3>
+          <p>Integración llave en mano con WhatsApp, Google Maps, Waze y Código QR dinámico.</p>
+        </div>
+        <div class="card card-servicio-comercial">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          </div>
+          <h3>Página Comercial Premium</h3>
+          <p>Perfil territorial digital avanzado con branding completo e indexación SEO local.</p>
+        </div>
+        <div class="card card-servicio-comercial">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <h3>Circuitos e Inclusión VIP</h3>
+          <p>Posicionamiento garantizado dentro de las rutas turísticas y mapas de alta visibilidad.</p>
+        </div>
       </div>
     </section>
 
-    <!-- BUSCADOR -->
     <section id="buscar" class="section">
-      <div style="background: white; border-radius: 32px; padding: 40px; text-align: center; box-shadow: var(--shadow-md);">
+      <div class="search-section">
         <h2>¿Buscas un servicio específico?</h2>
-        <p class="text-muted" style="margin-bottom: 24px;">Encuentra infraestructura, rutas y comercios activos en nuestras zonas piloto.</p>
-        <div style="display: flex; max-width: 600px; margin: 0 auto; gap: 8px;">
-          <input type="text" id="searchInput" placeholder="Ejemplo: restaurante en Costa del Este" style="flex:1; padding: 14px 20px; border-radius: 60px; border: 1px solid var(--border-light); outline: none;">
-          <button onclick="buscarRadar()" style="background: var(--primary); border: none; padding: 0 28px; border-radius: 60px; color: white; font-weight: 600;">Buscar</button>
+        <p>Encuentra infraestructura, rutas y comercios activos en nuestras zonas piloto.</p>
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Ejemplo: restaurante en Coronado, hotel en El Valle..." />
+          <button onclick="buscarRadar()">Buscar en Radar</button>
         </div>
       </div>
     </section>
 
-    <!-- CTA FINAL -->
-    <section class="section">
-      <div class="business-section">
-        <h2 style="font-size: 32px;">Impulsa tu Presencia Territorial Hoy</h2>
-        <p style="max-width: 600px; margin: 20px auto;">Planes corporativos adaptados. Solicita una propuesta personalizada y obtén tu badge de verificación Premium Pro.</p>
-        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-          <a href="https://forms.gle/fQCdj3MEZLkvAHGaA" target="_blank" class="btn-registro" style="background: white; color: var(--primary-dark);"><i class="fas fa-gem"></i> Registrar mi negocio gratis</a>
-          <a href="https://wa.me/50765996532?text=Hola,%20me%20interesa%20recibir%20una%20propuesta%20personalizada%20de%20Radar%20507." class="btn-outline-wa" style="background: #1e293b; color: white; border: none;">WhatsApp</a>
-        </div>
-        <p style="margin-top: 24px; font-size: 12px;">📍 DISPONIBLE PARA ZONAS PILOTO INICIALES</p>
+    <section id="negocios" class="business-section">
+      <h2>Impulsa tu Presencia Territorial Hoy</h2>
+      <p style="max-width: 700px; margin: 0 auto 30px; opacity: 0.9;">
+        Planes corporativos y comerciales adaptados. Solicita una propuesta personalizada para tu negocio y obtén tu badge de verificación Premium Pro dentro de Radar.
+      </p>
+      <div style="margin-bottom: 30px; font-weight: 600; font-size: 15px; letter-spacing: 0.5px; color: #31e6c8;">
+        📍 DISPONIBLE PARA ZONAS PILOTO INICIALES
       </div>
+      <div style="margin-bottom:20px;">
+        <a href="https://forms.gle/fQCdj3MEZLkvAHGaA" target="_blank" class="btn-registro">🚀 Registrar mi negocio gratis</a>
+      </div>
+      <a href="https://wa.me/50765996532?text=Hola,%20me%20interesa%20recibir%20una%20propuesta%20personalizada%20de%20Radar%20507." class="btn primary" target="_blank">
+        Solicitar Información por WhatsApp
+      </a>
     </section>
   </main>
+
   <footer>
     <p>© 2026 Radar Direcciones507. Plataforma territorial de negocios, turismo y ubicaciones digitales en Panamá.</p>
   </footer>
 
   <script>
-    // ====================== TODA LA LÓGICA ORIGINAL CONSERVADA ======================
+    // =========================================================================
+    // LÓGICA JAVASCRIPT RECONSTRUIDA Y LIMPIA
+    // =========================================================================
+
     const API_RADAR = "https://script.google.com/macros/s/AKfycby5TsFEPQd6sGVfj_IPKaVqesh--bujnSrHIIY_C9bhRLaSsRIBBm96XgJlEtsq7jf6/exec";
-    let provinciasRadar = [], categoriasRadar = [], negociosRadar = [], circuitosRadar = [], baseDatosRadar = [];
 
-    function normalizar(texto) { return String(texto || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim(); }
-    function slugify(texto) { return normalizar(texto).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
-    function textoSeguro(texto) { return String(texto || "").replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, "&quot;"); }
-    function obtenerCampo(item, campos, respaldo = "") { for(const c of campos) if(item[c] && String(item[c]).trim()) return item[c]; return respaldo; }
-    function obtenerSector(item) { return obtenerCampo(item, ["sector","sector_nombre","nombre_sector","zona","corregimiento"], ""); }
-    function obtenerProvincia(item) { return obtenerCampo(item, ["provincia","provincia_nombre"], ""); }
-    function obtenerDistrito(item) { return obtenerCampo(item, ["distrito","distrito_nombre"], ""); }
-    function obtenerNombreNegocio(item) { return obtenerCampo(item, ["nombre","nombre_negocio","negocio","comercio"], "Comercio"); }
-    function obtenerCategoriaNegocio(item) { return obtenerCampo(item, ["categoria","rubro"], "Otros"); }
-    function obtenerDescripcionNegocio(item) { return obtenerCampo(item, ["descripcion","detalle"], ""); }
-    function obtenerEnlaceNegocio(item) { return obtenerCampo(item, ["enlace","url_negocio"], "#"); }
-    function esPremium(item) { return ["true","1","premium","premium pro"].includes(normalizar(obtenerCampo(item,["destacado","premium"],""))); }
-    function esDestacado(item) { if(esPremium(item)) return false; return ["true","1","destacado"].includes(normalizar(obtenerCampo(item,["destacado"],""))); }
-    function estadoValido(item) { let e = normalizar(obtenerCampo(item,["estado_radar","estado"],"")); if(!e) return true; return ["aprobado","activo","premium","destacado","publicado"].includes(e); }
-    function sectoresCoinciden(a,b) { let na=normalizar(a), nb=normalizar(b); if(!na||!nb) return false; return na===nb || slugify(na)===slugify(nb); }
+    let provinciasRadar = [];
+    let categoriasRadar = [];
+    let negociosRadar = [];
+    let circuitosRadar = [];
+    let eventosRadar = [];
+    let anunciosRadar = [];
+    let baseDatosRadar = [];
 
+    function normalizar(texto) {
+      return String(texto || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    }
+
+    function slugify(texto) {
+      return normalizar(texto).replace(/Ã±/g, "n").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    }
+
+    function textoSeguro(texto) {
+      return String(texto || "").replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, " ");
+    }
+
+    function obtenerCampo(item, campos, respaldo = "") {
+      if (!item) return respaldo;
+      for (const campo of campos) {
+        if (item[campo] !== undefined && item[campo] !== null && String(item[campo]).trim() !== "") {
+          return item[campo];
+        }
+      }
+      return respaldo;
+    }
+
+    function obtenerSector(item) { return obtenerCampo(item, ["sector", "sector_nombre", "nombre_sector", "sector_radar", "zona", "zona_radar", "corregimiento", "corregimiento_sector"], ""); }
+    function obtenerProvincia(item) { return obtenerCampo(item, ["provincia", "provincia_nombre", "nombre_provincia"], ""); }
+    function obtenerDistrito(item) { return obtenerCampo(item, ["distrito", "distrito_nombre", "nombre_distrito"], ""); }
+    function obtenerNombreNegocio(item) { return obtenerCampo(item, ["nombre", "nombre_negocio", "negocio", "comercio", "empresa", "nombre_empresa", "nombre_comercial", "razon_social"], "Comercio"); }
+    function obtenerCategoriaNegocio(item) { return obtenerCampo(item, ["categoria", "categoria_radar", "categoria_nombre", "tipo_categoria", "rubro"], "Otros"); }
+    function obtenerDescripcionNegocio(item) { return obtenerCampo(item, ["descripcion", "descripcion_negocio", "detalle", "resumen"], ""); }
+    function obtenerEnlaceNegocio(item) { return obtenerCampo(item, ["enlace", "url_negocio", "url_ubicacion", "direccion_digital"], "#"); }
+
+    function esPremium(item) {
+      const valor = normalizar(obtenerCampo(item, ["destacado", "premium", "destacado_radar"], ""));
+      return ["true", "1", "premium", "premium pro"].includes(valor);
+    }
+
+    function esDestacado(item) {
+      if (esPremium(item)) return false; 
+      const valor = normalizar(obtenerCampo(item, ["destacado", "destacado_radar", "recomendado"], ""));
+      return ["true", "1", "si", "sÃ­", "destacado", "recomendado"].includes(valor);
+    }
+
+    function estadoValido(item) {
+      const estado = normalizar(obtenerCampo(item, ["estado_radar", "estado", "estado_publicacion", "status"], ""));
+      if (!estado) return true;
+      return ["aprobado", "activo", "premium", "premium pro", "destacado", "publicado", "visible"].includes(estado);
+    }
+
+    function sectoresCoinciden(a, b) {
+      const sa = normalizar(a); const sb = normalizar(b);
+      if (!sa || !sb) return false;
+      if (sa === sb) return true;
+      const slugA = slugify(sa); const slugB = slugify(sb);
+      if (slugA === slugB) return true;
+      if (slugA.includes(slugB) && slugB.length >= 5) return true;
+      if (slugB.includes(slugA) && slugA.length >= 5) return true;
+      return false;
+    }
+
+    // --- FUNCIÓN RECUPERADA: CREAR TARJETAS HTML ---
     function crearHTMLTarjeta(item) {
       const nombre = obtenerNombreNegocio(item);
       const categoria = obtenerCategoriaNegocio(item);
@@ -592,37 +390,252 @@
       const enlace = obtenerEnlaceNegocio(item);
       const premium = esPremium(item);
       const destacado = esDestacado(item);
-      let claseTarjeta = "card-circuito", claseBadge = "badge-card-cat", iconoBadge = "";
-      if(premium){ claseTarjeta+=" premium"; claseBadge+=" premium-badge"; iconoBadge="👑 "; }
-      else if(destacado){ claseTarjeta+=" destacado"; iconoBadge="⭐ "; }
+
+      let claseTarjeta = "card-circuito";
+      let claseBadge = "badge-card-cat";
+      let iconoBadge = "";
+
+      // Asignar clases de acuerdo a los planes de Radar (Premium Pro o Destacado)
+      if (premium) {
+        claseTarjeta += " premium";
+        claseBadge += " premium-badge";
+        iconoBadge = "👑 💎 ";
+      } else if (destacado) {
+        claseTarjeta += " destacado";
+        claseBadge += " destacado-badge";
+        iconoBadge = "⭐ ";
+      }
+
+      // Placeholder de imagen (Si tienes URL de imágenes en tu sheet, lo reemplazas aquí)
       const imagen = item.imagen_url || "https://images.pexels.com/photos/1516415/pexels-photo-1516415.jpeg?auto=compress&cs=tinysrgb&w=600";
-      return `<article class="${claseTarjeta}"><img src="${imagen}" class="card-img-placeholder"><div class="card-body"><span class="${claseBadge}">${iconoBadge}${categoria}</span><h2>${nombre}</h2><p class="desc-corta">${descripcion || "Explora los servicios y productos en Radar 507."}</p><a href="${enlace}" target="_blank" class="enlace-comercio">Ver Radar <i class="fas fa-arrow-right"></i></a></div></article>`;
+
+      return `
+        <article class="${claseTarjeta}">
+          <img src="${imagen}" alt="${nombre}" class="card-img-placeholder">
+          <div style="flex-grow: 1;">
+            <span class="${claseBadge}">${iconoBadge}${categoria}</span>
+            <h2>${nombre}</h2>
+            <p class="desc-corta">${descripcion || "Explora los servicios y productos de este negocio en su perfil de Radar 507."}</p>
+          </div>
+          <a href="${enlace}" target="_blank" class="enlace-comercio">Ver Radar</a>
+        </article>
+      `;
     }
 
+    // --- INICIALIZADOR PRINCIPAL ---
     async function inicializarRadar() {
       try {
-        const resp = await fetch(API_RADAR);
-        const json = await resp.json();
+        const respuesta = await fetch(API_RADAR);
+        const json = await respuesta.json();
         const data = json.data || {};
-        provinciasRadar = data.sectores || [];
+
+        provinciasRadar = data.sectores || data.provincias || [];
+        categoriasRadar = data.categorias || [];
         negociosRadar = data.negocios || [];
         circuitosRadar = data.circuitos || [];
-        baseDatosRadar = [...circuitosRadar, ...negociosRadar.map(n=>({...n,tipo:"comercio"}))];
+
+        baseDatosRadar = [
+          ...circuitosRadar,
+          ...negociosRadar.map(n => ({ ...n, tipo: "comercio" }))
+        ];
+
         renderizarMenuProvincias();
-        renderizarDestacadosPais();
-      } catch(e) { console.error(e); }
+        renderizarDestacadosPais(); // Pinta los generales al inicio
+
+      } catch (error) {
+        console.error("Error cargando Radar:", error);
+      }
     }
 
-    function tieneContenidoTerritorial(item) { let sector=obtenerSector(item); return negociosRadar.some(n=>sectoresCoinciden(obtenerSector(n),sector) && estadoValido(n)); }
-    function agruparProvinciasActivas() { let mapa={}; provinciasRadar.filter(tieneContenidoTerritorial).forEach(item=>{ let p=obtenerProvincia(item)||"Sin provincia", d=obtenerDistrito(item)||"Sin distrito"; if(!mapa[p]) mapa[p]={}; if(!mapa[p][d]) mapa[p][d]=[]; mapa[p][d].push(item); }); return mapa; }
-    function renderizarMenuProvincias() { let cont=document.getElementById("contenido-maestro-provincias"); if(!cont) return; let mapa=agruparProvinciasActivas(); if(Object.keys(mapa).length===0){ cont.innerHTML='<p class="txt-vacio">Cargando sectores...</p>'; return; } cont.innerHTML=""; Object.keys(mapa).sort().forEach(p=>{ let key=slugify(p); cont.innerHTML+=`<div class="provincia-bloque-menu"><button class="btn-provincia-select" onclick="toggleProvinciaDinamica('${key}', this)"><span><i class="fas fa-map-marker-alt" style="margin-right:10px;color:var(--primary);"></i>${p}</span><span class="sub-icon-prov">+</span></button><div class="sectores-internos-menu" id="sub-sectores-${key}"></div></div>`; }); }
-    function toggleMenuMaestro(){ let c=document.getElementById("contenido-maestro-provincias"), i=document.getElementById("icono-maestro"); if(!c||!i) return; c.classList.toggle("active"); i.textContent=c.classList.contains("active")?"-":"+"; }
-    function toggleProvinciaDinamica(provinciaKey, btn){ let cont=document.getElementById(`sub-sectores-${provinciaKey}`), subIcon=btn.querySelector(".sub-icon-prov"); if(!cont||!subIcon) return; if(cont.classList.contains("active")){ cont.classList.remove("active"); subIcon.textContent="+"; cont.innerHTML=""; return; } document.querySelectorAll(".sectores-internos-menu").forEach(el=>{el.classList.remove("active");el.innerHTML="";}); document.querySelectorAll(".sub-icon-prov").forEach(el=>el.textContent="+"); cont.classList.add("active"); subIcon.textContent="-"; let mapa=agruparProvinciasActivas(); let provinciaReal=Object.keys(mapa).find(p=>slugify(p)===provinciaKey); if(!provinciaReal) return; let distritos=mapa[provinciaReal]; Object.keys(distritos).sort().forEach(distrito=>{ let htmlSectores=distritos[distrito].sort((a,b)=>String(obtenerSector(a)).localeCompare(String(obtenerSector(b)))).map(item=>`<button class="btn-sector-link" onclick="cargarSectorDetalle('${textoSeguro(obtenerProvincia(item))}','${textoSeguro(obtenerDistrito(item))}','${textoSeguro(obtenerSector(item))}')">${obtenerSector(item)}</button>`).join(""); cont.innerHTML+=`<div class="distrito-bloque"><h4>Distrito: ${distrito}</h4><div class="sectores-links-container">${htmlSectores}</div></div>`; }); }
-    function cargarSectorDetalle(provincia,distrito,sector){ document.getElementById("territorio").style.display="none"; let vista=document.getElementById("vista-sector"); vista.style.display="block"; document.getElementById("dinamico-nombre-sector").textContent=sector; document.getElementById("dinamico-jerarquia").textContent=`${provincia} > ${distrito}`; let negociosSector=baseDatosRadar.filter(item=>sectoresCoinciden(obtenerSector(item),sector)&&estadoValido(item)); let zonaCont=document.getElementById("zona-destacados-container"), contZona=document.getElementById("contenedor-destacados-zona"); if(negociosSector.length>0){ zonaCont.style.display="block"; contZona.innerHTML=negociosSector.map(crearHTMLTarjeta).join(""); }else{ zonaCont.style.display="none"; } document.getElementById("destacados").style.display="none"; vista.scrollIntoView({behavior:"smooth"}); }
-    function cerrarVistaSector(){ document.getElementById("vista-sector").style.display="none"; document.getElementById("territorio").style.display="block"; document.getElementById("destacados").style.display="block"; document.getElementById("territorio").scrollIntoView({behavior:"smooth"}); }
-    function renderizarDestacadosPais(){ let cont=document.getElementById("contenedor-destacados"); if(!cont) return; let destacados=baseDatosRadar.filter(item=>estadoValido(item)&&(esDestacado(item)||esPremium(item))).slice(0,6); cont.innerHTML=destacados.length?destacados.map(crearHTMLTarjeta).join(""):"<p>Cargando negocios aliados...</p>"; }
-    function buscarRadar(){ let input=document.getElementById("searchInput").value, query=normalizar(input); if(!query) return; let resultados=baseDatosRadar.filter(item=>estadoValido(item)&&(normalizar(obtenerNombreNegocio(item)).includes(query)||normalizar(obtenerCategoriaNegocio(item)).includes(query)||normalizar(obtenerSector(item)).includes(query))); document.getElementById("territorio").style.display="block"; document.getElementById("vista-sector").style.display="none"; document.getElementById("destacados").style.display="block"; document.getElementById("titulo-destacados")?document.getElementById("titulo-destacados").textContent=`Resultados: "${input}" (${resultados.length})`:null; let cont=document.getElementById("contenedor-destacados"); cont.innerHTML=resultados.length?resultados.map(crearHTMLTarjeta).join(""):"<p>No se encontraron resultados en el radar.</p>"; document.getElementById("destacados").scrollIntoView({behavior:"smooth"}); }
+    function tieneContenidoTerritorial(item) {
+      const sector = obtenerSector(item);
+      const tieneNegocio = negociosRadar.some(n => sectoresCoinciden(obtenerSector(n), sector) && estadoValido(n));
+      return tieneNegocio;
+    }
+
+    function agruparProvinciasActivas() {
+      const visibles = provinciasRadar.filter(tieneContenidoTerritorial);
+      const mapa = {};
+      visibles.forEach(item => {
+        const provincia = obtenerProvincia(item) || "Sin provincia";
+        const distrito = obtenerDistrito(item) || "Sin distrito";
+        if (!mapa[provincia]) mapa[provincia] = {};
+        if (!mapa[provincia][distrito]) mapa[provincia][distrito] = [];
+        mapa[provincia][distrito].push(item);
+      });
+      return mapa;
+    }
+
+    function renderizarMenuProvincias() {
+      const contenedor = document.getElementById("contenido-maestro-provincias");
+      if (!contenedor) return;
+      const mapa = agruparProvinciasActivas();
+      contenedor.innerHTML = "";
+
+      if (Object.keys(mapa).length === 0) {
+        contenedor.innerHTML = '<p class="txt-vacio">Cargando sectores disponibles...</p>';
+        return;
+      }
+
+      Object.keys(mapa).sort().forEach(provincia => {
+        const key = slugify(provincia);
+        contenedor.innerHTML += `
+          <div class="provincia-bloque-menu">
+            <button class="btn-provincia-select" onclick="toggleProvinciaDinamica('${key}', this)">
+              <span class="header-title-wrapper">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                <span>${provincia}</span>
+              </span>
+              <span class="sub-icon-prov">+</span>
+            </button>
+            <div class="sectores-internos-menu" id="sub-sectores-${key}"></div>
+          </div>
+        `;
+      });
+    }
+
+    function toggleMenuMaestro() {
+      const contenido = document.getElementById("contenido-maestro-provincias");
+      const icono = document.getElementById("icono-maestro");
+      if (!contenido || !icono) return;
+      contenido.classList.toggle("active");
+      icono.textContent = contenido.classList.contains("active") ? "-" : "+";
+    }
+
+    function toggleProvinciaDinamica(provinciaKey, botonElemento) {
+      const contenedorSectores = document.getElementById(`sub-sectores-${provinciaKey}`);
+      const subIcono = botonElemento.querySelector(".sub-icon-prov");
+      if (!contenedorSectores || !subIcono) return;
+
+      if (contenedorSectores.classList.contains("active")) {
+        contenedorSectores.classList.remove("active");
+        subIcono.textContent = "+";
+        contenedorSectores.innerHTML = "";
+        return;
+      }
+
+      document.querySelectorAll(".sectores-internos-menu").forEach(el => { el.classList.remove("active"); el.innerHTML = ""; });
+      document.querySelectorAll(".sub-icon-prov").forEach(el => { el.textContent = "+"; });
+
+      contenedorSectores.classList.add("active");
+      subIcono.textContent = "-";
+
+      const mapa = agruparProvinciasActivas();
+      const provinciaReal = Object.keys(mapa).find(p => slugify(p) === provinciaKey);
+      if (!provinciaReal) return;
+
+      const distritos = mapa[provinciaReal];
+
+      Object.keys(distritos).sort().forEach(distrito => {
+        const sectoresHTML = distritos[distrito]
+          .sort((a, b) => String(obtenerSector(a)).localeCompare(String(obtenerSector(b))))
+          .map(item => {
+            const sectorNombre = obtenerSector(item);
+            const provinciaNombre = obtenerProvincia(item);
+            const distritoNombre = obtenerDistrito(item);
+            return `<button class="btn-sector-link" onclick="cargarSectorDetalle('${textoSeguro(provinciaNombre)}', '${textoSeguro(distritoNombre)}', '${textoSeguro(sectorNombre)}')">${sectorNombre}</button>`;
+          }).join("");
+
+        contenedorSectores.innerHTML += `
+          <div class="distrito-bloque">
+            <h4>Distrito: ${distrito}</h4>
+            <div class="sectores-links-container">${sectoresHTML}</div>
+          </div>
+        `;
+      });
+    }
+
+    // --- FUNCIÓN RECUPERADA: CARGAR SECTOR ESPECÍFICO ---
+    function cargarSectorDetalle(provincia, distrito, sector) {
+      // 1. Ocultar acordeón principal y mostrar sección del sector
+      document.getElementById("territorio").style.display = "none";
+      const vistaSector = document.getElementById("vista-sector");
+      vistaSector.style.display = "block";
+
+      // 2. Llenar los textos
+      document.getElementById("dinamico-nombre-sector").textContent = sector;
+      document.getElementById("dinamico-jerarquia").textContent = `${provincia} > ${distrito}`;
+
+      // 3. Filtrar negocios del sector seleccionado
+      const negociosSector = baseDatosRadar.filter(item => sectoresCoinciden(obtenerSector(item), sector) && estadoValido(item));
+
+      // 4. Renderizar negocios
+      const contenedorZona = document.getElementById("contenedor-destacados-zona");
+      const contenedorGeneral = document.getElementById("zona-destacados-container");
+
+      if (negociosSector.length > 0) {
+        contenedorGeneral.style.display = "block";
+        contenedorZona.innerHTML = negociosSector.map(crearHTMLTarjeta).join("");
+      } else {
+        contenedorGeneral.style.display = "none";
+        contenedorZona.innerHTML = "";
+      }
+
+      // 5. Ocultar la sección general de destacados para no confundir
+      document.getElementById("destacados").style.display = "none";
+
+      // 6. Hacer scroll automático al sector
+      vistaSector.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function cerrarVistaSector() {
+      document.getElementById("vista-sector").style.display = "none";
+      document.getElementById("territorio").style.display = "block";
+      document.getElementById("destacados").style.display = "block";
+      document.getElementById("territorio").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // --- FUNCIÓN RECUPERADA: DESTACADOS GENERALES ---
+    function renderizarDestacadosPais() {
+      const contenedor = document.getElementById("contenedor-destacados");
+      if (!contenedor) return;
+      
+      const destacados = baseDatosRadar
+        .filter(item => estadoValido(item) && (esDestacado(item) || esPremium(item)))
+        .slice(0, 6); // Mostrar máximo 6 al inicio
+
+      if(destacados.length > 0) {
+        contenedor.innerHTML = destacados.map(crearHTMLTarjeta).join("");
+      } else {
+        contenedor.innerHTML = "<p>Cargando negocios aliados...</p>";
+      }
+    }
+
+    // --- FUNCIÓN RECUPERADA: BUSCADOR ---
+    function buscarRadar() {
+      const input = document.getElementById("searchInput").value;
+      const query = normalizar(input);
+      if (!query) return;
+
+      const resultados = baseDatosRadar.filter(item => {
+        if (!estadoValido(item)) return false;
+        return normalizar(obtenerNombreNegocio(item)).includes(query) ||
+               normalizar(obtenerCategoriaNegocio(item)).includes(query) ||
+               normalizar(obtenerSector(item)).includes(query);
+      });
+
+      // Mostrar los resultados en la sección de destacados temporalmente
+      document.getElementById("territorio").style.display = "block";
+      document.getElementById("vista-sector").style.display = "none";
+      document.getElementById("destacados").style.display = "block";
+
+      const tituloDestacados = document.getElementById("titulo-destacados");
+      const contenedor = document.getElementById("contenedor-destacados");
+
+      tituloDestacados.textContent = `Resultados de búsqueda: "${input}" (${resultados.length})`;
+
+      if (resultados.length > 0) {
+        contenedor.innerHTML = resultados.map(crearHTMLTarjeta).join("");
+      } else {
+        contenedor.innerHTML = "<p>No se encontraron resultados en el radar.</p>";
+      }
+
+      document.getElementById("destacados").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // --- EJECUTAR AL CARGAR ---
     window.onload = inicializarRadar;
+
   </script>
 </body>
 </html>
