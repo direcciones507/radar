@@ -34,7 +34,7 @@
   <style>
 /* =====================================================
    RADAR507 - ESTILO VISUAL PREMIUM FINAL
-   Tarjetas flotantes SIN el bloque blanco trasero
+   Corrección de Cuadrículas, 3 Servicios, y Fondo Limpio
 ===================================================== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -59,7 +59,7 @@ body {
   color: var(--ink);
   line-height: 1.55;
   background-color: #edf1ee;
-  /* PATRÓN TOPOGRÁFICO DE FONDO */
+  /* PATRÓN TOPOGRÁFICO DE FONDO APLICADO A TODO EL BODY */
   background-image:
     linear-gradient(rgba(237,241,238,.72), rgba(237,241,238,.86)),
     radial-gradient(circle at 18% 12%, rgba(39,216,197,.15), transparent 30%),
@@ -75,7 +75,8 @@ button { font-family: inherit; }
 /* HERO */
 .hero {
   min-height: 54vh;
-  width: min(1180px, calc(100% - 48px));
+  max-width: 1200px;
+  width: 95%;
   margin: 32px auto 0;
   border-radius: 24px;
   position: relative;
@@ -125,12 +126,33 @@ button { font-family: inherit; }
 .btn.primary { background: var(--primary); color: #06232d; }
 .btn-registro:hover, .btn.primary:hover { transform: translateY(-2px); filter: saturate(1.08); }
 
-/* SECCIONES Y CONTENEDOR PRINCIPAL - 100% TRANSPARENTES PARA VER EL FONDO */
-main { width: min(1180px, calc(100% - 48px)); margin: 0 auto 40px; background: transparent; box-shadow: none; backdrop-filter: none; }
-.section { max-width: 1120px; margin: 50px auto; padding: 0; text-align: center; }
-.section.light { max-width: 100%; margin: 0; padding: 50px 0; background: transparent; border: none; }
-.section h2 { font-size: clamp(26px, 4vw, 36px); line-height: 1.1; font-weight: 900; letter-spacing: -.7px; margin-bottom: 10px; }
-.section-text, .search-section p { color: var(--muted); }
+/* CONTENEDOR PRINCIPAL - TOTALMENTE TRANSPARENTE */
+main { 
+  max-width: 1200px; 
+  width: 95%; 
+  margin: 0 auto 40px; 
+  background: transparent !important; 
+  box-shadow: none !important; 
+  backdrop-filter: none !important; 
+  border: none !important;
+}
+
+/* SECCIONES SIN FONDO BLANCO GIGANTE */
+.section { margin: 60px auto; padding: 0; text-align: center; background: transparent !important; border: none !important;}
+.section h2 { font-size: clamp(26px, 4vw, 36px); line-height: 1.1; font-weight: 900; letter-spacing: -.7px; margin-bottom: 10px; color: var(--ink); text-shadow: 0 2px 10px rgba(255,255,255,0.8); }
+.section-text { color: var(--ink); font-weight: 500; text-shadow: 0 1px 5px rgba(255,255,255,0.8); }
+
+/* TÍTULOS DESTACADOS TIPO GLASS */
+.titulo-vidrio {
+  background: rgba(255,255,255,.8); 
+  display: inline-block; 
+  padding: 12px 24px; 
+  border-radius: 16px; 
+  box-shadow: 0 4px 15px rgba(0,0,0,.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.6);
+  margin-bottom: 20px;
+}
 
 /* ACORDEON TERRITORIAL */
 .accordion-container { max-width: 760px; margin: 0 auto; text-align: left; }
@@ -167,8 +189,16 @@ main { width: min(1180px, calc(100% - 48px)); margin: 0 auto 40px; background: t
 .btn-sector-link { background: transparent; border: none; color: #0f5160; font-weight: 700; font-size: 14px; padding: 4px 0; cursor: pointer; text-align: left; }
 .btn-sector-link:hover { color: var(--primary-dark); transform: translateX(4px); }
 
-/* SERVICIOS */
-.grid-tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1120px; margin: 30px auto 0; text-align: left; }
+/* GRID DE SERVICIOS - FORZADO A 3 COLUMNAS */
+.grid-servicios { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 30px; 
+  max-width: 1120px; 
+  margin: 30px auto 0; 
+  text-align: left; 
+}
+
 .card-servicio-comercial {
   background: rgba(255,255,255,.95);
   backdrop-filter: blur(12px);
@@ -177,53 +207,55 @@ main { width: min(1180px, calc(100% - 48px)); margin: 0 auto 40px; background: t
   padding: 40px 30px;
   box-shadow: var(--shadow-soft);
   display: flex; flex-direction: column; gap: 15px;
+  height: 100%; /* Alinea todas las tarjetas al mismo alto */
 }
-.card-servicio-comercial h3 { font-size: 22px; line-height: 1.15; font-weight: 900; }
+.card-servicio-comercial h3 { font-size: 20px; line-height: 1.15; font-weight: 900; }
 .card-servicio-comercial p { font-size: 15px; color: #111827; }
 .icon-circle {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-dark);
-  background: radial-gradient(circle at 38% 30%, #ecfffb, #bdebe5 70%);
-  box-shadow: 0 8px 18px rgba(15,118,110,.20), inset 0 0 0 5px rgba(255,255,255,.5);
-  margin-bottom: 10px;
+  width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: var(--primary-dark); background: radial-gradient(circle at 38% 30%, #ecfffb, #bdebe5 70%);
+  box-shadow: 0 8px 18px rgba(15,118,110,.20), inset 0 0 0 5px rgba(255,255,255,.5); margin-bottom: 10px;
 }
 .icon-circle svg { width: 28px; height: 28px; fill: currentColor; }
 
-/* TARJETAS DE NEGOCIOS (HERMOSAS Y CON IMÁGENES) */
+/* CUADRÍCULA DE NEGOCIOS - ALINEACIÓN PERFECTA */
+.grid-tarjetas { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  gap: 30px; 
+  max-width: 1120px; 
+  margin: 30px auto 0; 
+  text-align: left;
+  align-items: stretch; /* Hace que todas las tarjetas de una fila midan exactamente lo mismo */
+}
+
+/* TARJETAS DE NEGOCIOS */
 .card-circuito {
   position: relative;
-  overflow: hidden;
   background: rgba(255,255,255,.98);
   border: 1px solid rgba(15,118,110,.10);
   border-radius: 24px;
-  padding: 0 0 24px; /* Sin padding arriba para que la imagen toque el borde */
+  padding: 0; /* Sin padding general para que la imagen toque el borde superior */
   box-shadow: var(--shadow-soft);
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  height: 100%; /* Ocupa todo el alto de la cuadrícula */
+  overflow: hidden;
 }
 .card-circuito:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: rgba(15,118,110,.3); }
 
-/* IMAGEN SUPERIOR DE LA TARJETA */
-.card-img-placeholder { 
-  width: 100%; 
-  height: 200px; 
-  object-fit: cover; 
-  background: #dce8ec; 
-}
+/* IMAGEN SUPERIOR */
+.card-img-placeholder { width: 100%; height: 200px; object-fit: cover; background: #dce8ec; }
 
-/* CONTENIDO TEXTUAL DE LA TARJETA */
+/* CONTENIDO TEXTUAL (Empuja el botón hacia abajo) */
 .card-contenido-interno { 
-  padding: 22px 24px 0; 
-  flex-grow: 1; 
+  padding: 22px 24px 20px; 
+  flex-grow: 1; /* CRECE AUTOMÁTICAMENTE PARA LLENAR EL ESPACIO VACÍO */
   display: flex; 
   flex-direction: column; 
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
 }
 
 .badge-card-cat {
@@ -241,16 +273,25 @@ main { width: min(1180px, calc(100% - 48px)); margin: 0 auto 40px; background: t
   letter-spacing: 0.5px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   backdrop-filter: blur(5px);
+  z-index: 2;
 }
 
-.card-circuito h2 { font-size: 22px; line-height: 1.2; color: #101827; margin: 0 0 8px; font-weight: 900; }
-.card-circuito p { color: var(--muted); font-size: 14px; margin-bottom: 15px; }
+/* Textos ajustados para no romper el diseño */
+.card-circuito h2 { 
+  font-size: 21px; 
+  line-height: 1.25; 
+  color: #101827; 
+  margin: 0 0 10px; 
+  font-weight: 900; 
+  word-wrap: break-word; /* Evita que nombres largos descuadren todo */
+}
+.card-circuito p { color: var(--muted); font-size: 14px; margin-bottom: 15px; width: 100%; }
 
-/* BOTÓN ÚNICO Y ELEGANTE */
+/* BOTÓN ÚNICO Y ELEGANTE ALINEADO AL FONDO */
 .enlace-comercio {
   width: calc(100% - 48px);
-  margin: auto 24px 0; /* Auto margin top lo empuja hacia abajo */
-  display: inline-flex;
+  margin: auto 24px 24px; /* El 'auto' superior lo empuja exactamente al borde inferior */
+  display: flex; /* Flex para centrar correctamente */
   justify-content: center;
   align-items: center;
   padding: 14px 18px;
@@ -261,6 +302,7 @@ main { width: min(1180px, calc(100% - 48px)); margin: 0 auto 40px; background: t
   font-weight: 800;
   font-size: 15px;
   transition: var(--transition);
+  text-align: center;
 }
 .enlace-comercio:hover { background: var(--primary-dark); color: #fff; box-shadow: 0 8px 20px rgba(15,118,110,.25); border-color: transparent; }
 
@@ -271,7 +313,7 @@ main { width: min(1180px, calc(100% - 48px)); margin: 0 auto 40px; background: t
 .card-circuito.destacado .enlace-comercio:hover { background: #facc15; color: #3f2d00; }
 
 .card-circuito.premium { border: 2px solid transparent; background: linear-gradient(180deg, #fffef7, #ffffff); box-shadow: 0 15px 35px rgba(218, 165, 32, 0.15); }
-.card-circuito.premium::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1; margin: -2px; border-radius: 26px; background: linear-gradient(135deg, #FFDF00, #D4AF37, #996515); }
+.card-circuito.premium::before { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1; margin: -2px; border-radius: 26px; background: linear-gradient(135deg, #FFDF00, #D4AF37, #996515); }
 .card-circuito.premium .badge-card-cat { background: linear-gradient(135deg, #d4af37, #8f6b13); color: #fff; border: none; }
 .card-circuito.premium .enlace-comercio { background: linear-gradient(135deg, #fff7d6, #ffe58f); color: #7b5a00; border: none; }
 .card-circuito.premium .enlace-comercio:hover { background: linear-gradient(135deg, #d4af37, #996515); color: #fff; }
@@ -291,21 +333,25 @@ main { width: min(1180px, calc(100% - 48px)); margin: 0 auto 40px; background: t
 
 /* CTA FINAL */
 .business-section { padding: 80px 24px; margin-top: 60px; text-align: center; border-radius: 24px; background: linear-gradient(135deg, #061827, #0f766e); color: #ffffff; box-shadow: var(--shadow); }
-.business-section h2 { font-size: clamp(28px,4vw,40px); line-height: 1.12; margin-bottom: 15px; }
-footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; background: #06121e; border-radius: 16px; color: rgba(255,255,255,.68); text-align: center; padding: 26px 20px; font-size: 14px; }
+.business-section h2 { font-size: clamp(28px,4vw,40px); line-height: 1.12; margin-bottom: 15px; color: #fff;}
+footer { max-width: 1200px; width: 95%; margin: 40px auto 30px; background: #06121e; border-radius: 16px; color: rgba(255,255,255,.68); text-align: center; padding: 26px 20px; font-size: 14px; }
+
+/* RESPONSIVE MÓVIL */
+@media (max-width: 900px) {
+  .grid-servicios { grid-template-columns: 1fr; } /* Celulares apilan los servicios 1 debajo del otro */
+}
 
 @media (max-width: 760px) {
   body { background-attachment: scroll; }
   .hero, main, footer, .business-section { width: 100%; margin-left: 0; margin-right: 0; border-radius: 0; }
-  .hero { min-height: 58vh; padding: 18px 18px 54px; }
+  .hero { min-height: auto; padding: 18px 18px 54px; margin-top: 0;}
   .navbar { align-items: flex-start; }
   .nav-links { display: none; }
-  .hero-content { margin-top: 62px; }
-  .hero h1 { font-size: 34px; }
+  .hero-content { margin-top: 40px; }
+  .hero h1 { font-size: 30px; }
   .hero-text { font-size: 16px; }
   .section { margin: 40px auto; padding: 0 16px; }
   .grid-tarjetas { grid-template-columns: 1fr; gap: 25px; }
-  .card-servicio-comercial { padding: 30px 24px; }
   .accordion-container { max-width: 100%; }
   .search-box { flex-direction: column; }
   .search-box button { width: 100%; }
@@ -360,22 +406,24 @@ footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; backgrou
       </div>
 
       <div id="zona-destacados-container" style="display: none; margin-bottom: 40px;">
-        <h3 style="color: #0f766e; margin-bottom: 20px; font-size: 24px; font-weight: 900; background: rgba(255,255,255,.9); display: inline-block; padding: 10px 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,.05);">⭐ Negocios en la Zona</h3>
+        <h3 class="titulo-vidrio" style="color: #0f766e; font-size: 24px; font-weight: 900;">⭐ Negocios en la Zona</h3>
         <div id="contenedor-destacados-zona" class="grid-tarjetas"></div>
       </div>
     </section>
 
-    <section id="destacados" class="section light">
-      <h2 id="titulo-destacados" style="background: rgba(255,255,255,.9); display: inline-block; padding: 12px 24px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,.05);">⭐ Alianzas y Negocios Destacados</h2>
+    <section id="destacados" class="section">
+      <h2 id="titulo-destacados" class="titulo-vidrio" style="color: #0f172a;">⭐ Alianzas y Negocios Destacados</h2>
       <div id="contenedor-destacados" class="grid-tarjetas"></div>
     </section>
 
     <section id="servicios" class="section">
-      <div style="background: rgba(255,255,255,.9); display: inline-block; padding: 25px 35px; border-radius: 20px; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,.05);">
-        <h2>Ecosistema Territorial de Negocios</h2>
-        <p class="section-text">Planes y soluciones disponibles según tipo de negocio, ubicación y nivel de visibilidad.</p>
+      <div class="titulo-vidrio">
+        <h2 style="color: #0f172a; margin-bottom: 5px;">Ecosistema Territorial de Negocios</h2>
+        <p class="section-text" style="color: #475569;">Planes y soluciones disponibles según tipo de negocio, ubicación y nivel de visibilidad.</p>
       </div>
-      <div class="grid-tarjetas" style="grid-template-columns: repeat(3, 1fr);">
+      
+      <!-- CONTENEDOR ESPECÍFICO PARA LOS SERVICIOS (3 COLUMNAS SIEMPRE EN PC) -->
+      <div class="grid-servicios">
         <div class="card-servicio-comercial">
           <div class="icon-circle">
             <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
@@ -402,7 +450,7 @@ footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; backgrou
 
     <section id="buscar" class="section">
       <div class="search-section">
-        <h2>¿Buscas un servicio específico?</h2>
+        <h2 style="color: #0f172a;">¿Buscas un servicio específico?</h2>
         <p>Encuentra infraestructura, rutas y comercios activos en nuestras zonas piloto.</p>
         <div class="search-box">
           <input type="text" id="searchInput" placeholder="Ejemplo: restaurante en Coronado, hotel en El Valle..." />
@@ -434,7 +482,7 @@ footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; backgrou
 
   <script>
     // =========================================================================
-    // LÓGICA JAVASCRIPT: BOTÓN ÚNICO Y CONDICIONAL, IMÁGENES AUTOMÁTICAS
+    // LÓGICA JAVASCRIPT: BOTÓN ÚNICO, IMÁGENES AUTOMÁTICAS Y ALINEACIÓN FLEX
     // =========================================================================
 
     const API_RADAR = "https://script.google.com/macros/s/AKfycby5TsFEPQd6sGVfj_IPKaVqesh--bujnSrHIIY_C9bhRLaSsRIBBm96XgJlEtsq7jf6/exec";
@@ -475,7 +523,7 @@ footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; backgrou
     function obtenerDescripcionNegocio(item) { return obtenerCampo(item, ["descripcion", "descripcion_negocio", "detalle", "resumen"], ""); }
     function obtenerEnlaceNegocio(item) { return obtenerCampo(item, ["url_ubicacion", "google_maps", "google", "maps", "mapa", "ubicacion", "direccion_digital", "url_negocio", "enlace"], ""); }
     
-    // REGLA ESTRICTA PARA MOSTRAR BOTÓN: Debe existir, no ser "#", y no decir "sin ubicación"
+    // VALIDACIÓN ESTRICTA DE ENLACE (Oculta el botón si es inválido)
     function enlaceValido(enlace) {
       const valor = String(enlace || "").trim().toLowerCase();
       if (!valor || valor === "" || valor === "#" || valor.includes("sin ubicacion") || valor.includes("sin ubicación")) {
@@ -484,7 +532,6 @@ footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; backgrou
       return true;
     }
 
-    // LOGICA DE IMÁGENES HERMOSAS POR CATEGORÍA
     function obtenerImagenCategoria(item) {
       const imagenPropia = obtenerCampo(item, ["imagen_url", "imagen", "imagen_principal", "foto", "foto_url", "logo"], "");
       if (imagenPropia && imagenPropia.startsWith("http")) return imagenPropia;
@@ -507,7 +554,6 @@ footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; backgrou
       ];
 
       const encontrada = imagenes.find(grupo => grupo.claves.some(clave => texto.includes(clave)));
-      // Imagen genérica hermosa por defecto
       return encontrada ? encontrada.url : "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
     }
 
@@ -552,7 +598,6 @@ footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; backgrou
       let claseBadge = "badge-card-cat";
       let iconoBadge = "";
       
-      // Texto único y limpio por defecto
       let textoBoton = "📍 Ver Ubicación en Radar"; 
       let reviewsHTML = ""; 
 
@@ -561,7 +606,7 @@ footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; backgrou
         iconoBadge = "👑 ";
         textoBoton = "💎 Ubicación Premium";
         reviewsHTML = `
-          <div style="text-align: center; margin-bottom: 15px;">
+          <div style="text-align: center; margin-bottom: 10px;">
             <div style="color: #d4af37; font-size: 18px; letter-spacing: 2px;">★★★★★</div>
             <div style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase;">5.0 / 5 Votos de Usuarios<br>CERTIFIED REVIEWS</div>
           </div>`;
@@ -570,7 +615,7 @@ footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; backgrou
         iconoBadge = "⭐ ";
         textoBoton = "⭐ Ubicación Destacada";
         reviewsHTML = `
-          <div style="text-align: center; margin-bottom: 15px;">
+          <div style="text-align: center; margin-bottom: 10px;">
             <div style="color: #0f766e; font-size: 18px; letter-spacing: 2px;">★★★★<span style="opacity:0.4">★</span></div>
             <div style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase;">4.5 / 5 Votos de Usuarios<br>CERTIFIED REVIEWS</div>
           </div>`;
@@ -578,8 +623,7 @@ footer { width: min(1180px, calc(100% - 48px)); margin: 40px auto 30px; backgrou
 
       const imagen = obtenerImagenCategoria(item);
       
-      // SOLO SE CREA EL BOTÓN SI HAY ENLACE VÁLIDO. 
-      // Si no, esta variable queda vacía y no se renderiza nada en esa parte.
+      // EL BOTÓN SOLO SE GENERA SI EL ENLACE ES VÁLIDO.
       const botonUbicacion = enlaceValido(enlace)
         ? `<a href="${enlace}" target="_blank" class="enlace-comercio">${textoBoton}</a>`
         : "";
