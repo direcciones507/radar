@@ -19,6 +19,7 @@ function normalizar(texto) {
 function slugify(texto) {
   return normalizar(texto)
     .replace(/Ã±/g, "n")
+    .replace(/ÃƒÂ±/g, "n")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
@@ -74,12 +75,50 @@ function obtenerTelefonoNegocio(item) {
 }
 
 function obtenerEnlaceNegocio(item) {
-  return obtenerCampo(item, ["enlace", "url_negocio", "url_ubicacion", "google_maps", "maps", "waze", "website", "web", "sitio_web", "direccion_digital"], "#");
+  return obtenerCampo(item, ["enlace", "url_negocio", "url_ubicacion", "google_maps", "maps", "waze", "website", "web", "sitio_web", "direccion_digital"], "");
+}
+
+function enlaceValido(enlace) {
+  const valor = String(enlace || "").trim();
+  const bajo = valor.toLowerCase();
+  if (!valor || valor === "#" || bajo === "no" || bajo === "n/a" || bajo === "na") return false;
+  if (bajo.includes("sin ubicacion") || bajo.includes("sin ubicaciÃ³n")) return false;
+  return true;
+}
+
+function obtenerImagenCategoria(item) {
+  const imagenPropia = obtenerCampo(item, ["imagen_url", "imagen", "imagen_principal", "foto", "foto_url", "logo"], "");
+  if (String(imagenPropia).startsWith("http")) return imagenPropia;
+
+  const categoria = normalizar(obtenerCategoriaNegocio(item));
+  const nombre = normalizar(obtenerNombreNegocio(item));
+  const texto = `${categoria} ${nombre}`;
+
+  const grupos = [
+    { claves: ["hotel", "hostal", "hospedaje", "resort", "alojamiento", "camping", "inn"], url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["restaurante", "comida", "gourmet", "fonda", "cafe", "cafeteria", "bar", "pizza", "marisco"], url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["farmacia", "medicina", "salud", "clinica", "laboratorio"], url: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["taller", "mecanica", "auto", "repuesto", "llanta", "motor"], url: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["supermercado", "mini super", "minisuper", "mini sÃºper", "abarroteria", "abarroterÃ­a", "tienda", "market", "mercado", "super"], url: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["ferreteria", "ferreterÃ­a", "construccion", "construcciÃ³n", "herramienta"], url: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["playa", "tour", "turismo", "circuito", "actividad", "experiencia"], url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["salon", "salÃ³n", "belleza", "barber", "spa", "estetica", "estÃ©tica"], url: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["gimnasio", "gym", "fitness", "deporte"], url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80" },
+    { claves: ["veterinaria", "mascota", "pet"], url: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=900&q=80" }
+  ];
+
+  const encontrado = grupos.find(g => g.claves.some(clave => texto.includes(normalizar(clave))));
+  return encontrado ? encontrado.url : "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
+}
+
+function esPremium(item) {
+  const valor = normalizar(obtenerCampo(item, ["premium", "plan_comercial", "estado_radar", "destacado"], ""));
+  return ["premium", "premium pro"].includes(valor);
 }
 
 function esDestacado(item) {
-  const valor = normalizar(obtenerCampo(item, ["destacado", "destacado_radar", "recomendado", "premium", "visible_destacado"], ""));
-  return ["true", "si", "sÃ­", "1", "destacado", "premium", "premium pro"].includes(valor);
+  const valor = normalizar(obtenerCampo(item, ["destacado", "destacado_radar", "recomendado", "visible_destacado"], ""));
+  return ["true", "si", "sÃ­", "sÃƒÂ­", "1", "destacado", "recomendado"].includes(valor) || esPremium(item);
 }
 
 function estadoValido(item) {
@@ -121,15 +160,6 @@ async function inicializarRadar() {
       ...circuitosRadar,
       ...negociosRadar.map(n => ({ ...n, tipo: "comercio" }))
     ];
-
-    console.log("Radar cargado:", {
-      sectores: provinciasRadar.length,
-      negocios: negociosRadar.length,
-      categorias: categoriasRadar.length,
-      circuitos: circuitosRadar.length,
-      eventos: eventosRadar.length,
-      anuncios: anunciosRadar.length
-    });
 
     renderizarMenuProvincias();
     renderizarDestacadosPais();
@@ -175,12 +205,10 @@ function renderizarMenuProvincias() {
   if (!contenedor) return;
 
   const mapa = agruparProvinciasActivas();
-  console.log("Provincias visibles:", Object.keys(mapa).length);
-
   contenedor.innerHTML = "";
 
   if (Object.keys(mapa).length === 0) {
-    contenedor.innerHTML = '<p class="txt-vacio">No hay sectores con negocios activos todavia.</p>';
+    contenedor.innerHTML = '<p class="txt-vacio">No hay sectores con negocios activos todavÃ­a.</p>';
     return;
   }
 
@@ -272,31 +300,53 @@ function toggleProvinciaDinamica(provinciaKey, botonElemento) {
   });
 }
 
+function crearTarjetaComercio(comercio, modo = "") {
+  const nombre = obtenerNombreNegocio(comercio);
+  const categoria = obtenerCategoriaNegocio(comercio);
+  const descripcion = obtenerDescripcionNegocio(comercio);
+  const direccion = obtenerDireccionNegocio(comercio);
+  const telefono = obtenerTelefonoNegocio(comercio);
+  const enlace = obtenerEnlaceNegocio(comercio);
+  const imagen = obtenerImagenCategoria(comercio);
+
+  const claseExtra = esPremium(comercio) ? " premium" : (esDestacado(comercio) ? " destacado" : "");
+  const badgeTexto = esPremium(comercio) ? "Premium" : (modo || categoria);
+
+  const boton = enlaceValido(enlace)
+    ? `<a href="${enlace}" target="_blank" class="enlace-comercio">Ver ubicaciÃ³n</a>`
+    : "";
+
+  return `
+    <article class="card-circuito${claseExtra}">
+      <img src="${imagen}" alt="${nombre}" class="card-img-placeholder" loading="lazy">
+      <span class="badge-card-cat">${badgeTexto}</span>
+
+      <div class="card-contenido-interno">
+        <h2>${nombre}</h2>
+        ${descripcion ? `<p class="desc-corta">${descripcion}</p>` : ""}
+        <p><strong>CategorÃ­a:</strong> ${categoria}</p>
+        ${direccion ? `<p><strong>DirecciÃ³n:</strong> ${direccion}</p>` : ""}
+        ${telefono ? `<p><strong>Tel:</strong> ${telefono}</p>` : ""}
+      </div>
+
+      ${boton}
+    </article>
+  `;
+}
+
 function renderizarDestacadosPais() {
   const contenedor = document.getElementById("contenedor-destacados");
   if (!contenedor) return;
 
-  const destacados = negociosRadar.filter(item => esDestacado(item) && estadoValido(item));
+  const destacados = negociosRadar.filter(item => esDestacado(item) && estadoValido(item)).slice(0, 6);
   contenedor.innerHTML = "";
 
   if (destacados.length === 0) {
-    contenedor.innerHTML = '<p class="txt-vacio">Cargando proximos comercios recomendados...</p>';
+    contenedor.innerHTML = '<p class="txt-vacio">Cargando prÃ³ximos comercios recomendados...</p>';
     return;
   }
 
-  destacados.forEach(item => {
-    contenedor.innerHTML += `
-      <div class="card-circuito pop-destacado">
-        <span class="badge-card-cat">Destacado</span>
-        <h2>${obtenerNombreNegocio(item)}</h2>
-        <p><strong>Zona:</strong> ${obtenerSector(item)}, ${obtenerDistrito(item)}</p>
-        <p class="desc-corta">${obtenerDescripcionNegocio(item)}</p>
-        <a href="${obtenerEnlaceNegocio(item)}" target="_blank" class="enlace-comercio">
-          Ver Radar
-        </a>
-      </div>
-    `;
-  });
+  contenedor.innerHTML = destacados.map(item => crearTarjetaComercio(item, "Destacado")).join("");
 }
 
 function obtenerNombreCategoria(idCategoria) {
@@ -311,6 +361,7 @@ function obtenerNombreCategoria(idCategoria) {
 function limpiarNombreCategoria(catId) {
   return obtenerNombreCategoria(catId)
     .replace(/^[^\wÃ¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“ÃšÃ±Ã‘]+/, "")
+    .replace(/^[^\wÃƒÂ¡ÃƒÂ©ÃƒÂ­ÃƒÂ³ÃƒÂºÃƒÂÃƒâ€°ÃƒÂÃƒâ€œÃƒÅ¡ÃƒÂ±Ãƒâ€˜]+/, "")
     .trim();
 }
 
@@ -353,19 +404,21 @@ function cargarSectorDetalle(provincia, distrito, sector) {
   if (circuitoData) {
     bloqueCircuito.innerHTML = `
       <div class="circuito-header-info">
-        <span class="badge-circuito-tag">Circuito Turistico Oficial</span>
+        <span class="badge-circuito-tag">Circuito TurÃ­stico Oficial</span>
         <span class="duracion-tag">${circuitoData.duracion || "Variable"}</span>
       </div>
-      <h3>${circuitoData.nombre || "Circuito turistico"}</h3>
+      <h3>${circuitoData.nombre || "Circuito turÃ­stico"}</h3>
       <p>${circuitoData.descripcion || ""}</p>
-      <a href="${circuitoData.enlace_mapa || "#"}" target="_blank" class="btn-mapa-circuito">
-        Ver Ruta Digital del Circuito
-      </a>
+      ${enlaceValido(circuitoData.enlace_mapa) ? `
+        <a href="${circuitoData.enlace_mapa}" target="_blank" class="btn-mapa-circuito">
+          Ver ruta digital del circuito
+        </a>
+      ` : ""}
     `;
   } else {
     bloqueCircuito.innerHTML = `
       <p style="color:#64748b;font-style:italic;">
-        Circuito turistico de la comunidad consolidandose proximamente.
+        Circuito turÃ­stico de la comunidad consolidÃ¡ndose prÃ³ximamente.
       </p>
     `;
   }
@@ -376,28 +429,12 @@ function cargarSectorDetalle(provincia, distrito, sector) {
     sectoresCoinciden(obtenerSector(item), sector) && estadoValido(item)
   );
 
-  console.log("Negocios del sector:", sector, itemsDelSector.length);
-
-  const destacadosDeLaZona = itemsDelSector.filter(esDestacado);
+  const destacadosDeLaZona = itemsDelSector.filter(esDestacado).slice(0, 6);
 
   if (destacadosDeLaZona.length > 0 && bloqueDestacadosZona && contenedorDestacadosZona) {
-    contenedorDestacadosZona.innerHTML = "";
-
-    destacadosDeLaZona.forEach(comercio => {
-      contenedorDestacadosZona.innerHTML += `
-        <div class="card-circuito pop-destacado" style="background:#faf5ff;border-color:#a855f7 !important;">
-          <span class="badge-card-cat" style="background:rgba(168,85,247,0.1);color:#a855f7;">
-            Recomendado Local
-          </span>
-          <h2>${obtenerNombreNegocio(comercio)}</h2>
-          <p>${obtenerDescripcionNegocio(comercio)}</p>
-          <a href="${obtenerEnlaceNegocio(comercio)}" target="_blank" class="enlace-comercio" style="color:#a855f7;">
-            Ver Radar
-          </a>
-        </div>
-      `;
-    });
-
+    contenedorDestacadosZona.innerHTML = destacadosDeLaZona
+      .map(comercio => crearTarjetaComercio(comercio, "Recomendado Local"))
+      .join("");
     bloqueDestacadosZona.style.display = "block";
   } else if (bloqueDestacadosZona) {
     bloqueDestacadosZona.style.display = "none";
@@ -412,7 +449,7 @@ function cargarSectorDetalle(provincia, distrito, sector) {
 
   if (itemsDelSector.length === 0) {
     contenedorCategorias.innerHTML = `
-      <p class="txt-vacio">Proximamente mas comercios afiliados en este sector.</p>
+      <p class="txt-vacio">PrÃ³ximamente mÃ¡s comercios afiliados en este sector.</p>
     `;
   }
 
@@ -444,30 +481,7 @@ function renderizarListaComercios(titulo, comercios, index) {
 
       <div class="sub-accordion-content" id="sub-cat-${index}">
         <div class="grid-tarjetas padding-intern-cards">
-          ${comercios.map(comercio => `
-            <div class="card-circuito">
-              <h2>${obtenerNombreNegocio(comercio)}</h2>
-              <p>${obtenerDescripcionNegocio(comercio)}</p>
-              <p><strong>Categoria:</strong> ${obtenerCategoriaNegocio(comercio)}</p>
-              <p><strong>Direccion:</strong> ${obtenerDireccionNegocio(comercio)}</p>
-
-              ${obtenerTelefonoNegocio(comercio) ? `<p><strong>Tel:</strong> ${obtenerTelefonoNegocio(comercio)}</p>` : ""}
-
-              ${obtenerEnlaceNegocio(comercio) !== "#" ? `
-                <a href="${obtenerEnlaceNegocio(comercio)}" target="_blank" class="enlace-comercio">
-                  Ver ubicacion
-                </a>
-              ` : `
-                <span class="enlace-comercio ubicacion-no-disponible">
-                  Ubicacion Premium
-                </span>
-              `}
-
-              <a href="${obtenerEnlaceNegocio(comercio)}" target="_blank" class="enlace-comercio">
-                Ver Radar
-              </a>
-            </div>
-          `).join("")}
+          ${comercios.map(comercio => crearTarjetaComercio(comercio)).join("")}
         </div>
       </div>
     </div>
@@ -499,7 +513,7 @@ function buscarRadar() {
   const val = normalizar(input.value);
 
   if (val === "") {
-    result.textContent = "Por favor escribe un termino.";
+    result.textContent = "Por favor escribe un tÃ©rmino.";
     return;
   }
 
@@ -534,7 +548,7 @@ function buscarRadar() {
         obtenerSector(negocioEncontrado)
       );
     } else {
-      result.textContent = `Proximamente resultados en vivo para: "${input.value}"`;
+      result.textContent = `PrÃ³ximamente resultados en vivo para: "${input.value}"`;
     }
   }, 500);
 }
