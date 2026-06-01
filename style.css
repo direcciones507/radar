@@ -669,3 +669,43 @@ footer{
   .search-box button{width:100%}
   .card-circuito{min-height:auto}
 }
+
+.btn-volver-mapa{
+  margin-top:18px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:13px 22px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#073b4c,#0f766e,#27d8c5);
+  color:#fff;
+  font-weight:900;
+  font-size:15px;
+  cursor:pointer;
+  box-shadow:0 12px 28px rgba(15,118,110,.25);
+}
+
+.btn-volver-mapa::before{
+  content:"←";
+  font-size:18px;
+}
+
+.grid-servicios{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+  max-width:1080px;
+  margin:28px auto 0;
+}
+
+.grid-servicios .card-servicio-comercial{
+  min-height:250px;
+}
+
+@media(max-width:700px){
+  .grid-servicios{
+    grid-template-columns:1fr;
+  }
+}
