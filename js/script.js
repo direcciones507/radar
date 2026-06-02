@@ -74,7 +74,16 @@ function obtenerTelefonoNegocio(item) {
 }
 
 function obtenerEnlaceNegocio(item) {
-  return obtenerCampo(item, ["url_ubicacion", "google_maps", "google", "maps", "waze", "enlace", "url_negocio", "website", "web", "sitio_web", "direccion_digital"], "");
+  return obtenerCampo(item, [
+    "url_ubicacion",
+    "google_maps",
+    "google",
+    "maps",
+    "waze",
+    "ubicacion_maps",
+    "link_maps",
+    "enlace_mapa"
+  ], "");
 }
 
 function enlaceValido(enlace) {
